@@ -1,0 +1,23 @@
+{
+  "name": "particle_docs",
+  "version": "1.0.0",
+  "description": "API and Documentation.",
+  "main": "server.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "serve": "nodemon -e js,hbs,json, --watch ./src/back --watch views server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milesthedisch/particle_docs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/milesthedisch/particle_docs/issues"
+  },
+  "homepage": "https://github.com/milesthedisch/particle_docs#readme"
+}
