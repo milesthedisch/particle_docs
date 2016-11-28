@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/milesthedisch/particle_docs#readme",
   "dependencies": {
-    "particle_library": "file:../particle_libary"
+    "bunyan": "^1.8.5",
+    "express": "^4.14.0",
+    "particle_library": "file:../particle_library"
   },
   "devDependencies": {
     "eslint": "^3.11.0",

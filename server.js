@@ -1,4 +1,6 @@
-const serve = require("./src/back/helpers/serve");
-const app = require("./src/back/app");
+const serve = require("./controllers/helpers/serve");
+const app = require("./controllers/app");
+const particleLib = require("particle_library");
 
+console.log(particleLib);
 serve(app, 3000);
