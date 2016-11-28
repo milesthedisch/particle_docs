@@ -6,11 +6,11 @@ var fetchExample = function fetchExample(id) {
       return txt;
     });
   })
-  .catch(function (err) { 
+  .catch(function(err) {
     console.error(new Error(err));
   });
 };
 
 document.addEventListener("DOMContentLoaded", function() {
-  fetchExample(1).then(res => console.log(res));
+  fetchExample(1).then((res) => console.log(res));
 });
