@@ -12,5 +12,5 @@ var fetchExample = function fetchExample(id) {
 };
 
 document.addEventListener("DOMContentLoaded", function() {
-  fetchExample(1).then((res) => console.log(res));
+  fetchExample("@1").then((res) => console.log(res));
 });

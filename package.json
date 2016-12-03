@@ -7,7 +7,7 @@
     "example": "examples"
   },
   "scripts": {
-    "serve": "nodemon -e js,hbs,json, --watch ./src/back --watch views server.js",
+    "serve": "nodemon -e js,hbs,json, --watch ./controllers --watch views server.js | bunyan",
     "start": "node server.js"
   },
   "repository": {
@@ -22,7 +22,8 @@
   "homepage": "https://github.com/milesthedisch/particle_docs#readme",
   "dependencies": {
     "bunyan": "^1.8.5",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^3.11.0",

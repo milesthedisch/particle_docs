@@ -5,4 +5,5 @@ module.exports = function(app, port) {
     const host = server.address().address;
     log.warn("server listening at http://%s:%s", host, port);
   });
+  return server;
 };
