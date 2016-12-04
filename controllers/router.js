@@ -1,6 +1,5 @@
 const express = require("express");
-const app = require("./app");
-const exphs = require("express-handlebars");
+const exampleHandler = require("./helpers/exampleHandler");
 
 module.exports = function router(config) {
   const router = express.Router();
@@ -22,12 +21,17 @@ module.exports = function router(config) {
   });
 
   router.get("/examples/:id", function(req, res, next) {
-    res.send("sometext");
+    // Grab the id from the url
+    const id = req.params.id;
+    exampleHandler(id, function(err, data) {
+      if (err) res.send("error");
+      res.send(data);
+    });
   });
 
   router.get("/code", function(req, res, next) {
     const _path = require.resolve("particle_library");
-    res.download(_path, "particle_library", function(err) {
+    res.download(_path, "particle_library.js", function(err) {
       if (err) {
         // Clinet could be streaming the content.
         // If they close the connection send back a 400.
