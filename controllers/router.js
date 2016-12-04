@@ -24,7 +24,7 @@ module.exports = function router(config) {
     // Grab the id from the url
     const id = req.params.id;
     exampleHandler(id, function(err, data) {
-      if (err) res.send("error");
+      if (err) next("error");
       res.send(data);
     });
   });
