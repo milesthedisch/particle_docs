@@ -17,12 +17,15 @@ module.exports = function router(config) {
   });
 
   router.get("/examples", function(req, res, next) {
-    res.render("examples", {layout: "examples"});
+    // TODO: Miles get the list of name from the config file a
+    // and pass it as the context for this template.
+    res.render("exampleList", {layout: "examples"});
   });
 
   router.get("/examples/:id", function(req, res, next) {
     // Grab the id from the url
     const id = req.params.id;
+
     exampleHandler(id, function(err, data) {
       if (err) next("error");
       res.send(data);

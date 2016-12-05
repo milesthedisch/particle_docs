@@ -23,8 +23,7 @@ module.exports = function exampleHandler(id, cb) {
   config.css = "<style></style>";
   config.title = "Fake title";
 
-  // Based on the config read in the associated
-  // js file.
+  // Based on the config read in the associated js file.
   exampleLoader(config, function(err, contextObj) {
     if (err) cb(err);
 
@@ -35,19 +34,18 @@ module.exports = function exampleHandler(id, cb) {
       css: contextObj.css,
     };
 
-    const templatePath = path.resolve(__dirname, "../../views/templates/example.handlebars");
+    const templatePath =
+      path.resolve(__dirname, "../../views/templates/example.handlebars");
+
     // Read in the template and pass in context
     fs.readFile(templatePath, "utf8", function(err, data) {
       if (err) return cb(err);
+      // compile the template
       const template = handlebars.compile(data);
+      // Pass context into the template
       const html = template(ctx);
+      // Send of string to the client so that it can put it in to the srcdoc.
       cb(null, html);
     });
-    // // compile the template
-    // .then((data) => handlebars.compile(data))
-    // // Pass context into the template
-    // .then((template) => template(ctx))
-    // // Send of string to the client so that it can put it in to the srcdoc.
-    // .then((string) => res.send(string));
   });
 };
