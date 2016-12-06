@@ -7,8 +7,11 @@
     "example": "examples"
   },
   "scripts": {
-    "serve": "nodemon -e js,hbs,json, --watch ./controllers --watch views server.js | bunyan",
-    "start": "node server.js"
+    "setup": "./bin/setup && node ./bin/writeConfigFiles.js",
+    "serve": "npm run setup && nodemon -e js,hbs,json, --watch ./controllers --watch ./views server.js | bunyan",
+    "start": "npm run setup && node server.js",
+    "dev": "npm run style && static ./public",
+    "styles": ""
   },
   "repository": {
     "type": "git",
@@ -28,6 +31,7 @@
   },
   "devDependencies": {
     "eslint": "^3.11.0",
-    "eslint-config-google": "^0.7.1"
+    "eslint-config-google": "^0.7.1",
+    "node-sass": "^3.13.0"
   }
 }

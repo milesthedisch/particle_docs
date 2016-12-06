@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 // Theres probably a better way to do this but watever this works for me.
+// Get the nodemodule particle lib and write the file in to the public vendor folder.
 const fs = require("fs");
 const path = require("path");
 const pathToParticleLib = require.resolve("particle_library/main.js");
