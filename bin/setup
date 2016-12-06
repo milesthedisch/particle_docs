@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+const fs = require("fs");
+const path = require("path");
+const pathToParticleLib = require.resolve("particle_library/main.js");
+const output = path.resolve(__dirname, "../public/vendor/particle_lib.js");
+
+fs.readFile(pathToParticleLib, "utf8", function(err, data) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+  fs.writeFile(output, data, "utf8", function(err, data) {
+    if (err) {
+      console.log(err);
+      process.exit(1);
+    }
+    console.log("Copied in particle_lib succesfully!");
+    process.exit(0);
+  });
+});
+
+

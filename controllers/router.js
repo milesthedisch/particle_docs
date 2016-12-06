@@ -1,4 +1,5 @@
 const express = require("express");
+const exConfig = require("../ex-config.js");
 const exampleHandler = require("./helpers/exampleHandler");
 
 module.exports = function router(config) {
@@ -19,7 +20,9 @@ module.exports = function router(config) {
   router.get("/examples", function(req, res, next) {
     // TODO: Miles get the list of name from the config file a
     // and pass it as the context for this template.
-    res.render("exampleList", {layout: "examples"});
+    const names = Object.keys(exConfig).map((config) => exConfig[config].name);
+    console.log(names);
+    res.render("examples", {layout: "examples", names: names});
   });
 
   router.get("/examples/:id", function(req, res, next) {
@@ -36,7 +39,7 @@ module.exports = function router(config) {
     const _path = require.resolve("particle_library");
     res.download(_path, "particle_library.js", function(err) {
       if (err) {
-        // Clinet could be streaming the content.
+        // Client could be streaming the content.
         // If they close the connection send back a 400.
         if (res.headersSent) {
           res.status(400);
