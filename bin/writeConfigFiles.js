@@ -26,13 +26,13 @@ fs.readdir(examplesDir, function(err, dirs) {
 /**
  * checkJsInConfig
  * Check the js file in the example directory.
- * If it dosent exsist throw and error 
+ * If it dosent exsist throw and error
  * If it does exsist return the path that its in.
  * @param  {String} dir directory
  * @return {String}     a file path
  */
 function checkJsInConfig(dir) {
-  const jsFiles = fs.readdirSync(dir).filter((file) => path.extname(file) === ".js"); 
+  const jsFiles = fs.readdirSync(dir).filter((file) => path.extname(file) === ".js");
 
   if (!jsFiles.length) throw new Error("There is no js file for this example " + dir);
   return path.resolve(dir, jsFiles[0]);
