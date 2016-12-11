@@ -18,10 +18,7 @@ module.exports = function router(config) {
   });
 
   router.get("/examples", function(req, res, next) {
-    // TODO: Miles get the list of name from the config file a
-    // and pass it as the context for this template.
     const names = Object.keys(exConfig).map((config) => exConfig[config].name);
-    console.log(names);
     res.render("examples", {layout: "examples", names: names});
   });
 

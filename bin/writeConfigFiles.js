@@ -11,14 +11,20 @@ fs.readdir(examplesDir, function(err, dirs) {
 
   const dirPaths = dirs.map((dir) => path.resolve(examplesDir, dir));
   const isDir = dirPaths.every((dir) => fs.statSync(dir).isDirectory());
+  const isValidName = dirPaths.every((dir) => isValidCssName(path.parse(dir).name));
 
-  if (!isDir) throw new Error("Please make sure the format of your example is correct.");
+  if (!isDir || !isValidName) {
+    console.error(new Error("Please make sure the format of your example is correct."));
+    process.exit(1);
+  }
 
   const dirNames = dirPaths.map((dir) => path.parse(dir).name);
   const names = dirNames;
   const jsPaths = dirPaths.map((dir) => checkJsInConfig(dir));
   const keys = dirNames.map((x) => `"${x}":`);
-  const pairs = keys.map((key, i) => `\t${key} { \n\t\t "name": "${names[i]}", \n\t\t "js": "${jsPaths[i]}" \n  },\n`);
+  const pairs = keys.map((key, i) => (
+    `\t${key} { \n\t\t "name": "${names[i]}", \n\t\t "js": "${jsPaths[i]}" \n  },\n`)
+  );
 
   fs.writeFileSync(outputDir, `module.exports = { \t\n${ pairs.join("") } }`);
 });
@@ -37,3 +43,7 @@ function checkJsInConfig(dir) {
   if (!jsFiles.length) throw new Error("There is no js file for this example " + dir);
   return path.resolve(dir, jsFiles[0]);
 }
+
+function isValidCssName(name) {
+  return /-?[_a-zA-Z]+[_a-zA-Z0-9-]*/.test(name);
+};

@@ -1,3 +1,5 @@
+var FIRST_IFRAME = true;
+
 /* eslint no-var: 0, max-len: 0 */
 (function IIFE(window, document) {
   var DEFAULT_EXAMPLE = "@1";
@@ -41,15 +43,6 @@
   };
 
   /**
-   * [appendFrame description]
-   * @param  {[type]} iframe [description]
-   * @return {[type]}        [description]
-   */
-  var appendFrame = function appendFrame(iframe) {
-    return document.querySelector(".frame_container").appendChild(iframe);
-  };
-
-  /**
    * [createFrame description]
    * @param  {[type]} name [description]
    * @return {[type]}      [description]
@@ -59,13 +52,13 @@
       throw new Error(name + " Not a valid name for a id.");
     }
 
-    const iframe = document.createElement("iframe");
+    var iframe = document.createElement("iframe");
 
     iframe.setAttribute("allow-same-origin", true);
     iframe.setAttribute("allow-scripts", true);
     iframe.setAttribute("allowfullscreen", true);
     iframe.setAttribute("class", "frame_example");
-    iframe.setAttribute("id", name);
+    iframe.setAttribute("data-example", name);
 
     return iframe;
   };
@@ -76,11 +69,72 @@
    * @return {[type]}      [description]
    */
   var loadInIframe = function loadInIframe(name) {
-    const frame = createFrame(name);
+    var frame = createFrame(name);
+    debugger;
+    // If the example already exsists dont do anything.
+    if (!exampleExists(name)) {
+      // If we are the first frame in the document.
+      if (FIRST_IFRAME) {
+        // Toggle the state and remove old src and inject new src.
+        FIRST_IFRAME = !FIRST_IFRAME;
+        removeFrameSrc(name);
+        return fetchExample(name).then((src) => injectSrc(src, frame));
+      }
 
-    return fetchExample(name)
-    .then((src) => injectSrc(src, frame))
-    .then((newFrame) => appendFrame(newFrame));
+      // If we are not the first frame of the document do this regular stuff.
+      return fetchExample(name)
+        .then((src) => injectSrc(src, frame))
+        .then((newFrame) => writeFrame(newFrame))
+        .catch((err) => err);
+    }
+
+    return false;
+  };
+
+  /**
+   * [exampleExists description]
+   * @param  {[type]} example [description]
+   * @return {[type]}         [description]
+   */
+  var exampleExists = function exampleExists(example) {
+    if (!example) return false;
+
+    var id;
+
+    try {
+      id = getFrame(example)
+        .attributes["data-value"]
+        .nodeValue;  
+    } catch (e) {
+      if (e) {
+        id = false;  
+      }
+    }
+
+    return id === example;
+  };
+
+  /**
+   * [writeFrame description]
+   * @param  {[type]} parent [description]
+   * @param  {[type]} frame  [description]
+   * @return {[type]}        [description]
+   */
+  var writeFrame = function writeFrame(parent, frame) {
+    if (!isElement(parent)) {
+      throw new Error(parent + " this parent isn't a DOM element.");
+    }
+    return parent.appendChild(iframe);
+  };
+
+  /**
+   * [getFrame description]
+   * @param  {[type]} name [description]
+   * @return {[type]}      [description]
+   */
+  var getFrame = function getFrame(name) {
+    if (!name) return $("iframe[data-example]");
+    return $("iframe[data-example^=" + name + "]");
   };
 
   /**
@@ -124,7 +178,7 @@
    * elmDelegator delegate items
    * @param  {DOMElement} elm         The parent element of the delegates.
    * @param  {Function}   checkTarget Boolean to check which elements to delegate to.
-   * @param  {Function}   callback    A callback that is passed a error as its first 
+   * @param  {Function}   callback    A callback that is passed a error as its first
    *                                     argugmet and second argument as the delegate.
    */
   var elmDelegator = function elmDelegator(elm, checkTarget, callback) {
@@ -142,6 +196,19 @@
     });
   };
 
+  /**
+   * [removeFrameSrc description]
+   * @param  {[type]} elm [description]
+   * @return {[type]}     [description]
+   */
+  var removeFrameSrc = function removeFrameSrc(target) {
+    if (!target) throw new Error("Please provide a target");
+    if (!isElement(target)) {
+      return getFrame(target).srcDoc = "";
+    }
+    return target.srcDoc = "";
+  };
+
   document.addEventListener("DOMContentLoaded", function() {
     var hash = window.location.hash;
     var textNodes = mapText(".list_container li a");
@@ -153,6 +220,7 @@
         throw err;
       }
 
+      validFrameName();
       setHash(hash);
       loadInIframe(target.text);
     });
