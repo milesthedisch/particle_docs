@@ -8,9 +8,12 @@
   },
   "scripts": {
     "setup": "./bin/setup && node ./bin/writeConfigFiles.js",
+    "style": "node-sass --recursive --output ./public/build/css --source-map true --source-map-contents ./styles && npm run style:clean",
+    "style:clean": "cleancss -o ./public/build/css/main.css ./public/build/css/main.css",
+    "style:watch": "node-sass --recursive --watch --output ./public/build/css --source-map true --source-map-contents ./styles && npm run style:clean",
     "serve": "npm run setup && nodemon -e js,hbs,json, --watch ./controllers --watch ./views server.js | bunyan",
     "start": "npm run setup && node server.js",
-    "dev": "npm run style && static ./public"
+    "dev": "node bin/devServer"
   },
   "repository": {
     "type": "git",
@@ -26,11 +29,19 @@
     "bunyan": "^1.8.5",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
+    "extend": "^3.0.0",
     "handlebars": "^4.0.6"
   },
   "devDependencies": {
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.2.9",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-es2015": "^6.18.0",
+    "clean-css": "^3.4.21",
     "eslint": "^3.11.0",
     "eslint-config-google": "^0.7.1",
-    "node-sass": "^3.13.0"
+    "node-sass": "^3.13.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
   }
 }

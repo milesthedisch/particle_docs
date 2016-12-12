@@ -1,0 +1,14 @@
+{
+	"version": 3,
+	"file": "main.css",
+	"sources": [
+		"../../../styles/main.scss",
+		"../../../styles/components/_frameExample.scss"
+	],
+	"sourcesContent": [
+		"@import 'components/frameExample';\n",
+		".frameExample {\n  width: 80%;\n  margin: 0 auto;\n}\n"
+	],
+	"mappings": "ACAA,AAAA,aAAa,CAAC;EACZ,KAAK,EAAE,GAAI;EACX,MAAM,EAAE,MAAO,GAChB",
+	"names": []
+}

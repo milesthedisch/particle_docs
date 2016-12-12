@@ -1,7 +1,7 @@
 var FIRST_IFRAME = true;
 
 /* eslint no-var: 0, max-len: 0 */
-(function IIFE(window, document) {
+module.exports = (function IIFE(window, document) {
   var DEFAULT_EXAMPLE = "@1";
 
   /* shims */
