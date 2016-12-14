@@ -5,7 +5,7 @@
 const fs = require("fs");
 const path = require("path");
 const pathToParticleLib = require.resolve("particle_library/main.js");
-const output = path.resolve(__dirname, "../public/vendor/particle_lib.js");
+const output = path.resolve(__dirname, "../public/src/vendor/particle_lib.js");
 
 fs.readFile(pathToParticleLib, "utf8", function(err, data) {
   if (err) {

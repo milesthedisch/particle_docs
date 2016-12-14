@@ -18,7 +18,7 @@ module.exports = function(config) {
   app.set("view engine", "handlebars");
 
   // Set up static files
-  app.use(express.static(config.public));
+  app.use("/public", express.static(config.public));
 
   // Set up routes.
   app.use(router(config));

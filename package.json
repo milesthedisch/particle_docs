@@ -13,7 +13,7 @@
     "style:watch": "node-sass --recursive --watch --output ./public/build/css --source-map true --source-map-contents ./styles && npm run style:clean",
     "serve": "npm run setup && nodemon -e js,hbs,json, --watch ./controllers --watch ./views server.js | bunyan",
     "start": "npm run setup && node server.js",
-    "dev": "node bin/devServer"
+    "dev": "webpack --config=./webpack.dev.js --bail && npm run style && npm run serve"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,8 @@
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
     "extend": "^3.0.0",
-    "handlebars": "^4.0.6"
+    "handlebars": "^4.0.6",
+    "particle_library": "git+https://github.com/milesthedisch/particle_library.git"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",
@@ -40,6 +41,7 @@
     "clean-css": "^3.4.21",
     "eslint": "^3.11.0",
     "eslint-config-google": "^0.7.1",
+    "html-webpack-plugin": "^2.24.1",
     "node-sass": "^3.13.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
