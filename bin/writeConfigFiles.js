@@ -46,8 +46,7 @@ fs.readdir(examplesDir, function(err, dirs) {
     "name": "${dirNames[i]}", 
     "js": "${jsPaths[i]}"
   },\n`
-  )
-  );
+  ));
 
   fs.writeFileSync(outputDir, `module.exports = { \t\n${ pairs.join("") } }`);
 });
