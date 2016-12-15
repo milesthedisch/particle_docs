@@ -1,50 +1,60 @@
-/**
- * isElement checks if a element is a DOM node.
- * @param  {Object}  obj
- * @return {Boolean}
- */
-var isElement = function isElm(obj) {
-  return obj instanceof HTMLElement;
-};
+module.exports = function (document) {
+  document = document || this.document;
 
-/**
- * mapText takes an elment list and return a array of textNodes.
- * @param  {DOMElememt} elm   DOMElememt
- * @return {Array}            Array
- */
-var mapText = function mapText(elm) {
-  var elmList = $$(elm, document);
-  var textNodes = [];
+  const shims = require("shims")(document);
+  const $$ = shims.$$;
 
-  /*
-    We need to use a for `of` loop here cause its a NodeList and not an
-    array.
-  */
-  for (item of elmList) {
-    textNodes.push(item.text);
-  }
+  /**
+   * isElement checks if a element is a DOM node.
+   * @param  {Object}  obj
+   * @return {Boolean}
+   */
+  const isElement = function isElm(obj) {
+    return obj instanceof HTMLElement;
+  };
 
-  return textNodes;
-};
+  /**
+   * mapText takes an elment list and return a array of textNodes.
+   * @param  {DOMElememt} elm   DOMElememt
+   * @return {Array}            Array
+   */
+  const mapText = function mapText(elm) {
+    const elmList = $$(elm, document);
+    const textNodes = [];
 
-/**
- * elmDelegator delegate items
- * @param  {DOMElement} elm         The parent element of the delegates.
- * @param  {Function}   checkTarget Boolean to check which elements to delegate to.
- * @param  {Function}   callback    A callback that is passed a error as its first
- *                                     argugmet and second argument as the delegate.
- */
-var elmDelegator = function elmDelegator(elm, checkTarget, callback) {
-  if (!isElement(elm)) throw new Error(elm + " needs to be a element.");
-  if (elm.length) throw new Error(elm + " needs to be element list");
-
-  elm.addEventListener("click", function(e) {
-    e.preventDefault();
-
-    if (checkTarget(e.target)) {
-      return callback(null, e.target);
+    /*
+      We need to use a for `of` loop here cause its a NodeList and not an
+      array.
+    */
+    for (item of elmList) {
+      textNodes.push(item.text);
     }
 
-    return callback(new Error("No target matched"));
-  });
+    return textNodes;
+  };
+
+  /**
+   * elmDelegator delegate items
+   * @param  {DOMElement} elm         The parent element of the delegates.
+   * @param  {Function}   checkTarget Boolean to check which elements to delegate to.
+   * @param  {Function}   callback    A callback that is passed a error as its first
+   *                                     argugmet and second argument as the delegate.
+   */
+  const elmDelegator = function elmDelegator(elm, checkTarget, callback) {
+    if (!isElement(elm)) throw new Error(elm + " needs to be a element.");
+    if (elm.length) throw new Error(elm + " needs to be element list");
+
+    elm.addEventListener("click", function(e) {
+      e.preventDefault();
+
+      if (checkTarget(e.target)) {
+        return callback(null, e.target);
+      }
+
+      return callback(new Error("No target matched"));
+    });
+  };
+
+  return {elmDelegator, mapText, isElement};
 };
+

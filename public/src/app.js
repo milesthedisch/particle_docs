@@ -1,54 +1,41 @@
-var FIRST_IFRAME = true;
+const FIRST_IFRAME = true;
+const DEFAULT_EXAMPLE = "@1";
+const iframe = require("./module/iframe");
+const example_handler = require("./module/example_handler");
+const shims = require("./module/shims")(document);
+const utils = require("./module/dom_handler")(document);
 
-/* eslint no-var: 0, max-len: 0 */
-module.exports = (function IIFE(window, document) {
-  var DEFAULT_EXAMPLE = "@1";
 
-  /* shims */
-  window.$ = function qs(selector, baseNode) {
-    return document.querySelector(selector, baseNode);
-  };
+function setHash(hash) {
+  window.location.hash = hash || "";
+};
 
-  window.$$ = function qsAll(selector, baseNode) {
-    return document.querySelectorAll(selector, baseNode);
-  };
-  /* shims */
+document.addEventListener("DOMContentLoaded", function() {
+  const hash = window.location.hash;
+  const textNodes = mapText(".list_container li a");
 
-  /**
-   * setHash of URL
-   * @param {String} hash
-   */
-  var setHash = function setHash(hash) {
-    window.location.hash = hash || "";
-  };
-
-  document.addEventListener("DOMContentLoaded", function() {
-    var hash = window.location.hash;
-    var textNodes = mapText(".list_container li a");
-
-    elmDelegator($(".list_container"), function check(elm) {
-      return elm.tagName === "A";
-    }, function(err, target) {
-      if (err) {
-        throw err;
-      }
-
-      validFrameName();
-      setHash(hash);
-      loadInIframe(target.text);
-    });
-
-    // If theres a page fragment load the right example.
-    if (hash.length) {
-      var hashQuery = hash.substr(1);
-
-      if (textNodes.indexOf(hashQuery) > -1) {
-        loadInIframe(hashQuery);
-      }
+  utils.elmDelegator($(".list_container"), function check(elm) {
+    return elm.tagName === "A";
+  }, function(err, target) {
+    if (err) {
+      throw err;
     }
 
-    // Default to the an example if theres no hash.
-    setHash(DEFAULT_EXAMPLE);
-    loadInIframe(DEFAULT_EXAMPLE);
+    iframe.validFrameName();
+    setHash(hash);
+    iframe.loadInIframe(target.text);
   });
-})(window || this, window.document || document);
+
+  // If theres a page fragment load the right example.
+  if (hash.length) {
+    const hashQuery = hash.substr(1);
+
+    if (textNodes.indexOf(hashQuery) > -1) {
+      loadInIframe(hashQuery);
+    }
+  }
+
+  // Default to the an example if theres no hash.
+  setHash(DEFAULT_EXAMPLE);
+  loadInIframe(DEFAULT_EXAMPLE);
+});

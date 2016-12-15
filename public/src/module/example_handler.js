@@ -1,3 +1,5 @@
+const iframeManager = require('./iframeManager');
+
 /**
  * [fetchExample description]
  * @param  {[type]} id [description]
@@ -26,7 +28,7 @@ const exampleExists = function exampleExists(example) {
   let id;
 
   try {
-    id = getFrame(example)
+    id = iframeManager.getFrame(example)
       .attributes["data-value"]
       .nodeValue;
   } catch (e) {
@@ -37,3 +39,8 @@ const exampleExists = function exampleExists(example) {
     return id === example;
   }
 };
+
+module.exports = {
+  exampleExists,
+  fetchExample,
+}
