@@ -26,7 +26,7 @@ module.exports = function (document) {
       We need to use a for `of` loop here cause its a NodeList and not an
       array.
     */
-    for (item of elmList) {
+    for (let item of elmList) {
       textNodes.push(item.text);
     }
 
@@ -40,15 +40,15 @@ module.exports = function (document) {
    * @param  {Function}   callback    A callback that is passed a error as its first
    *                                     argugmet and second argument as the delegate.
    */
-  const elmDelegator = function elmDelegator(elm, checkTarget, callback) {
+  const elmDelegator = function elmDelegator(elm, event, checkTarget, callback) {
     if (!isElement(elm)) throw new Error(elm + " needs to be a element.");
     if (elm.length) throw new Error(elm + " needs to be element list");
 
-    elm.addEventListener("click", function(e) {
+    elm.addEventListener(event, function(e) {
       e.preventDefault();
 
       if (checkTarget(e.target)) {
-        return callback(null, e.target);
+        return callback(null, e.target, e);
       }
 
       return callback(new Error("No target matched"));

@@ -5,9 +5,11 @@ const path = require("path");
 
 module.exports = extend(true, {
   entry: [
-    "babel-polyfill",
+    "whatwg-fetch",
     path.resolve("./public/src/app.js"),
   ],
   progress: true,
+  watch: true,
+  devtool: "#inline-source-map",
 }, common);
 
