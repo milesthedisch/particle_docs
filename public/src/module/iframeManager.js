@@ -8,6 +8,7 @@ module.exports = function iframeHandler(document) {
 
   const $ = shims.$;
   const $$ = shims.$$;
+  
   let firstState = FIRST_IFRAME;
 
   /**
