@@ -2,6 +2,10 @@ const express = require("express");
 const exConfig = require("../ex-config.js");
 const exampleHandler = require("./helpers/exampleHandler");
 
+const getExampleNames = (config) => {
+  return Object.keys(config).map((x) => config[x].name);
+};
+
 module.exports = function router(config) {
   const router = express.Router();
 
@@ -18,8 +22,12 @@ module.exports = function router(config) {
   });
 
   router.get("/examples", function(req, res, next) {
-    const names = Object.keys(exConfig).map((config) => exConfig[config].name);
-    res.render("examples", {layout: "examples", names: names});
+    const names = getExampleNames(exConfig);
+    res.render("examples", {
+      layout: "examples",
+      showExamples: true,
+      names,
+    });
   });
 
   router.get("/examples/:id", function(req, res, next) {

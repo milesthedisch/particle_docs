@@ -13,6 +13,8 @@ function setHash(hash) {
 
 document.addEventListener("DOMContentLoaded", function() {
   const hash = window.location.hash;
+  const pathname = window.location.pathname;
+  console.log(pathname);
   const textNodes = utils.mapText(".list_container li a");
   const $ = shims.$;
 
@@ -36,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   } 
 
-  if (hash.length < 1) {
+  if (hash.length < 1) {``
     // Default to the an example if theres no hash.
     setHash(DEFAULT_EXAMPLE);
     iframe.loadInIframe(DEFAULT_EXAMPLE);
