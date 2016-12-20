@@ -16,6 +16,13 @@ module.exports = function exampleHandler(id, cb) {
     }
   }
 
+  // Hard coded references to the particle library.
+  // The code is in the parent frame.
+  const particleLib =
+  "<script>" +
+    "window.particleLib = window.particleLib || window.top.particle" +
+  "</script>";
+
   // Find the config associated with that ID.
   const config = examplesConfig[id];
 
@@ -32,6 +39,7 @@ module.exports = function exampleHandler(id, cb) {
       js: contextObj.js,
       title: contextObj.title,
       css: contextObj.css,
+      particleLib,
     };
 
     const templatePath =

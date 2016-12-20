@@ -17,6 +17,10 @@
     "build:watch": "webpack --config=./webpack.dev.js --bail",
     "build": "webpack --config=./webpack.production.js --bail"
   },
+  "engines" : { 
+    "node" : ">=6.9.0",
+    "npm": ">=3.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/milesthedisch/particle_docs.git"

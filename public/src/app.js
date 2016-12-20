@@ -3,14 +3,15 @@ const shims = require("shims.js")(document);
 const utils = require("dom_helper.js")(document);
 const DEFAULT_EXAMPLE = "a1";
 
+const sethash = (fragment) => {
+  return window.location.hash = fragment || "";
+};
+
 document.addEventListener("DOMContentLoaded", function() {
   const hash = window.location.hash;
   const pathname = window.location.pathname;
-  const query = window.location.search;
   const textNodes = utils.mapText(".list_container li a");
   const $ = shims.$;
-
-  history.pushState("", "/", pathname);
 
   switch (pathname) {
   case("/"): {
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
         throw err;
       }
 
-      history.sethash(hash);
+      sethash(target.text);
       iframe.loadInIframe(target.text);
     });
 
@@ -38,9 +39,9 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
 
+   // Default to the an example if theres no hash.
     if (hash.length < 1) {
-      // Default to the an example if theres no hash.
-      history.pushState(DEFAULT_EXAMPLE, document.title, pathname + query);
+      sethash(DEFAULT_EXAMPLE);
       iframe.loadInIframe(DEFAULT_EXAMPLE);
     }
     break;
