@@ -11,10 +11,10 @@
     "style": "node-sass --recursive --output ./public/build/css --source-map true --source-map-contents ./styles && npm run style:clean",
     "style:clean": "cleancss -o ./public/build/css/main.css ./public/build/css/main.css",
     "style:watch": "node-sass --recursive --watch --output ./public/build/css --source-map true --source-map-contents ./styles && npm run style:clean",
-    "serve": "npm run setup && nodemon -e js,hbs,json, --watch ./controllers --watch ./views server.js | bunyan",
+    "serve": "nodemon -e js,hbs,json, --watch ./controllers --watch ./views server.js | bunyan",
     "start": "npm run setup && node server.js",
-    "dev": "npm-run-all --parallel build:watch style:watch serve",
-    "build:watch": "webpack --config=./webpack.dev.js --bail",
+    "dev": "npm run setup && npm-run-all --parallel build:watch style:watch serve",
+    "build:watch": "webpack --config=./webpack.dev.js --bail --watch",
     "build": "webpack --config=./webpack.production.js --bail"
   },
   "engines" : { 

@@ -9,7 +9,6 @@ module.exports = extend(true, {
     path.resolve("./public/src/app.js"),
   ],
   progress: true,
-  watch: true,
   devtool: "#inline-source-map",
 }, common);
 
