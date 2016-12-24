@@ -1,20 +1,25 @@
 window.onload = function () {
 
-  // When using id's the variable is exposed 
-  var canvas = a;
-  var ctx = a.getContext("2d");
-  var w = canvas.width = window.innerWidth;
-  var h = canvas.height = window.innerHeight;
+  const vec = new particleLib.Vector();
+  const vScale = vec.create(1, 1);
 
+  // When using id's the variable is exposed 
+  const canvas = a;
+  const ctx = a.getContext("2d");
+  const w = canvas.width = window.innerWidth;
+  const h = canvas.height = window.innerHeight;
 
   ctx.translate(0, h/2);
-  ctx.scale(1, -1)
+  ctx.scale(vScale.state.x, vScale.state.y);
 
-  for (var angle = 0; angle < Math.PI * 2; angle += 0.01) {
-    var x = angle * 200;
-    var y = Math.sin(angle) * 200;
+  const µ = (Math.PI * 2) / w;
+  const amp = h / 2;
+  const phaseShift = 0;
 
-    ctx.fillRect(x, y, 5, 5)
+  for (let x = 0; x < w; x += 1) {
+    const angle = (x * µ) - phaseShift;
+    const y = amp * Math.sin(angle);
+
+    ctx.fillRect(x, y, 5, 5);
   }
-
-}
+};

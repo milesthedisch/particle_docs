@@ -27,8 +27,8 @@ module.exports = function exampleHandler(id, cb) {
   const config = examplesConfig[id];
 
   // Stub these out for now.
-  config.css = "<style></style>";
-  config.title = "Fake title";
+  config.css = "<style>body{margin:0!important}</style>";
+  config.title = config.name;
 
   // Based on the config read in the associated js file.
   exampleLoader(config, function(err, contextObj) {
