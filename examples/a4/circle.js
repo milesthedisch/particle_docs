@@ -17,7 +17,7 @@ window.onload = function () {
       slice = 2 * Math.PI / numObjects,
       x, y;
 
-      var arr = []
+      var arr = [];
       for (var i = 0; i < numObjects; i++) {
         arr.push(i);
       }

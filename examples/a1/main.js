@@ -20,11 +20,8 @@ window.onload = function() {
     ctx.stroke();
   }
 
-  let i=0;
-
   (function animate() {
     update();
-    console.log("animating", "" + (i++));
     window.requestAnimationFrame(animate);
   })();
 
