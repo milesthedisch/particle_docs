@@ -2,37 +2,39 @@
 
 window.onload = function () {
 
-  var rAF = window.requestAnimationFrame;
-  // When using id's the variable is exposed 
-  var canvas = a;
-  var ctx = a.getContext("2d");
-  var w = canvas.width = window.innerWidth;
-  var h = canvas.height = window.innerHeight;
+  const rAF = window.requestAnimationFrame;
+  // When using id's the constiable is exposed 
+  const canvas = a;
+  const ctx = a.getContext("2d");
+  const w = canvas.width = window.innerWidth;
+  const h = canvas.height = window.innerHeight;
 
-  var cx = w * .5,
-      cy = h * .5,
-      radius = 200,
-      angle = 0,
-      numObjects = 20,
-      slice = 2 * Math.PI / numObjects,
-      x, y;
+  const particle = particleLib.Particle;
 
-      var arr = [];
-      for (var i = 0; i < numObjects; i++) {
-        arr.push(i);
-      }
+  const cx = w * .5;
+  const cy = h * .5;
+  const objRadius = 10;
+  const radius = cy - objRadius;
+
+  const numObjects = 20;
+  const slice = 2 * Math.PI / numObjects;
+  let x; 
+  let y;
+
+  const arr = [];
+  for (let i = 0; i < numObjects; i++) {
+    arr.push(new Particle());
+  }
       
-
-      arr
-      .map(function (x) { return x * slice})
-      .forEach(function(angle) {
-        x = cx + Math.cos(angle) * radius;
-        y = cy + Math.sin(angle) * radius;
-        console.log(x, y)
-        ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI * 2, false);
-        ctx.fill()
-      })
+  arr
+  .map(function (x) { return x * slice})
+  .forEach(function(angle) {
+    x = cx + Math.cos(angle) * radius;
+    y = cy + Math.sin(angle) * radius;
+    ctx.beginPath();
+    ctx.arc(x, y, 10, 0, Math.PI * 2, false);
+    ctx.fill();
+  });
   // If the window is resizes fill the page again.
   window.onresize = function() {
     w = canvas.width = window.innerWidth;
