@@ -31,6 +31,10 @@ module.exports = {
     "name": "a4", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a4/circle.js"
   },
+	"a4-5": { 
+    "name": "a4-5", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a4-5/lissajous_curves.js"
+  },
 	"a5": { 
     "name": "a5", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a5/arctangent.js"
