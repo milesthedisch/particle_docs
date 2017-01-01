@@ -25,20 +25,17 @@ window.onload = function() {
   const arr = [];
   for (let i = 0; i < numObjects; i += 1) {
     arr.push(particle.create({
-      velocity: i,
+      velocity: i * slice,
       position: vec.create(),
     }));
   }
 
+  let µ = 0.01;
   (function animate() {
-    arr
-    .map(function(particle) {
-      particle.set("velocity", particle.get("velocity") * slice);
-      return particle;
-    })
-    .forEach(function(particle) {
-      x = cx + Math.cos(particle.get("velocity")) * radius;
-      y = cy + Math.sin(particle.get("velocity")) * radius;
+    µ += 0.01 / 2;
+    arr.forEach(function(particle) {
+      x = cx + Math.cos(particle.get("velocity") + µ) * (radius * µ);
+      y = cy + Math.sin(particle.get("velocity") + µ) * (radius * µ);
 
       particle.get("position").set("x", x);
       particle.get("position").set("y", y);
