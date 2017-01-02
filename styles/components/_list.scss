@@ -1,0 +1,8 @@
+.list-examples {
+  @extend %row;
+  flex-direction: column;
+
+  li {
+    @extend %column;
+  }
+}

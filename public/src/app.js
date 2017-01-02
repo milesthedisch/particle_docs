@@ -10,8 +10,12 @@ const sethash = (fragment) => {
 document.addEventListener("DOMContentLoaded", function() {
   const hash = window.location.hash;
   const pathname = window.location.pathname;
-  const textNodes = utils.mapText(".list_container li a");
+  const textNodes = utils.mapText(".list-examples li a");
   const $ = shims.$;
+
+  if (textNodes.length === 0) {
+    throw new Error("Theres no textNodes to check against.");
+  }
 
   switch (pathname) {
   case("/"): {
@@ -19,7 +23,8 @@ document.addEventListener("DOMContentLoaded", function() {
     break;
   }
   case("/examples"): {
-    utils.elmDelegator($(".list_container"), "click", function check(elm) {
+    console.log("examples");
+    utils.elmDelegator($(".list-examples"), "click", function check(elm) {
       return elm.tagName === "A";
     }, function(err, target, evt) {
       if (err) {

@@ -131,6 +131,8 @@ module.exports = function iframeHandler(document) {
     if (!exampleExists(id)) {
       // If we are not the first frame in the document.
       if (!firstState) {
+
+        console.log("Example doesn't exsist but we are the next iframe.")
         // Toggle the state and remove old src and inject new src.
         const existingFrame = getFrame();
         removeFrameSrc(existingFrame);
@@ -139,17 +141,21 @@ module.exports = function iframeHandler(document) {
           .catch((err) => console.error(err));
       }
 
+      console.log("Example doesn't exsist but we are the first iframe ever.")
+
       // Toggle the state.
       firstState = !firstState;
       // Create the frame
       const firstFrame = createFrame(id);
-      const parentDiv = $(".frame_container");
+      const parentDiv = $(".wrapper__frame");
       // If we are not the first frame of the document do this regular stuff.
       return fetchExample(id)
         .then((src) => injectSrc(src, firstFrame))
         .then((newFrame) => writeFrame(parentDiv, newFrame))
         .catch((err) => console.error(err));
     }
+
+    console.log("Example exsists not doing anything..");
 
     return false;
   };

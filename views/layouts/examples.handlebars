@@ -8,10 +8,13 @@
   <script src="public/build/js/bundle.js"></script>
 </head>
 <body>
-  <nav class="navigation__main">
-    <h1 class="header__main">Particle Library Examples</h1>
-    {{> navigation }}
-  </nav>  
-  {{{ body }}}
+  <div class="wrapper__page">
+    <nav class="navigation__main">
+      {{> navigation .}}  
+    </nav>
+    <div class="wrapper__content">
+      {{{ body }}}
+    </div>
+  </div>
 </body>
 </html>

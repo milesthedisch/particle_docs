@@ -6,3 +6,13 @@
 .wrapper__page {
   display: flex;
 }
+
+.wrapper__frame {
+  @extend .wrapper__content;
+  height: 100vh;
+
+  iframe {
+    @extend .wrapper__frame;
+    border: none;
+  }
+}

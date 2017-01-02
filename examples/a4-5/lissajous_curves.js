@@ -17,7 +17,7 @@ window.onload = function() {
   const cy = h * .5;
   const yRadius = 50;
   const xRadius = 40;
-  const numObjects = 100;
+  const numObjects = 1000;
   const accel = 0.0002;
   const size = 1;
 
