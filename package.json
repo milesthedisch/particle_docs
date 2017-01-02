@@ -8,17 +8,18 @@
   },
   "scripts": {
     "setup": "./bin/setup && node ./bin/writeConfigFiles.js",
-    "style": "node-sass --recursive --output ./public/build/css --source-map true --source-map-contents ./styles && npm run style:clean",
+    "style:build": "node-sass --recursive --output ./public/build/css --source-map true --source-map-contents ./styles && npm run style:postbuild && npm run style:clean",
+    "style:postbuild": "postcss --use autoprefixer --autoprefixer.browsers \"> 5%\" -o ./public/build/css/main.css ./public/build/css/main.css",
     "style:clean": "cleancss -o ./public/build/css/main.css ./public/build/css/main.css",
-    "style:watch": "node-sass --recursive --watch --output ./public/build/css --source-map true --source-map-contents ./styles && npm run style:clean",
+    "style:dev": "node-sass --recursive --watch --output ./public/build/css --source-map true --source-map-contents ./styles",
     "serve": "nodemon -e js,hbs,json, --watch ./controllers --watch ./views server.js | bunyan",
     "start": "npm run setup && node server.js",
-    "dev": "npm run setup && npm-run-all --parallel build:watch style:watch serve",
+    "dev": "npm run setup && npm-run-all --parallel build:watch style:dev serve",
     "build:watch": "webpack --config=./webpack.dev.js --bail --watch",
     "build": "webpack --config=./webpack.production.js --bail"
   },
-  "engines" : { 
-    "node" : ">=6.9.0",
+  "engines": {
+    "node": ">=6.9.0",
     "npm": ">=3.0.0"
   },
   "repository": {
@@ -42,6 +43,7 @@
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
+    "autoprefixer": "^6.6.0",
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.9",
     "babel-plugin-transform-runtime": "^6.15.0",
@@ -52,6 +54,7 @@
     "html-webpack-plugin": "^2.24.1",
     "node-sass": "^3.13.0",
     "npm-run-all": "^3.1.2",
+    "postcss-cli": "^2.6.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   }

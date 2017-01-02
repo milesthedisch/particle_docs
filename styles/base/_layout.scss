@@ -1,0 +1,21 @@
+.row,
+%row {
+  max-width: 740px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.column,
+%column {
+  margin: 10px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0px;
+}
+
+.column__big,
+%column__big {
+  flex-grow: 4;
+  flex-shrink: 4;
+  flex-basis: 0px;
+}

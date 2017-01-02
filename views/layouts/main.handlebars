@@ -7,9 +7,13 @@
   <script src="public/build/js/bundle.js"></script>
   <title>Particles</title>
 </head>
-<body> 
-  <h1 class="header__main">Particle Library</h1>
-  {{> navigation showExampleList=./showExampleList}}
-  {{{ body }}}
+<body>
+  <div class="wrapper__page">
+    <nav class="navigation__main">
+      <h1 class="header__main">Particle Library</h1>
+      {{> navigation showExampleList=./showExampleList}}  
+    </nav>
+    {{{ body }}}
+  </div>
 </body>
 </html>

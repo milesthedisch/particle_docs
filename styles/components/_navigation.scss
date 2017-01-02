@@ -1,3 +1,23 @@
 .list_container {
   display: flex;
 }
+
+.navigation__main {
+
+  @extend %column;
+
+  ol, ul, li {
+    @extend %column;
+    list-style: none;
+    padding: 0px;
+  }
+
+  .header__main {
+    @extend %column;
+    font-family: Code Pro Regular;
+    font-weight: 100;
+    padding-left: 0px;
+    text-align: center;
+  }
+
+}
