@@ -1,3 +1,6 @@
+const particle = new particleLib.particle();
+const vector = new particleLib.vector();
+
 window.onload = function () {
   
   var rAF = window.requestAnimationFrame;
@@ -14,12 +17,17 @@ window.onload = function () {
 
   for (var i = 0; i < numParticles; i += 1) {
     particles.push(
-      particle.create(cx, cy, Math.random() * 4 + 1, Math.random() * Math.PI * 2)
-    )
+      particle.create({
+        position: vector.create(cx, cy),
+        acceleration: vector.create(Math.random() * 4 + 1),
+        velocity: vector.create(0, 0),
+        Math.random() * Math.PI * 2
+      })
+    );
   }
 
   console.log(particles);
-  update()
+  update();
 
   function update() {
     //                from , to //

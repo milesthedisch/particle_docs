@@ -32,10 +32,12 @@ window.onload = function() {
 
   let µ = 0.01;
   (function animate() {
-    µ += 0.01 / 2;
+    ctx.clearRect(0, 0, w, h);
+    µ += 0.05;
+
     arr.forEach(function(particle) {
-      x = cx + Math.cos(particle.get("velocity") + µ) * (radius * µ);
-      y = cy + Math.sin(particle.get("velocity") + µ) * (radius * µ);
+      x = cx + Math.sin(µ) * 10 + Math.cos(particle.get("velocity") + µ) * (radius);
+      y = cy + Math.cos(µ) * 10 + Math.sin(particle.get("velocity") + µ) * (radius);
 
       particle.get("position").set("x", x);
       particle.get("position").set("y", y);
