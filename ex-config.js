@@ -43,10 +43,6 @@ module.exports = {
     "name": "a5-5", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a5-5/5.5.js"
   },
-	"a6": { 
-    "name": "a6", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a6/main.js"
-  },
 	"a7": { 
     "name": "a7", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a7/velocity.js"

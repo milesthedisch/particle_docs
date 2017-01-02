@@ -17,24 +17,15 @@ window.onload = function() {
   const cy = h * .5;
   const yRadius = 50;
   const xRadius = 40;
-  const numObjects = 10;
+  const numObjects = 100;
   const accel = 0.0002;
   const size = 1;
-
-  let xSpeed = 0.1;
-  let ySpeed = 0.11;
-
-  let xAngle = 0;
-  let yAngle = 0;
-
-  let x; 
-  let y;
 
   const _particles = createObjects(numObjects);
   render();
 
   function render() {
-    // ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(0, 0, w, h);
     updateParticles(_particles).forEach(function(p) {
       ctx.beginPath();
       ctx.arc(
@@ -56,11 +47,11 @@ window.onload = function() {
 
     for (let i = 0; i < num; i++) {
       particles.push(particle.create({
-        velocity: vector.create(0.05, 0.04),
-        acceleration: vector.create(0.00002, 0.00002),
+        velocity: vector.create(0.005, 0.004),
+        acceleration: vector.random(0.00002, 0.001),
         position: vector.create(0, h - size),
-        angle: vector.random(0, 10),
-        radius: vector.create(w / 2 - size, h / 2 - size),
+        angle: vector.random(0, 1000),
+        radius: vector.random(w / 4 - size, h / 4 - size),
       }));
     };
 
