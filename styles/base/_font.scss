@@ -1,0 +1,24 @@
+@font-face {
+    font-family: Code Pro Regular;
+    src: url('../../../public/files/fonts/Code Pro/Code Pro Regular.eot');
+    src: url('../../../public/files/fonts/Code Pro/Code Pro Regular.eot?iefix') format('embedded-opentype'),
+         url('../../../public/files/fonts/Code Pro/Code Pro Regular.woff') format('woff'),
+         url('../../../public/files/fonts/Code Pro/Code Pro Regular.woff2') format('woff2'),
+         url('../../../public/files/fonts/Code Pro/Code Pro Regular.svg') format('svg'),
+         url('../../../public/files/fonts/Code Pro/Code Pro Regular.ttf') format('truetype');
+    font-weight: 600;
+    font-style: none;
+}
+
+@font-face {
+    font-family: Code Pro Regular;
+    src: url('../../../public/files/fonts/Code Pro/Code Pro Bold.eot');
+    src: url('../../../public/files/fonts/Code Pro/Code Pro Bold.eot?iefix') format('embedded-opentype'),
+         url('../../../public/files/fonts/Code Pro/Code Pro Bold.woff') format('woff'),
+         url('../../../public/files/fonts/Code Pro/Code Pro Bold.woff2') format('woff2'),
+         url('../../../public/files/fonts/Code Pro/Code Pro Bold.svg') format('svg'),
+         url('../../../public/files/fonts/Code Pro/Code Pro Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: none;
+}
+
