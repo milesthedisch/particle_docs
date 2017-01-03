@@ -4,7 +4,7 @@
 // Get the nodemodule particle lib and write the file in to the public vendor folder.
 const fs = require("fs");
 const path = require("path");
-const pathToParticleLib = require.resolve("particle_library/main.js");
+const pathToParticleLib = require.resolve("particle_library");
 const output = path.resolve(__dirname, "../public/src/vendor/particle_lib.js");
 
 fs.readFile(pathToParticleLib, "utf8", function(err, data) {
