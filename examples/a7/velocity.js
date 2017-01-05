@@ -1,27 +1,27 @@
-const particle = new particleLib.particle();
-const vector = new particleLib.vector();
+const particle = new particleLib.Particle();
+const vector = new particleLib.Vector();
 
 window.onload = function () {
   
-  var rAF = window.requestAnimationFrame;
-  var canvas = a;
-  var ctx = a.getContext("2d");
+  const rAF = window.requestAnimationFrame;
+  const canvas = a;
+  const ctx = a.getContext("2d");
 
-  var w = canvas.width = window.innerWidth;
-  var h = canvas.height = window.innerHeight;
+  const w = canvas.width = window.innerWidth;
+  const h = canvas.height = window.innerHeight;
 
-  var cx = w / 2,
-      cy = h / 2,
-      particles = [],
-      numParticles = 100;
+  let cx = w / 2;
+  let cy = h / 2;
+  let particles = [];
+  let numParticles = 100;
 
-  for (var i = 0; i < numParticles; i += 1) {
+  for (let i = 0; i < numParticles; i += 1) {
     particles.push(
       particle.create({
         position: vector.create(cx, cy),
         acceleration: vector.create(Math.random() * 4 + 1),
         velocity: vector.create(0, 0),
-        Math.random() * Math.PI * 2
+        angle: Math.random() * Math.PI * 2,
       })
     );
   }
@@ -30,7 +30,6 @@ window.onload = function () {
   update();
 
   function update() {
-    //                from , to //
     ctx.clearRect(0, 0, w, h);
     for (var i = 0; i < numParticles; i += 1) {
       var p = particles[i];
@@ -40,8 +39,7 @@ window.onload = function () {
       ctx.fill();
     }
       
-    requestAnimationFrame(update);
-
+    rAF(update);
   }
 
 }
