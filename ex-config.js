@@ -3,22 +3,6 @@ module.exports = {
     "name": "a1", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a1/main.js"
   },
-	"a11": { 
-    "name": "a11", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a11/main.js"
-  },
-	"a12": { 
-    "name": "a12", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a12/main.js"
-  },
-	"a12-1": { 
-    "name": "a12-1", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a12-1/main.js"
-  },
-	"a12-2": { 
-    "name": "a12-2", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a12-2/main.js"
-  },
 	"a2": { 
     "name": "a2", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a2/trig.js"
@@ -58,6 +42,22 @@ module.exports = {
 	"a9": { 
     "name": "a9", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a9/main.js"
+  },
+	"b1": { 
+    "name": "b1", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/b1/main.js"
+  },
+	"b2": { 
+    "name": "b2", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/b2/main.js"
+  },
+	"b3": { 
+    "name": "b3", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/b3/main.js"
+  },
+	"b4": { 
+    "name": "b4", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/b4/main.js"
   },
 	"normalizeEx": { 
     "name": "normalizeEx", 

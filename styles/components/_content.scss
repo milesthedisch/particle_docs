@@ -52,6 +52,27 @@
   font-size: 1.05rem;
 }
 
+.content-block__small {
+  @extend %spaced__light;
+  @extend %padded__light;
+  font-size: 1rem;
+}
+
+.code-block,
+%code-block {
+  background-color: $code-block-color;
+}
+
+.scrollable__vertical,
+%scrollable__vertical {
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+}
+
+.anchor-style-none {
+  text-decoration: none;
+}
+
 .important,
 %important {
   color: white;
@@ -64,6 +85,14 @@
   line-height: 1.25;
 }
 
-.anchor-style-none {
-  text-decoration: none;
+.attention, 
+%attention {
+  color: white;
+  list-style: none;
+  background: $warn-color;
+  font-size: 1.025rem;
+  font-weight: 100;
+  padding: 2px;
+  padding-left: 10px;
+  line-height: 2;
 }

@@ -12,7 +12,7 @@
     "style:postbuild": "postcss --use autoprefixer --autoprefixer.browsers \"> 5%\" -o ./public/build/css/main.css ./public/build/css/main.css",
     "style:clean": "cleancss -o ./public/build/css/main.css ./public/build/css/main.css",
     "style:dev": "node-sass --recursive --watch --output ./public/build/css --source-map true --source-map-contents ./styles",
-    "serve": "nodemon -e js,hbs,json, --watch ./controllers --watch ./views server.js | bunyan",
+    "serve": "nodemon -e js,handlebars,json, --watch ./controllers --watch ./views server.js | bunyan",
     "start": "npm run setup && node server.js",
     "dev": "npm run setup && npm-run-all --parallel build:watch style:dev serve",
     "build:watch": "webpack --config=./webpack.dev.js --bail --watch",
