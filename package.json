@@ -51,6 +51,7 @@
     "clean-css": "^3.4.21",
     "eslint": "^3.11.0",
     "eslint-config-google": "^0.7.1",
+    "fs-extra": "^1.0.0",
     "html-webpack-plugin": "^2.24.1",
     "node-sass": "^3.13.0",
     "nodemon": "^1.11.0",

@@ -2,24 +2,35 @@
 
 // Theres probably a better way to do this but watever this works for me.
 // Get the nodemodule particle lib and write the file in to the public vendor folder.
-const fs = require("fs");
+const fse = require("fs-extra");
 const path = require("path");
-const pathToParticleLib = require.resolve("particle_library");
-const output = path.resolve(__dirname, "../public/src/vendor/particle_lib.js");
 
-fs.readFile(pathToParticleLib, "utf8", function(err, data) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-  fs.writeFile(output, data, "utf8", function(err, data) {
+const pathToParticleLib = require.resolve("particle_library");
+const pathToDocs = path.resolve(`${pathToParticleLib}/../docs`);
+
+const outputLib = path.resolve(__dirname, "../public/src/vendor/particle_lib.js");
+const outputDocs = path.resolve(__dirname, "../public/files/docs");
+
+function writeLibraryIn(callback) {
+  fse.copy(pathToParticleLib, outputLib, function(err, data) {
     if (err) {
       console.log(err);
       process.exit(1);
     }
-    console.log("Copied in particle_lib succesfully!");
+    console.log("Copied in library successfully!");
+    callback();
+  });
+}
+
+function writeDocsIn() {
+  fse.copy(pathToDocs, outputDocs, function(err, data) {
+    if (err) {
+      console.log(err);
+      process.exit(1);
+    }
+    console.log("Copied in docs successfully!");
     process.exit(0);
   });
-});
+}
 
-
+writeLibraryIn(writeDocsIn);

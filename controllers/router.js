@@ -1,5 +1,8 @@
 const express = require("express");
+const path = require("path");
+
 const exConfig = require("../ex-config.js");
+const logger = require("./helpers/logger.js");
 const exampleHandler = require("./helpers/exampleHandler");
 
 const getExampleNames = (config) => {
@@ -13,8 +16,10 @@ module.exports = function router(config) {
     res.render("home");
   });
 
+  // TODO: Router nesting -
+  // http://stackoverflow.com/questions/25260818/rest-with-express-js-nested-router
   router.get("/docs", function(req, res, next) {
-    res.render("docs");
+    res.redirect("/public/files/docs");
   });
 
   router.get("/maths", function(req, res, next) {
