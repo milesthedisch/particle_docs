@@ -1,6 +1,7 @@
 'use strict';
 const particle = new particleLib.Particle();
 const vector = new particleLib.Vector();
+const utils = particleLib.Utils;
 
 window.onload = function() {
   const rAF = window.requestAnimationFrame;
@@ -13,45 +14,48 @@ window.onload = function() {
   // are the same as 0,0 on
   // a cartiesian cordinate map.
 
-  const cx = w * .5;
-  const cy = h * .5;
-  const yRadius = 50;
-  const xRadius = 40;
-  const numObjects = 1000;
-  const accel = 0.0002;
-  const size = 1;
+  const numObjects = 40;
+  const size = 10;
+
+  const bounds = vector.random(w / 3 - size, h / 3 - size);
+  const centerVec = vector.create(w / 2, h / 2);
 
   const _particles = createObjects(numObjects);
-  render();
 
-  function render() {
+  (function render() {
     ctx.clearRect(0, 0, w, h);
     updateParticles(_particles).forEach(function(p) {
+
       ctx.beginPath();
       ctx.arc(
-        p.get("position").get("x"), 
-        p.get("position").get("y"), 
-        size, 
-        0, 
-        Math.PI * 2, 
+        p.get("position").get("x"),
+        p.get("position").get("y"),
+        p.get("size"),
+        0,
+        Math.PI * 2,
         false
       );
       ctx.fill();
     });
 
     rAF(render);
-  }
+  })();
 
   function createObjects(num) {
     const particles = [];
 
     for (let i = 0; i < num; i++) {
       particles.push(particle.create({
-        velocity: vector.create(0.005, 0.004),
-        acceleration: vector.random(0.00002, 0.001),
-        position: vector.create(0, h - size),
+        velocity: vector.create(0.00005, 0.00004),
+        acceleration: vector.random(0, 0),
+        position: vector.create(
+          utils.lerp(Math.random(), 0, w), 
+          utils.lerp(Math.random(), 0, h)
+        ),
+        direction: 1,
+        size: Math.round(utils.lerp(Math.random(), 5, size)),
         angle: vector.random(0, 1000),
-        radius: vector.random(w / 4 - size, h / 4 - size),
+        magnitude: 0.01,
       }));
     };
 
@@ -59,9 +63,9 @@ window.onload = function() {
   };
 
   function updateParticles(particles) {
-    particles.forEach(function (p) {
-      let x = cx + p.get("radius").get("x") * Math.sin(p.get("angle").get("x"));
-      let y = cy + p.get("radius").get("y") * Math.sin(p.get("angle").get("y"));
+    particles.forEach(function(p) {
+      let x = centerVec.get("x") + bounds.get("x") * Math.sin(p.get("angle").get("x"));
+      let y = centerVec.get("y") + bounds.get("y") * Math.sin(p.get("angle").get("y"));
       p.get("position").set("x", x);
       p.get("position").set("y", y);
       p.accelerate(p.get("acceleration"));

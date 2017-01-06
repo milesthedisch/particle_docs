@@ -19,48 +19,53 @@ window.onload = function() {
   const slice = 2 * Math.PI / numObjects;
   const arr = [];
   for (let i = 0; i < numObjects; i += 1) {
+
+    // Center are the particles //
+    let position = vec.create();
+    position["+="](centerVec);
+
     arr.push(
       particle.create({
+        // Each slice is slice of Math.PI //
         direction: i * slice,
-        magnitude: 100,
+        // How far its from the center //
+        magnitude: 1,
+        // Radius fo the particles drawn //
         radius: objRadius,
+        position: position,
       })
     );
   }
 
-  arr.forEach(function(particle) {
-    const position = particle.get("position");
-    const velocity = particle.get("velocity");
+  // const µ = 0.01;
+  // const µDelta = 0.05;
 
-    position["+="](velocity);
-    position["+="](centerVec);
+  (function animate() {
+    ctx.clearRect(0, 0, w, h);
 
-    shapes.circle(
-      position.get("x"),
-      position.get("y"),
-      particle.get("radius"),
-      0,
-      Math.PI * 2,
-      false
-    );
-  });
+    // µ += µDelta;
 
-  // let µ = 0.01;
-  // (function animate() {
-  //   ctx.clearRect(0, 0, w, h);
-  //   µ += 0.05;
+    arr.forEach(function(particle) {
+      let position = particle.get("position");
+      let velocity = particle.get("velocity");
+      let directionDelta = particle.get("direction") // + µ;
 
-  //   arr.forEach(function(particle) {
-  //     x = cx + Math.sin(µ) * 10 + Math.cos(particle.get("direction") + µ) * (radius);
-  //     y = cy + Math.cos(µ) * 10 + Math.sin(particle.get("direction") + µ) * (radius);
+      particle.set("direction", directionDelta);
+      velocity.setAngle(directionDelta);
+      position["+="](velocity);
 
-  //     particle.get("position").set("x", x);
-  //     particle.get("position").set("y", y);
+      shapes.circle(
+        position.get("x"),
+        position.get("y"),
+        particle.get("radius"),
+        0,
+        Math.PI * 2,
+        false
+      );
+    });
 
-  //     shapes.circle(x, y, objRadius, 0, Math.PI * 2, false);
-  //   });
-  //   rAF(animate);
-  // })();
+    rAF(animate);
+  })();
 
 
       // If the window is resizes fill the page again.
