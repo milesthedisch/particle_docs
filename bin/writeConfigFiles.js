@@ -64,13 +64,13 @@ function checkJsInConfig(dir) {
     fs.readdirSync(dir)
       .filter((file) => path.extname(file) === ".js");
 
-  if (!jsFiles.length) {
-    throw new Error(
-      `There is no js file for this example ${dir}`
-    );
+  if (jsFiles.length > 0) {
+    return path.resolve(dir, jsFiles[0]);
   }
 
-  return path.resolve(dir, jsFiles[0]);
+  throw new Error(
+    `There is no js file for this example ${dir}`
+  );
 }
 
 /**

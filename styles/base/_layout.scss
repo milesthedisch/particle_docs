@@ -1,8 +1,20 @@
 .row,
 %row {
+  display: flex;
+  width: 100%;
+}
+
+.row__centered 
+%row__centered {
+  @extend %row;
   max-width: 740px;
   margin: 0 auto;
-  display: flex;
+}
+
+.row__vertical,
+%row__vertical {
+  @extend %row;
+  flex-direction: column;
 }
 
 .column,
@@ -15,7 +27,7 @@
 
 .column__big,
 %column__big {
-  flex-grow: 4;
-  flex-shrink: 4;
+  flex-grow: 9;
+  flex-shrink: 9;
   flex-basis: 0px;
 }

@@ -19,6 +19,10 @@ module.exports = function router(config) {
   // TODO: Router nesting -
   // http://stackoverflow.com/questions/25260818/rest-with-express-js-nested-router
   router.get("/docs", function(req, res, next) {
+    res.redirect("https://github.com/milesthedisch/particle_library");
+  });
+
+  router.get("/api", function(req, res, next) {
     res.redirect("/public/files/docs");
   });
 

@@ -1,0 +1,69 @@
+// Paddings
+
+.padded__light,
+%padded__light {
+  padding: 5px;
+}
+
+.padded,
+%padded {
+  padding: 10px;
+}
+
+.padded__heavy,
+%padded__heavy {
+  padding: 20px;
+}
+
+// Margins
+
+.spaced__light,
+%spaced__light {
+  margin: 5px;
+}
+
+.spaced,
+%spaced {
+  margin: 10px;
+}
+
+.spaced__heavy,
+%spaced__heavy {
+  margin: 20px;
+}
+
+.border,
+%border {
+  border: 2px solid $border-color;
+  border-radius: 4px;
+}
+
+.content-block,
+%content-block {
+  @extend %spaced;
+  @extend %padded;
+  line-height: 1.5rem;
+  font-size: 1.05rem;
+}
+
+.content-block__large {
+  @extend %spaced__heavy;
+  @extend %padded__heavy;
+  font-size: 1.05rem;
+}
+
+.important,
+%important {
+  color: white;
+  list-style: none;
+  background: $hightlight-color;
+  font-size: 1.025rem;
+  font-weight: 600;
+  padding: 3px;
+  border-radius: 4%;
+  line-height: 1.25;
+}
+
+.anchor-style-none {
+  text-decoration: none;
+}

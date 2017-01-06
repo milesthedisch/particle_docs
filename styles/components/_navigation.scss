@@ -1,20 +1,16 @@
 .navigation__main {
 
   @extend %column;
+  
+  h1 {
+    text-transform: uppercase;
+  }
 
   ol, ul, li {
     @extend %column;
     list-style: none;
     padding: 0px;
     margin: 2px;
-  }
-
-  .header__logo {
-    @extend %column;
-    font-family: Code Pro Regular;
-    font-weight: 100;
-    padding-left: 0px;
-    text-align: left;
   }
 
 }

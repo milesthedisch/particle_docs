@@ -23,13 +23,10 @@ document.addEventListener("DOMContentLoaded", function() {
     break;
   }
   case("/examples"): {
-    console.log("examples");
     utils.elmDelegator($(".list-examples"), "click", function check(elm) {
       return elm.tagName === "A";
     }, function(err, target, evt) {
-      if (err) {
-        throw err;
-      }
+      if (err) throw err;
 
       sethash(target.text);
       iframe.loadInIframe(target.text);

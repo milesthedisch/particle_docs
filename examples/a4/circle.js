@@ -25,7 +25,7 @@ window.onload = function() {
   const arr = [];
   for (let i = 0; i < numObjects; i += 1) {
     arr.push(particle.create({
-      velocity: i * slice,
+      direction: i * slice,
       position: vec.create(),
     }));
   }
@@ -36,8 +36,8 @@ window.onload = function() {
     µ += 0.05;
 
     arr.forEach(function(particle) {
-      x = cx + Math.sin(µ) * 10 + Math.cos(particle.get("velocity") + µ) * (radius);
-      y = cy + Math.cos(µ) * 10 + Math.sin(particle.get("velocity") + µ) * (radius);
+      x = cx + Math.sin(µ) * 10 + Math.cos(particle.get("direction") + µ) * (radius);
+      y = cy + Math.cos(µ) * 10 + Math.sin(particle.get("direction") + µ) * (radius);
 
       particle.get("position").set("x", x);
       particle.get("position").set("y", y);

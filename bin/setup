@@ -12,7 +12,7 @@ const outputLib = path.resolve(__dirname, "../public/src/vendor/particle_lib.js"
 const outputDocs = path.resolve(__dirname, "../public/files/docs");
 
 function writeLibraryIn(callback) {
-  fse.copy(pathToParticleLib, outputLib, function(err, data) {
+  fse.copy(pathToParticleLib, outputLib, function(err) {
     if (err) {
       console.log(err);
       process.exit(1);
@@ -23,7 +23,7 @@ function writeLibraryIn(callback) {
 }
 
 function writeDocsIn() {
-  fse.copy(pathToDocs, outputDocs, function(err, data) {
+  fse.copy(pathToDocs, outputDocs, function(err) {
     if (err) {
       console.log(err);
       process.exit(1);

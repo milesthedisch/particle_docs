@@ -417,10 +417,13 @@ template {
   font-style: none; }
 
 .row,
+.row__vertical,
 .list-examples {
-  max-width: 740px;
-  margin: 0 auto;
-  display: flex; }
+  display: flex;
+  width: 100%; }
+
+.row__vertical {
+  flex-direction: column; }
 
 .column,
 .list-examples li,
@@ -428,7 +431,7 @@ template {
 .navigation__main ol,
 .navigation__main ul,
 .navigation__main li,
-.navigation__main .header__logo {
+.header__logo {
   margin: 10px;
   flex-grow: 1;
   flex-shrink: 1;
@@ -438,8 +441,8 @@ template {
 .wrapper__content,
 .wrapper__frame,
 .wrapper__frame iframe {
-  flex-grow: 4;
-  flex-shrink: 4;
+  flex-grow: 9;
+  flex-shrink: 9;
   flex-basis: 0px; }
 
 .frameExample {
@@ -449,16 +452,59 @@ template {
 .list-examples {
   flex-direction: column; }
 
+.navigation__main h1 {
+  text-transform: uppercase; }
+
 .navigation__main ol, .navigation__main ul, .navigation__main li {
   list-style: none;
   padding: 0px;
   margin: 2px; }
 
-.navigation__main .header__logo {
-  font-family: Code Pro Regular;
-  font-weight: 100;
-  padding-left: 0px;
-  text-align: left; }
+.padded__light {
+  padding: 5px; }
+
+.padded,
+.content-block {
+  padding: 10px; }
+
+.padded__heavy,
+.content-block__large {
+  padding: 20px; }
+
+.spaced__light {
+  margin: 5px; }
+
+.spaced,
+.content-block {
+  margin: 10px; }
+
+.spaced__heavy,
+.content-block__large {
+  margin: 20px; }
+
+.border {
+  border: 2px solid rgba(200, 200, 200, 0.5);
+  border-radius: 4px; }
+
+.content-block {
+  line-height: 1.5rem;
+  font-size: 1.05rem; }
+
+.content-block__large {
+  font-size: 1.05rem; }
+
+.important {
+  color: white;
+  list-style: none;
+  background: rgba(255, 150, 0, 0.8);
+  font-size: 1.025rem;
+  font-weight: 600;
+  padding: 3px;
+  border-radius: 4%;
+  line-height: 1.25; }
+
+.anchor-style-none {
+  text-decoration: none; }
 
 .wrapper__content, .wrapper__frame, .wrapper__frame iframe {
   display: flex; }
@@ -472,5 +518,19 @@ template {
   height: 100vh; }
   .wrapper__frame iframe {
     border: none; }
+
+.header__medium {
+  font-size: 1.75rem;
+  font-weight: 200;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0.25rem; }
+
+.header__logo {
+  font-family: Code Pro Regular;
+  font-weight: 200;
+  padding-left: 0px;
+  text-align: left;
+  margin: 0px;
+  text-transform: uppercase; }
 
 /*# sourceMappingURL=main.css.map */
