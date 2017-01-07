@@ -14,28 +14,33 @@ window.onload = function () {
   let cy = h / 2;
   let particles = [];
   let numParticles = 100;
+  let diffVector;
+  let delta;
 
   for (let i = 0; i < numParticles; i += 1) {
     particles.push(
       particle.create({
         position: vector.create(cx, cy),
-        acceleration: vector.create(Math.random() * 4 + 1),
         velocity: vector.create(0, 0),
-        angle: Math.random() * Math.PI * 2,
+        magnitude: Math.random() * 1,
+        direction: Math.random() * Math.PI * 4,
+        radius: Math.random() * 5 + 1,
+        color: "hsl("+ 360*Math.random() +",100%,50%)",
       })
     );
   }
 
-  console.log(particles);
   update();
 
   function update() {
     ctx.clearRect(0, 0, w, h);
-    for (var i = 0; i < numParticles; i += 1) {
-      var p = particles[i];
+    for (let i = 0; i < numParticles; i += 1) {
+      let p = particles[i];
+
       p.update();
       ctx.beginPath();
-      ctx.arc(p.position.getX(), p.position.getY(), 10, 0, Math.PI * 2, false);
+      ctx.fillStyle = p.get("color");
+      ctx.arc(p.get("position").get("x"), p.get("position").get("y"), p.get("radius"), 0, Math.PI * 2, false);
       ctx.fill();
     }
       

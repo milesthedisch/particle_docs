@@ -1,6 +1,8 @@
 'use strict';
 
 window.onload = function () {
+  const particle = new particleLib.Particle();
+  const vector = new particleLib.Vector();
 
   // When using id's the variable is exposed 
   var canvas = a;
@@ -8,12 +10,14 @@ window.onload = function () {
   var ctx = a.getContext("2d");
   var w = canvas.width = window.innerWidth;
   var h = canvas.height = window.innerHeight;
-  var ship = particle.create(w / 2, h / 2, 0, 0, 0),
-      thrust = vector.create(0, 0),
-      angle = 0,
-      turningLeft = false,
-      turningRight = false,
-      thrusting = false;
+  var ship = particle.create({
+    position: vector.create(w/2, h/2),
+  }),
+  thrust = vector.create(0, 0),
+  angle = 0,
+  turningLeft = false,
+  turningRight = false,
+  thrusting = false;
 
   document.body.addEventListener("keydown", function (event) {
 
@@ -66,7 +70,7 @@ window.onload = function () {
     }
 
     if (turningLeft) {
-      angle += 0.05;  
+      angle += 0.05;
     }
 
     thrust.setAngle(angle);
@@ -74,14 +78,14 @@ window.onload = function () {
     if (thrusting) {
       thrust.setLength(0.1);
     } else {
-      thrust.setLength(0);
+      thrust.setLength(-0.0002);
     }
 
     ship.accelerate(thrust);
     ship.update();
 
-    ctx.save(); 
-    ctx.translate(ship.position.getX(), ship.position.getY());
+    ctx.save();
+    ctx.translate(ship.get("position").get("x"), ship.get("position").get("y"));
     ctx.rotate(angle);
 
     ctx.beginPath();
@@ -99,20 +103,20 @@ window.onload = function () {
     ctx.restore();
 
     // Boundries // 
-    if (ship.position.getX() > w) {
-      ship.position.setX(0);
+    if (ship.get("position").get("x") > w) {
+      ship.get("position").set("x", 0);
     }
 
-    if (ship.position.getX() < 0) {
-      ship.position.setX(w);
+    if (ship.get("position").get("x") < 0) {
+      ship.get("position").set("x", w);
     }
 
-    if (ship.position.getY() > h) {
-      ship.position.setY(0);
+    if (ship.get("position").get("y") > h) {
+      ship.get("position").set("y", 0);
     }
 
-    if (ship.position.getY() < 0) {
-      ship.position.setY(h);
+    if (ship.get("position").get("y") < 0) {
+      ship.get("position").set("y", h);
     }
 
     rAF(update);
@@ -122,7 +126,5 @@ window.onload = function () {
   window.onresize = function() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
-  }
-
-}
-
+  };
+};

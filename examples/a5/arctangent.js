@@ -1,19 +1,19 @@
-'use strict';
+"use strict";
 
-window.onload = function () {
+window.onload = function() {
+  const rAF = window.requestAnimationFrame;
+  // When using id's the variable is exposed
+  const canvas = a;
+  const ctx = a.getContext("2d");
 
-  var rAF = window.requestAnimationFrame;
-  // When using id's the variable is exposed 
-  var canvas = a;
-  var ctx = a.getContext("2d");
-  var w = canvas.width = window.innerWidth;
-  var h = canvas.height = window.innerHeight;
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
 
-  var cx = w * .5,
-      cy = h * .5,
-      angle = 0,
-      dx,
-      dy;
+  let cx = w * .5;
+  let cy = h * .5;
+  let angle = 0;
+  let dx;
+  let dy;
 
   render();
 
@@ -39,16 +39,15 @@ window.onload = function () {
   }
 
 
-  document.addEventListener('mousemove', function (event) {
-    dx = event.clientX - cx
-    dy = event.clientY - cy
-    angle = Math.atan2(dy, dx)
+  document.addEventListener("mousemove", function(event) {
+    dx = event.clientX - cx;
+    dy = event.clientY - cy;
+    angle = Math.atan2(dy, dx);
   });
-      
+
   // If the window is resizes fill the page again.
   window.onresize = function() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
   };
-
 };

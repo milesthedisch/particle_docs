@@ -1,5 +1,8 @@
-  window.onload = function () {
-  
+
+window.onload = function () {
+  var particle = new particleLib.Particle();
+  var vector = new particleLib.Vector();
+
   var rAF = window.requestAnimationFrame;
   var canvas = a;
   var ctx = a.getContext("2d");
@@ -9,21 +12,18 @@
 
   var cx = w / 2,
       cy = h / 2,
-      p = particle.create(100, h, 10, -Math.PI / 2),
-      accel = vector.create(0.1, 0.01);
+      p = particle.create();
+      accel = vector.create(0.02, 0.001);
 
-  update()
+  update();
 
   function update() {
-    //                from , to //
     ctx.clearRect(0, 0, w, h);
-    
     p.accelerate(accel);
-
-    p.update();
+    p.get("position")["+="](p.get("velocity"));
 
     ctx.beginPath();
-    ctx.arc(p.position.getX(), p.position.getY(), 10, 0, Math.PI * 2, false);
+    ctx.arc(p.get("position").get("x"), p.get("position").get("y"), 10, 0, Math.PI * 2, false);
     ctx.fill();
       
     requestAnimationFrame(update);
