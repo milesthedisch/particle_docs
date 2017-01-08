@@ -1,4 +1,7 @@
 window.onload = function () {
+  const vector = new particleLib.Vector();
+  const particle = new particleLib.Particle();
+  const utils = particleLib.Utils;
 
   const rAF = window.requestAnimationFrame;
   const canvas = a;
@@ -19,8 +22,9 @@ window.onload = function () {
   function generateParticles(numParticles) {
     for (let i = 0; i < numParticles; i++) {
       particles.push(particle.create({
-        position: vector.create(cx, cy + 500),
+        position: vector.create(cx, cy + 200),
         velocity: vector.create(0, -2),
+        radius: utils.lerp(Math.random(), 2, 4),
       }));
     }
   }
@@ -28,16 +32,15 @@ window.onload = function () {
   function rocketUp(particles) {
     particles.forEach(function(p) {
       p.accelerate(rocket);
-      p.update();
+      p.get("position")["+="](p.get("velocity"));
     });
   }
 
   function explode(particles) {
     particles.forEach(function(p) {
-      p = particles[i];
-      p.velocity.setLength(Math.random() * 4 + 4);
-      p.velocity.setAngle(Math.random() * Math.PI * 2);
-      p.position = vector.create(cx, Math.random() * 10 + 48);
+      p.get("velocity").setLength(Math.random() * 6 + 1);
+      p.get("velocity").setAngle(Math.random() * Math.PI * 6);
+      p.get("position")["+="](p.get("velocity"));
     });
   }
 
@@ -51,11 +54,12 @@ window.onload = function () {
   function draw(particles) {
     particles.forEach(function(p) {
       ctx.beginPath();
-      ctx.arc(p.position.getX(), p.position.getY(), 5, 0, Math.PI * 2, false);
+      ctx.arc(p.get("position").get("x"), p.get("position").get("y"), p.get("radius"), 0, Math.PI * 2, false);
       ctx.fill();
     });
   }
 
+  generateParticles(numParticles);
   update();
 
   function update(dt) {
@@ -65,7 +69,7 @@ window.onload = function () {
       rocketUp(particles);
     }
 
-    if (particles[0].position.getY() > 44 && !boom) {
+    if (particles[0].get("position").get("y") < (w / 4) && !boom) {
       boom = true;
       explode(particles);
     }
