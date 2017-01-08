@@ -1,68 +1,68 @@
 'use strict';
 
-window.onload = function () {
+window.onload = function() {
+  window.document.body.insertAdjacentHTML(
+    "beforeBegin",
+    "<div style=\"position: fixed; top: 20%; left: 50%; color: rgba(0,0,0,0.8)\">" +
+      "Use the arrow keys." +
+    "</div>"
+  );
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
 
-  // When using id's the variable is exposed 
-  var canvas = a;
-  var rAF = window.requestAnimationFrame;
-  var ctx = a.getContext("2d");
-  var w = canvas.width = window.innerWidth;
-  var h = canvas.height = window.innerHeight;
-  var ship = particle.create({
+  // When using id's the variable is exposed
+  const canvas = a;
+  const rAF = window.requestAnimationFrame;
+  const ctx = a.getContext("2d");
+
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+
+  const ship = particle.create({
     position: vector.create(w/2, h/2),
-  }),
-  thrust = vector.create(0, 0),
-  angle = 0,
-  turningLeft = false,
-  turningRight = false,
-  thrusting = false;
+  });
+  const thrust = vector.create(0, 0);
 
-  document.body.addEventListener("keydown", function (event) {
+  let angle = 0;
+  let turningLeft = false;
+  let turningRight = false;
+  let thrusting = false;
 
-    console.log(event.keyCode);
-
+  document.body.addEventListener("keydown", function(event) {
     switch(event.keyCode) {
-      case 38: 
-        thrusting = true;
-        break;
-      case 37:
-        turningLeft = true;
-        break;
-      case 39:
-        turningRight = true;
-        break;
-      default: 
-        break;
-    }   
-
+    case 38:
+      thrusting = true;
+      break;
+    case 37:
+      turningLeft = true;
+      break;
+    case 39:
+      turningRight = true;
+      break;
+    default:
+      break;
+    }
   });
 
-  document.body.addEventListener("keyup", function (event) {
-
-    console.log(event.keyCode);
-
+  document.body.addEventListener("keyup", function(event) {
     switch(event.keyCode) {
-      case 38: 
-        thrusting = false;
-        break;
-      case 37:
-        turningLeft = false;
-        break;
-      case 39:
-        turningRight = false;
-        break;
-      default: 
-        break;
-    }   
-
+    case 38:
+      thrusting = false;
+      break;
+    case 37:
+      turningLeft = false;
+      break;
+    case 39:
+      turningRight = false;
+      break;
+    default:
+      break;
+    }
   });
 
   update();
- 
+
   function update() {
-    
     ctx.clearRect(0, 0, w, h);
 
     if (turningRight) {
@@ -98,11 +98,11 @@ window.onload = function () {
       ctx.moveTo(-10, 0);
       ctx.lineTo(-18, 0);
     }
-    
+
     ctx.stroke();
     ctx.restore();
 
-    // Boundries // 
+    // Boundries //
     if (ship.get("position").get("x") > w) {
       ship.get("position").set("x", 0);
     }
