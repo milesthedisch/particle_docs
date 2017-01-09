@@ -1,66 +1,66 @@
 module.exports = { 	
-	"a1": { 
-    "name": "a1", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a1/main.js"
+	"accelerating": { 
+    "name": "accelerating", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/accelerating/accel.js"
   },
-	"a2": { 
-    "name": "a2", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a2/trig.js"
+	"basic": { 
+    "name": "basic", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/basic/main.js"
   },
-	"a3": { 
-    "name": "a3", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a3/main.js"
+	"basic_2": { 
+    "name": "basic_2", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/basic_2/trig.js"
   },
-	"a4": { 
-    "name": "a4", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a4/circle.js"
+	"circles": { 
+    "name": "circles", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/circles/circle.js"
   },
-	"a4-5": { 
-    "name": "a4-5", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a4-5/lissajous_curves.js"
+	"clean_dead_particles": { 
+    "name": "clean_dead_particles", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/clean_dead_particles/main.js"
   },
-	"a5": { 
-    "name": "a5", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a5/arctangent.js"
+	"colors": { 
+    "name": "colors", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/colors/velocity.js"
   },
-	"a5-5": { 
-    "name": "a5-5", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a5-5/5.5.js"
+	"fireworks": { 
+    "name": "fireworks", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/fireworks/fireworks.js"
   },
-	"a7": { 
-    "name": "a7", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a7/velocity.js"
+	"forever_on_screen": { 
+    "name": "forever_on_screen", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/forever_on_screen/main.js"
   },
-	"a8": { 
-    "name": "a8", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a8/accel.js"
+	"fountain": { 
+    "name": "fountain", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/fountain/main.js"
   },
-	"a8-5": { 
-    "name": "a8-5", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a8-5/fireworks.js"
-  },
-	"a9": { 
-    "name": "a9", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/a9/main.js"
-  },
-	"b1": { 
-    "name": "b1", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/b1/main.js"
-  },
-	"b2": { 
-    "name": "b2", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/b2/main.js"
-  },
-	"b3": { 
-    "name": "b3", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/b3/main.js"
-  },
-	"b4": { 
-    "name": "b4", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/b4/main.js"
+	"lissajous_curves": { 
+    "name": "lissajous_curves", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/lissajous_curves/lissajous_curves.js"
   },
 	"normalizeEx": { 
     "name": "normalizeEx", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/normalizeEx/main.js"
+  },
+	"orbits": { 
+    "name": "orbits", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/orbits/main.js"
+  },
+	"pointer": { 
+    "name": "pointer", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/pointer/5.5.js"
+  },
+	"pointer_2": { 
+    "name": "pointer_2", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/pointer_2/arctangent.js"
+  },
+	"random_vectors": { 
+    "name": "random_vectors", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/random_vectors/main.js"
+  },
+	"spaceship": { 
+    "name": "spaceship", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/spaceship/main.js"
   },
  }

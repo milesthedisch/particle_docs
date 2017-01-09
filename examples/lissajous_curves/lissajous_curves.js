@@ -15,7 +15,7 @@ window.onload = function() {
   // a cartiesian cordinate map.
 
   const numObjects = 40;
-  const size = 10;
+  const size = 5;
 
   const bounds = vector.random(w / 3 - size, h / 3 - size);
   const centerVec = vector.create(w / 2, h / 2);
@@ -53,8 +53,8 @@ window.onload = function() {
           utils.lerp(Math.random(), 0, h)
         ),
         direction: 1,
-        size: Math.round(utils.lerp(Math.random(), 5, size)),
-        angle: vector.random(0, 1000),
+        size: Math.round(utils.lerp(Math.random(), 2, size)),
+        angle: vector.random(0, 10),
         magnitude: 0.01,
       }));
     };

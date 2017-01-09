@@ -17,13 +17,13 @@ window.onload = function () {
   });
 
   const planet = particle.create({
-    position: vector.create(w / 4, h / 4),
+    position: vector.create(w / 3, h / 4),
     direction: -Math.PI / 2,
     magnitude: 5,
   });
 
   const jupiter = particle.create({
-    position: vector.create(w / 4, h / 2),
+    position: vector.create(w / 3, h / 2),
     magnitude: 7,
     direction: -Math.PI / 2,
   });

@@ -7,6 +7,7 @@ window.onload = function() {
       "Use the arrow keys." +
     "</div>"
   );
+  window.focus();
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
 

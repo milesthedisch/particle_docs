@@ -37,26 +37,26 @@ window.onload = function() {
     );
   }
 
-  // const µ = 0.01;
-  // const µDelta = 0.05;
+  let µ = 0.01;
+  let µDelta = 0.1;
 
   (function animate() {
-    ctx.clearRect(0, 0, w, h);
+    // ctx.clearRect(0, 0, w, h);
 
-    // µ += µDelta;
+    µDelta += 0.1;
 
     arr.forEach(function(particle) {
-      let position = particle.get("position");
+      let position = particle.get("position").addTo(vec.create(Math.sin(µDelta), Math.sin(µDelta)));
       let velocity = particle.get("velocity");
-      let directionDelta = particle.get("direction") // + µ;
+      let directionDelta = particle.get("direction") + µ;
 
       particle.set("direction", directionDelta);
       velocity.setAngle(directionDelta);
-      position["+="](velocity);
+      particle.get("position")["+="](velocity);
 
       shapes.circle(
-        position.get("x"),
-        position.get("y"),
+        particle.get("position").get("x"),
+        particle.get("position").get("y"),
         particle.get("radius"),
         0,
         Math.PI * 2,
