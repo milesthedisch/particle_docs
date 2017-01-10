@@ -14,7 +14,7 @@ window.onload = function() {
   // are the same as 0,0 on
   // a cartiesian cordinate map.
 
-  const numObjects = 40;
+  const numObjects = 100;
   const size = 5;
 
   const bounds = vector.random(w / 3 - size, h / 3 - size);
@@ -25,8 +25,9 @@ window.onload = function() {
   (function render() {
     ctx.clearRect(0, 0, w, h);
     updateParticles(_particles).forEach(function(p) {
-
+      let c = p.get("color");
       ctx.beginPath();
+      ctx.fillStyle = "hsl(" +c.h+ "," +c.s+ "%," +c.l+ "%)";
       ctx.arc(
         p.get("position").get("x"),
         p.get("position").get("y"),
@@ -36,8 +37,10 @@ window.onload = function() {
         false
       );
       ctx.fill();
+      p.get("color").h += 1.5;
     });
 
+    
     rAF(render);
   })();
 
@@ -46,16 +49,14 @@ window.onload = function() {
 
     for (let i = 0; i < num; i++) {
       particles.push(particle.create({
+        color: {h: 360*Math.random(), s: 100, l: 60},
         velocity: vector.create(0.00005, 0.00004),
         acceleration: vector.random(0, 0),
-        position: vector.create(
-          utils.lerp(Math.random(), 0, w), 
-          utils.lerp(Math.random(), 0, h)
-        ),
+        position: vector.create(0, 0),
         direction: 1,
         size: Math.round(utils.lerp(Math.random(), 2, size)),
-        angle: vector.random(0, 10),
-        magnitude: 0.01,
+        angle: vector.random(0, 0.1),
+        magnitude: utils.lerp(Math.random(), 0.01, 0.02),
       }));
     };
 

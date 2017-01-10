@@ -17,10 +17,23 @@
     </div>
 
     <h2 class="header__medium">Instructions: </h2>
+
+    <div class="content-block__small ">
+      <span class="important">Install</span>
+    </div>
+
     <div class="content-block code-block">
       <code>npm install particle_library</code>
     </div>
-    <div class="content-block attention">Once installed, it will work in amd and commonjs enviroments.</div>
+
+    <div class="content-block attention">
+    Once installed, it will work in amd and commonjs enviroments.
+    </div>
+
+    <div class="content-block__small">
+      <span class="important">Require</span>
+    </div>
+
     <div class="content-block code-block">
       <code>
         const p = require("particle_library");<br/>
@@ -30,7 +43,55 @@
         const utils = p.Utils();<br/>
       </code>
     </div>
+    
+    <div class="content-block__small">
+      <span class="important">Setup</span>
     </div>
 
+    <div class="content-block__small">
+        Create a canvas with html.
+    </div>
+
+    <div class="content-block code-block" style="padding-left: -10px;">
+      <code>
+        &lt;html&gt;<br/>
+          &nbsp;&nbsp;&lt;head&gt;<br/>
+          &nbsp;&nbsp;&lt;script src="./particleLib.js"&gt;<br/>
+          &nbsp;&nbsp;&lt;/head&gt;<br/>
+          &nbsp;&nbsp;&lt;body&gt;<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;canvas id="space"&gt;&lt;/canvas&gt;<br/>
+          &nbsp;&nbsp;&lt;/body&gt;<br/>
+        &lt;/html&gt;
+      </code>
+    </div>
+
+    <div class="content-block__small">
+      <span class="important">Use</span>
+    </div>
+    
+    <div class="content-block__small">
+        Make sure the paticleLib is avaiable in your context. It is globally available here. Using the vector class we can create random vectors on the screen and start drawing.
+    </div>
+
+    <div class="content-block code-block">
+      <code>
+        &lt;script&gt;</br>
+        const p = particleLib;<br/>
+        const vec = new p.Vector();<br/>
+        const canvas = document.getElementById("space");<br/>
+        const context = canvas.getContext("2d");<br/>
+        <br/>
+        (function animate() {<br/>
+        &nbsp;&nbsp;const myVec = vec.random(0, 100);<br/>
+        &nbsp;&nbsp;ctx.beginPath();<br/>
+        &nbsp;&nbsp;ctx.moveTo(myVec.get("x"), myVec.get("x");<br/>
+        &nbsp;&nbsp;ctx.lineTo(myVec.get("y"), myVec.get("y");<br/>
+        &nbsp;&nbsp;ctx.stroke();<br/>
+        &nbsp;&nbsp;<br/>
+        &nbsp;&nbsp;window.requestAnimationFrame(animate);<br/>
+        });<br/>
+        &lt;/script&gt;
+      </code>
+    </div>
   </section>
 </div>
