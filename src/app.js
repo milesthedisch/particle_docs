@@ -1,13 +1,15 @@
 const iframe = require("iframeManager.js")(document);
 const shims = require("shims.js")(document);
 const utils = require("dom_helper.js")(document);
-const DEFAULT_EXAMPLE = "a1";
+const particleLib = require("./vendor/particle_lib.js");
+const DEFAULT_EXAMPLE = "random_vectors";
 
 const sethash = (fragment) => {
   return window.location.hash = fragment || "";
 };
 
 document.addEventListener("DOMContentLoaded", function() {
+  window.particleLib = particleLib;
   const hash = window.location.hash;
   const pathname = window.location.pathname;
   const textNodes = utils.mapText(".list-examples li a");

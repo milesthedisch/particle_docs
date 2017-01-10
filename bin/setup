@@ -8,7 +8,7 @@ const path = require("path");
 const pathToParticleLib = require.resolve("particle_library");
 const pathToDocs = path.resolve(`${pathToParticleLib}/../docs`);
 
-const outputLib = path.resolve(__dirname, "../public/src/vendor/particle_lib.js");
+const outputLib = path.resolve(__dirname, "../src/vendor/particle_lib.js");
 const outputDocs = path.resolve(__dirname, "../public/files/docs");
 
 function writeLibraryIn(callback) {

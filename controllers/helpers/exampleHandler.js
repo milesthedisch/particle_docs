@@ -20,7 +20,7 @@ module.exports = function exampleHandler(id, cb) {
   // The code is in the parent frame.
   const particleLib =
   "<script>" +
-    "window.particleLib = window.particleLib || window.top.particle" +
+    "window.particleLib = window.particleLib || window.top.particleLib" +
   "</script>";
 
   // Find the config associated with that ID.

@@ -6,7 +6,7 @@ const path = require("path");
 module.exports = extend(true, {
   entry: [
     "whatwg-fetch",
-    path.resolve("./public/src/app.js"),
+    path.resolve("./src/app.js"),
   ],
   progress: true,
   devtool: "#inline-source-map",

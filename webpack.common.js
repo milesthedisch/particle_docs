@@ -20,12 +20,13 @@ module.exports = {
       "particles$": path.resolve("./node_modules/particle_library"),
     },
     root: [
-      path.resolve("public/src/module"),
-      path.resolve("public/src/vendor"),
+      path.resolve("src/module"),
+      path.resolve("src/vendor"),
     ],
   },
   output: {
     filename: "bundle.js",
     path: path.join(__dirname, "public/build/js"),
   },
+  bail: true
 };
