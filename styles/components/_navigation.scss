@@ -1,7 +1,8 @@
 .navigation__main {
 
   @extend %column;
-  
+  height: 100vh;
+
   h1 {
     text-transform: uppercase;
   }
