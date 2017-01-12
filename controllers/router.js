@@ -11,25 +11,25 @@ const getExampleNames = (config) => {
 
 module.exports = function router(config) {
   const router = express.Router();
+  const docsRouter = express.Router({mergeParams: true});
 
+  // Nest docs router //
+  router.use("/docs/:methods", docsRouter);
+
+  // Home //
   router.get("/", function(req, res, next) {
     res.render("home");
   });
 
-  // TODO: Router nesting -
-  // http://stackoverflow.com/questions/25260818/rest-with-express-js-nested-router
-  router.get("/docs", function(req, res, next) {
-    res.redirect("https://github.com/milesthedisch/particle_library");
-  });
-
+  // Docs //
   router.get("/api", function(req, res, next) {
-    res.redirect("/public/files/docs");
+    res.render("docs", {
+      layout: "main",
+      coverage,
+    });
   });
 
-  router.get("/maths", function(req, res, next) {
-    res.render("maths");
-  });
-
+  // Examples //
   router.get("/examples", function(req, res, next) {
     const names = getExampleNames(exConfig);
     res.render("examples", {
@@ -39,6 +39,7 @@ module.exports = function router(config) {
     });
   });
 
+  // Example //
   router.get("/examples/:id", function(req, res, next) {
     // Grab the id from the url
     const id = req.params.id;
@@ -49,6 +50,7 @@ module.exports = function router(config) {
     });
   });
 
+  // Downloadable //
   router.get("/code", function(req, res, next) {
     const _path = require.resolve("particle_library");
     res.download(_path, "particle_library.js", function(err) {
