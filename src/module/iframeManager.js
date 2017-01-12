@@ -132,7 +132,7 @@ module.exports = function iframeHandler(document) {
       // If we are not the first frame in the document.
       if (!firstState) {
 
-        console.log("Example doesn't exsist but we are the next iframe.")
+        console.log("Example doesn't exsist but we are the next iframe.");
         // Toggle the state and remove old src and inject new src.
         const existingFrame = getFrame();
         removeFrameSrc(existingFrame);
@@ -141,7 +141,7 @@ module.exports = function iframeHandler(document) {
           .catch((err) => console.error(err));
       }
 
-      console.log("Example doesn't exsist but we are the first iframe ever.")
+      console.log("Example doesn't exsist but we are the first iframe ever.");
 
       // Toggle the state.
       firstState = !firstState;
