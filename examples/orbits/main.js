@@ -1,4 +1,4 @@
-
+// 
 window.onload = function () {
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
@@ -39,6 +39,7 @@ window.onload = function () {
 
     planet.gravitateTo(sun);
     jupiter.gravitateTo(sun);
+    // console.log(planet);
     jupiter.update();
     planet.update();
 
