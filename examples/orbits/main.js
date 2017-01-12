@@ -2,7 +2,7 @@
 window.onload = function () {
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
-  const util = particleLib.Utils;
+  const utils = particleLib.Utils;
 
   // When using id's the variable is exposed //
   const canvas = a;

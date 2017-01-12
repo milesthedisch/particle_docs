@@ -8,10 +8,10 @@
   },
   "scripts": {
     "setup": "./bin/setup && node ./bin/writeConfigFiles.js",
-    "style:build": "node-sass --recursive --output ./public/build/css --source-map true --source-map-contents ./styles && npm run style:postbuild && npm run style:clean",
+    "style:build": "node-sass --recursive --output ./public/build/css --source-map true --source-map-contents ./src/styles && npm run style:postbuild && npm run style:clean",
     "style:postbuild": "postcss --use autoprefixer --autoprefixer.browsers \"> 5%\" -o ./public/build/css/main.css ./public/build/css/main.css",
     "style:clean": "cleancss -o ./public/build/css/main.css ./public/build/css/main.css",
-    "style:dev": "node-sass --recursive --watch --output ./public/build/css --source-map true --source-map-contents ./styles",
+    "style:dev": "node-sass --recursive --watch --output ./public/build/css --source-map true --source-map-contents ./src/styles",
     "serve": "nodemon -e js,handlebars,json, --watch ./controllers --watch ./views server.js | bunyan",
     "start": "npm run setup && node server.js",
     "dev": "npm run setup && npm-run-all --parallel build:watch style:dev serve",
