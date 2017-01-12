@@ -4,10 +4,7 @@ const path = require("path");
 const exConfig = require("../ex-config.js");
 const logger = require("./helpers/logger.js");
 const exampleHandler = require("./helpers/exampleHandler");
-
-const getExampleNames = (config) => {
-  return Object.keys(config).map((x) => config[x].name);
-};
+const getExampleNames = require("./helpers/getExampleNames");
 
 module.exports = function router(config) {
   const router = express.Router();
@@ -23,10 +20,7 @@ module.exports = function router(config) {
 
   // Docs //
   router.get("/api", function(req, res, next) {
-    res.render("docs", {
-      layout: "main",
-      coverage,
-    });
+    res.redirect("/public/files/docs/Particle.html");
   });
 
   // Examples //
@@ -59,12 +53,12 @@ module.exports = function router(config) {
         // If they close the connection send back a 400.
         if (res.headersSent) {
           res.status(400);
-          res.send({"downloaded": "fail"});
+          return res.send({"downloaded": "fail"});
         }
         // If there headers were not sent send back a 500.
-        res.next(err);
+        return res.next(err);
       }
-      res.send({"downdload": "success"});
+      return res.send({"downdload": "success"});
     });
   });
 
