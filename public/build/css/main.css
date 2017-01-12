@@ -452,13 +452,14 @@ template {
 .list-examples {
   flex-direction: column; }
 
-.navigation__main h1 {
-  text-transform: uppercase; }
-
-.navigation__main ol, .navigation__main ul, .navigation__main li {
-  list-style: none;
-  padding: 0px;
-  margin: 2px; }
+.navigation__main {
+  height: 100vh; }
+  .navigation__main h1 {
+    text-transform: uppercase; }
+  .navigation__main ol, .navigation__main ul, .navigation__main li {
+    list-style: none;
+    padding: 0px;
+    margin: 2px; }
 
 .padded__light,
 .content-block__small {
@@ -543,7 +544,7 @@ template {
 
 .header__medium {
   font-size: 1.75rem;
-  font-weight: 200;
+  font-weight: 600;
   color: rgba(0, 0, 0, 0.8);
   margin: 0.25rem; }
 
