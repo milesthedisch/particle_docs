@@ -35,6 +35,10 @@ module.exports = {
     "name": "fountain", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/fountain/main.js"
   },
+	"friction": { 
+    "name": "friction", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/friction/fricition.js"
+  },
 	"lissajous_curves": { 
     "name": "lissajous_curves", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/lissajous_curves/lissajous_curves.js"

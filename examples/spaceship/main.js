@@ -21,6 +21,7 @@ window.onload = function() {
 
   const ship = particle.create({
     position: vector.create(w/2, h/2),
+    friction: vector.create(0.99, 0.99),
   });
   const thrust = vector.create(0, 0);
 
@@ -77,9 +78,9 @@ window.onload = function() {
     thrust.setAngle(angle);
 
     if (thrusting) {
-      thrust.setLength(0.1);
+      thrust.setLength(0.5);
     } else {
-      thrust.setLength(-0.0002);
+      thrust.setLength(0);
     }
 
     ship.accelerate(thrust);
