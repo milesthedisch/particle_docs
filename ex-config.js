@@ -23,6 +23,10 @@ module.exports = {
     "name": "collision_circle_circle_2", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/collision_circle_circle_2/circle_circle_2.js"
   },
+	"collision_circle_point": { 
+    "name": "collision_circle_point", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/collision_circle_point/main.js"
+  },
 	"collison_circle_circle": { 
     "name": "collison_circle_circle", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/collison_circle_circle/circle_circle.js"
