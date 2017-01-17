@@ -19,6 +19,14 @@ module.exports = {
     "name": "clean_dead_particles", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/clean_dead_particles/main.js"
   },
+	"collision_circle_circle_2": { 
+    "name": "collision_circle_circle_2", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/collision_circle_circle_2/circle_circle_2.js"
+  },
+	"collison_circle_circle": { 
+    "name": "collison_circle_circle", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/collison_circle_circle/circle_circle.js"
+  },
 	"colors": { 
     "name": "colors", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/colors/velocity.js"
