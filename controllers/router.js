@@ -8,10 +8,11 @@ const getExampleNames = require("./helpers/getExampleNames");
 
 module.exports = function router(config) {
   const router = express.Router();
-  const docsRouter = express.Router({mergeParams: true});
 
-  // Nest docs router //
-  router.use("/docs/:methods", docsRouter);
+  // Github //
+  router.use("/docs", function() {
+    res.redirect("https://github.com/milesthedisch/particle_library");
+  });
 
   // Home //
   router.get("/", function(req, res, next) {
