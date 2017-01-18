@@ -10,7 +10,7 @@ module.exports = function router(config) {
   const router = express.Router();
 
   // Github //
-  router.use("/docs", function() {
+  router.use("/docs", function(req, res, next) {
     res.redirect("https://github.com/milesthedisch/particle_library");
   });
 
