@@ -27,6 +27,10 @@ module.exports = {
     "name": "collision_circle_point", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/collision_circle_point/main.js"
   },
+	"collision_rect_point": { 
+    "name": "collision_rect_point", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/collision_rect_point/rect_point.js"
+  },
 	"collison_circle_circle": { 
     "name": "collison_circle_circle", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/collison_circle_circle/circle_circle.js"
