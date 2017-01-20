@@ -75,7 +75,7 @@ window.onload = function () {
   particles = generate();
   update();
 
-  var frame = 0;
+  let frame = 0;
 
   function update(dt) {
     frame++;
