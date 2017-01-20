@@ -14,7 +14,7 @@ window.onload = function() {
   // are the same as 0,0 on
   // a cartiesian cordinate map.
 
-  const numObjects = 100;
+  const numObjects = 2;
   const size = 5;
 
   const bounds = vector.random(w / 3 - size, h / 3 - size);
@@ -23,7 +23,7 @@ window.onload = function() {
   const _particles = createObjects(numObjects);
 
   (function render() {
-    ctx.clearRect(0, 0, w, h);
+    // ctx.clearRect(0, 0, w, h);
     updateParticles(_particles).forEach(function(p) {
       let c = p.get("color");
       ctx.beginPath();
@@ -50,13 +50,11 @@ window.onload = function() {
     for (let i = 0; i < num; i++) {
       particles.push(particle.create({
         color: {h: 360*Math.random(), s: 100, l: 60},
-        velocity: vector.create(0.00005, 0.00004),
-        acceleration: vector.random(0, 0),
         position: vector.create(0, 0),
         direction: 1,
         size: Math.round(utils.lerp(Math.random(), 2, size)),
-        angle: vector.random(0, 0.1),
-        magnitude: utils.lerp(Math.random(), 0.01, 0.02),
+        angle: vector.random(0, 0.2),
+        magnitude: utils.lerp(Math.random(), 0.1, 0.001),
       }));
     };
 
@@ -69,7 +67,7 @@ window.onload = function() {
       let y = centerVec.get("y") + bounds.get("y") * Math.sin(p.get("angle").get("y"));
       p.get("position").set("x", x);
       p.get("position").set("y", y);
-      p.accelerate(p.get("acceleration"));
+      p.speed();
       p.get("angle")["+="](p.get("velocity"));
     });
     return particles;

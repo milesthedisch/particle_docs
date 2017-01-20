@@ -1,6 +1,6 @@
 const particle = new particleLib.Particle();
 const vector = new particleLib.Vector();
-const utils = particleLib.Utils
+const utils = particleLib.Utils;
 
 window.onload = function () {
   window.focus();
