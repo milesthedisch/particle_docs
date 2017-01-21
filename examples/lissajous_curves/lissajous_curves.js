@@ -14,16 +14,37 @@ window.onload = function() {
   // are the same as 0,0 on
   // a cartiesian cordinate map.
 
-  const numObjects = 2;
+  const numObjects = 1000;
   const size = 5;
 
   const bounds = vector.random(w / 3 - size, h / 3 - size);
   const centerVec = vector.create(w / 2, h / 2);
 
-  const _particles = createObjects(numObjects);
+  const _particles = particle.generator(numObjects, undefined, function(p) {
+    return p.create({
+      "color": {h: 360*Math.random(), s: 100, l: 60},
+      "position": vector.create(0, 0),
+      "direction": 1,
+      "size": Math.round(utils.lerp(Math.random(), 2, size)),
+      "angle": vector.random(0, 0.2),
+      "magnitude": utils.lerp(Math.random(), 0.001, 0.01),
+    });
+  });
+
+  function updateParticles(particles) {
+    particles.forEach(function(p) {
+      let x = centerVec.get("x") + bounds.get("x") * Math.sin(p.get("angle").get("x"));
+      let y = centerVec.get("y") + bounds.get("y") * Math.sin(p.get("angle").get("y"));
+      p.get("position").set("x", x);
+      p.get("position").set("y", y);
+      p.speed();
+      p.get("angle")["+="](p.get("velocity"));
+    });
+    return particles;
+  };
 
   (function render() {
-    // ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(0, 0, w, h);
     updateParticles(_particles).forEach(function(p) {
       let c = p.get("color");
       ctx.beginPath();
@@ -39,39 +60,8 @@ window.onload = function() {
       ctx.fill();
       p.get("color").h += 1.5;
     });
-
-    
     rAF(render);
   })();
-
-  function createObjects(num) {
-    const particles = [];
-
-    for (let i = 0; i < num; i++) {
-      particles.push(particle.create({
-        color: {h: 360*Math.random(), s: 100, l: 60},
-        position: vector.create(0, 0),
-        direction: 1,
-        size: Math.round(utils.lerp(Math.random(), 2, size)),
-        angle: vector.random(0, 0.2),
-        magnitude: utils.lerp(Math.random(), 0.1, 0.001),
-      }));
-    };
-
-    return particles;
-  };
-
-  function updateParticles(particles) {
-    particles.forEach(function(p) {
-      let x = centerVec.get("x") + bounds.get("x") * Math.sin(p.get("angle").get("x"));
-      let y = centerVec.get("y") + bounds.get("y") * Math.sin(p.get("angle").get("y"));
-      p.get("position").set("x", x);
-      p.get("position").set("y", y);
-      p.speed();
-      p.get("angle")["+="](p.get("velocity"));
-    });
-    return particles;
-  };
 
   // If the window is resizes fill the page again.
   window.onresize = function() {

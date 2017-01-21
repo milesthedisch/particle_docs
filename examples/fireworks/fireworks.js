@@ -29,7 +29,7 @@ window.onload = function () {
 
   function explode(particles) {
     particles.forEach(function(p) {
-      p.get("velocity").setLength(Math.random() * 5 + 2);
+      p.get("velocity").setLength(Math.random() * 10 + 2);
       p.get("velocity").setAngle(Math.random() * Math.PI * 2);
     });
   }
@@ -52,7 +52,7 @@ window.onload = function () {
       rocketUp(particles);
     }
 
-    if (particles[0].get("position").get("y") < (w / 4) && !boom) {
+    if (particles[0].get("position").get("y") < (h / 8) && !boom) {
       boom = true;
       explode(particles);
     }
@@ -82,7 +82,7 @@ window.onload = function () {
 
     ctx.clearRect(0, 0, w, h);
 
-    if (frame % 150 == 0) {
+    if (frame % 150 === 0) {
       boom = false;
       particles = generate();
     }
