@@ -91,4 +91,8 @@ module.exports = {
     "name": "springs_1", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/springs_1/main.js"
   },
+	"springs_2": { 
+    "name": "springs_2", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/springs_2/main.js"
+  },
  }
