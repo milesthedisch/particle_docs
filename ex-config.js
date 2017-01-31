@@ -87,6 +87,10 @@ module.exports = {
     "name": "spaceship", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/spaceship/main.js"
   },
+	"spring_3": { 
+    "name": "spring_3", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/spring_3/main.js"
+  },
 	"springs_1": { 
     "name": "springs_1", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/springs_1/main.js"

@@ -16,9 +16,9 @@ window.onload = function() {
   let springLength = 50;
 
   const p1 = particle.create({
-    position: vector.create(w* Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
-    magnitude: 0,
-    direction: 0,
+    position: vector.create(w * Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
+    magnitude: utils.randomRange(0, 2),
+    direction: utils.randomRange(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
     friction: vector.create(0.92, 0.92),
@@ -27,15 +27,13 @@ window.onload = function() {
 
   const p2 = paticle.create({
     position: vector.create(w* Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
-    magnitude: utils.lerp(Math.random(), 0, 50),
-    direction: utils.lerp(Math.random(), 0, Math.PI * 2),
+    magnitude: utils.randomRange(0, 2),
+    direction: utils.randomRange(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
     friction: vector.create(0.92, 0.92),
     gravity: vector.create(0, 0.6),
   });
-
-  let springPoint = vector.create(w/2, h/2);
 
   document.addEventListener("mousemove", function(e) {
     springPoint = vector.create(e.clientX, e.clientY);
@@ -52,9 +50,9 @@ window.onload = function() {
     heavyObj.accelerate(springForce);
     heavyObj.update();
 
-    shapes.circle(springPoint.get("x"), springPoint.get("y"));
-    shapes.pCircle(heavyObj);
-    shapes.drawLineVec(heavyObj.get("position"), springPoint);
+    shapes.pCircle(p1);
+    shapes.pCircle(p2);
+    shapes.drawLineVec(p1.get("position"), p2.get("position"));
     rAF(update);
   })();
 };
