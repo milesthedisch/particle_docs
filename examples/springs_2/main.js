@@ -12,7 +12,7 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
   let radius = 10;
-  let k = 0.15;
+  let k = 0.01;
   let springLength = 50;
 
   const heavyObj = particle.create({
