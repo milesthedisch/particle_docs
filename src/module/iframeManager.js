@@ -127,6 +127,7 @@ module.exports = function iframeHandler(document) {
    * @return {[type]}      [description]
    */
   const loadInIframe = function loadInIframe(id) {
+    console.log("load in iFrame");
     // If the example already exsists dont do anything.
     if (!exampleExists(id)) {
       // If we are not the first frame in the document.

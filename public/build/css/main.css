@@ -450,7 +450,11 @@ template {
   margin: 0 auto; }
 
 .list-examples {
-  flex-direction: column; }
+  flex-direction: column;
+  overflow: scroll;
+  height: 50vh;
+  border: 3px solid rgba(200, 200, 200, 0.5);
+  border-radius: 10px; }
 
 .navigation__main {
   height: 100vh; }
@@ -533,6 +537,7 @@ template {
   display: flex; }
 
 .wrapper__page {
+  overflow-y: hidden;
   display: flex;
   max-height: 100vh;
   height: 100vh; }

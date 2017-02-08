@@ -50,11 +50,8 @@ window.onload = function() {
     ctx.clearRect(0, 0, w, h);
 
     p1.springFromTo(p2, springLength, 0.01);
-    p1.springFromTo(p3, springLength, 0.01);
-    p2.springFromTo(p1, springLength, 0.01);
     p2.springFromTo(p3, springLength, 0.01);
     p3.springFromTo(p1, springLength, 0.01);
-    p3.springFromTo(p2, springLength, 0.01);
 
     p1.update();
     p2.update();

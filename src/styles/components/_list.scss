@@ -2,6 +2,10 @@
   @extend %row;
 
   flex-direction: column;
+  overflow: scroll;
+  height: 50vh;
+  border: 3px solid $border-color;
+  border-radius: 10px;
 
   li {
     @extend %column;
