@@ -17,7 +17,7 @@ window.onload = function() {
 
   const p1 = particle.create({
     position: vector.create(w * Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
-    magnitude: utils.randomRange(1, 2),
+    magnitude: utils.randomRange(1, 10),
     direction: utils.randomRange(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
@@ -26,11 +26,11 @@ window.onload = function() {
 
   const p2 = particle.create({
     position: vector.create(w* Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
-    magnitude: utils.randomRange(1, 2),
+    magnitude: utils.randomRange(1, 10),
     direction: utils.randomRange(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
-    friction: vector.create(0.95, 0.95),
+    friction: vector.create(0.96, 0.96),
   });
 
   const p3 = particle.create({
@@ -39,7 +39,7 @@ window.onload = function() {
     direction: utils.randomRange(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
-    friction: vector.create(0.95, 0.95),
+    friction: vector.create(0.94, 0.94),
   });
 
   document.addEventListener("mousemove", function(e) {
@@ -49,9 +49,12 @@ window.onload = function() {
   (function update() {
     ctx.clearRect(0, 0, w, h);
 
-    spring(p1, p2, springLength);
-    spring(p2, p3, springLength);
-    spring(p3, p1, springLength);
+    p1.springFromTo(p2, springLength, 0.01);
+    p1.springFromTo(p3, springLength, 0.01);
+    p2.springFromTo(p1, springLength, 0.01);
+    p2.springFromTo(p3, springLength, 0.01);
+    p3.springFromTo(p1, springLength, 0.01);
+    p3.springFromTo(p2, springLength, 0.01);
 
     p1.update();
     p2.update();
@@ -64,15 +67,7 @@ window.onload = function() {
     shapes.drawLineVec(p3.get("position"), p1.get("position"));
     shapes.drawLineVec(p2.get("position"), p3.get("position"));
     shapes.drawLineVec(p1.get("position"), p2.get("position"));
+
     rAF(update);
   })();
-
-  function spring(p1, p0, offset) {
-    var distance = p0.get("position")["-"](p1.get("position"));
-    distance.setLength(distance.getLength() - offset);
-
-    var springForce = distance.multiply(vector.create(k, k));
-    p1.get("velocity")["+="](springForce);
-    p2.get("velocity")["-="](springForce);
-  };
 };

@@ -12,8 +12,8 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
   let radius = 10;
-  let k = 0.01;
-  let springLength = 50;
+  let k = 0.1;
+  let springLength = 20;
 
   const heavyObj = particle.create({
     position: vector.create(w* Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
@@ -22,7 +22,7 @@ window.onload = function() {
     radius: radius,
     color: "#000000",
     friction: vector.create(0.92, 0.92),
-    gravity: vector.create(0, 0.6),
+    gravity: vector.create(0, 0.9),
   });
 
   let springPoint = vector.create(w/2, h/2);
@@ -34,12 +34,7 @@ window.onload = function() {
   (function update() {
     ctx.clearRect(0, 0, w, h);
 
-    let distance = springPoint["-"](heavyObj.get("position"));
-        distance.setLength(distance.getLength() - springLength);
-
-    const springForce = distance["*"](vector.create(k, k));
-
-    heavyObj.accelerate(springForce);
+    heavyObj.springToPoint(springPoint, springLength, k);
     heavyObj.update();
 
     shapes.circle(springPoint.get("x"), springPoint.get("y"));

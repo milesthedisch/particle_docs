@@ -9,23 +9,31 @@ window.onload = function () {
   const rAF = window.requestAnimationFrame;
   const ctx = a.getContext("2d");
 
+  const shapes = new particleLib.Shapes(ctx, document);
+
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
   const sun = particle.create({
     position: vector.create(w / 2, h / 2),
+    color: "#ffff00",
+    radius: 50,
   });
 
   const planet = particle.create({
     position: vector.create(w / 3, h / 4),
     direction: -Math.PI / 2,
     magnitude: 5,
+    color: "#00ffff",
+    radius: 2,
   });
 
   const jupiter = particle.create({
     position: vector.create(w / 3, h / 2),
     magnitude: 7,
     direction: -Math.PI / 2,
+    color: "#0000ff",
+    radius: 10,
   });
 
   sun.set("mass", 4000);
@@ -42,25 +50,20 @@ window.onload = function () {
     // console.log(planet);
     jupiter.update();
     planet.update();
+    // sun.update();
 
-    ctx.beginPath();
-    ctx.fillStyle = "#ffff00";
-    ctx.arc(sun.get("position").get("x"), sun.get("position").get("y"), 20, 0, Math.PI * 2, false);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.fillStyle = "#00ffff";
-    ctx.arc(planet.get("position").get("x"), planet.get("position").get("y"), 5, 0, Math.PI * 2, false);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.fillStyle = "#0000ff";
-    ctx.arc(jupiter.get("position").get("x"), jupiter.get("position").get("y"), 10, 0, Math.PI * 2, false);
-    ctx.fill();
+    shapes.pCircle(sun);
+    shapes.pCircle(jupiter);
+    shapes.pCircle(planet);
 
     rAF(update);
   }
 
+  document.addEventListener("click", function() {
+    console.log("click");
+  });
+
+  window.focus();
   // If the window is resizes fill the page again.
   window.onresize = function() {
     w = canvas.width = window.innerWidth;

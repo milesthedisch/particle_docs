@@ -24,11 +24,11 @@ window.onload = function () {
 
   function render () {
     
-    x = cx + Math.cos(_angleX) * radius
-    y = cy + Math.sin(_angleY) * radius
+    x = cx + Math.cos(_angleX) * radius;
+    y = cy + Math.sin(_angleY) * radius;
 
-    _angleX = _avX + _angleX
-    _angleY = _avY + _angleY
+    _angleX = _avX + _angleX;
+    _angleY = _avY + _angleY;
 
     ctx.clearRect(0, 0, w, h);
 
@@ -53,15 +53,14 @@ window.onload = function () {
 
 
   document.addEventListener('mousemove', function (event) {
-    dx = event.clientX - y
-    dy = event.clientY - x
-    angle = Math.atan2(dy, dx)
+    dx = event.clientX - y;
+    dy = event.clientY - x;
+    angle = Math.atan2(dy, dx);
   });
       
   // If the window is resizes fill the page again.
   window.onresize = function() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
-  }
-
-}
+  };
+};

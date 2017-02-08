@@ -7,6 +7,7 @@ window.onload = function() {
   const rAF = window.requestAnimationFrame;
   const canvas = a;
   const ctx = a.getContext("2d");
+  const shapes = new particleLib.Shapes(ctx, document);
   const w = canvas.width = window.innerWidth;
   const h = canvas.height = window.innerHeight;
 
@@ -15,19 +16,19 @@ window.onload = function() {
   // a cartiesian cordinate map.
 
   const numObjects = 1000;
-  const size = 5;
+  const size = 10;
 
   const bounds = vector.random(w / 3 - size, h / 3 - size);
   const centerVec = vector.create(w / 2, h / 2);
 
   const _particles = particle.generator(numObjects, undefined, function(p) {
     return p.create({
-      "color": {h: 360*Math.random(), s: 100, l: 60},
+      "color": {h: 180*Math.random(), s: 100 * Math.random(), l: 60},
       "position": vector.create(0, 0),
       "direction": 1,
-      "size": Math.round(utils.lerp(Math.random(), 2, size)),
-      "angle": vector.random(0, 0.2),
-      "magnitude": utils.lerp(Math.random(), 0.001, 0.01),
+      "size": Math.round(utils.lerp(Math.random(), 0, size)),
+      "angle": vector.random(0, 0.3),
+      "magnitude": utils.lerp(Math.random(), 0.01, 0.02),
     });
   });
 
@@ -47,18 +48,13 @@ window.onload = function() {
     ctx.clearRect(0, 0, w, h);
     updateParticles(_particles).forEach(function(p) {
       let c = p.get("color");
-      ctx.beginPath();
-      ctx.fillStyle = "hsl(" +c.h+ "," +c.s+ "%," +c.l+ "%)";
-      ctx.arc(
+      shapes.circle(
         p.get("position").get("x"),
         p.get("position").get("y"),
         p.get("size"),
-        0,
-        Math.PI * 2,
-        false
+        "hsl(" +c.h+ "," +c.s+ "%," +c.l+ "%)"
       );
-      ctx.fill();
-      p.get("color").h += 1.5;
+      p.get("color").h += (p.get("velocity").get("x") + p.get("velocity").get("y")) * p.get("size") + 0.1;
     });
     rAF(render);
   })();

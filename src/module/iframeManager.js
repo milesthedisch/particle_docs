@@ -110,7 +110,7 @@ module.exports = function iframeHandler(document) {
 
     try {
       id = getFrame(example)
-        .attributes["data-value"]
+        .attributes["data-example"]
         .nodeValue;
     } catch (e) {
       if (e) {

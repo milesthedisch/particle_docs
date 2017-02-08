@@ -44,15 +44,13 @@ window.onload = function() {
       accelerate and the futher its is the faster it will accelerate.
      */
 
-    const distance = springPoint["-"](heavyObj.get("position"));
-    const springForce = distance["*"](vector.create(k, k));
-
-    heavyObj.accelerate(springForce);
+    heavyObj.springToPoint(springPoint, 0, k);
     heavyObj.update();
 
     shapes.circle(springPoint.get("x"), springPoint.get("y"));
     shapes.pCircle(heavyObj);
     shapes.drawLineVec(heavyObj.get("position"), springPoint);
+
     rAF(update);
   })();
 };
