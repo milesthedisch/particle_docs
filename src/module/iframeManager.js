@@ -155,7 +155,7 @@ module.exports = function iframeHandler(document) {
         .catch((err) => console.error(err));
     }
 
-    console.log("Example exsists not doing anything..");
+    console.log("Example already exsists dont do anything..");
 
     return false;
   };
