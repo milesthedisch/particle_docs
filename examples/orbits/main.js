@@ -40,27 +40,32 @@ window.onload = function () {
   planet.set("mass", 10);
   jupiter.set("mass", 50);
 
-  update();
+  const masses = [jupiter, planet];
 
-  function update() {
-    ctx.clearRect(0, 0, w, h);
-
-    planet.gravitateTo(sun);
-    jupiter.gravitateTo(sun);
-    // console.log(planet);
-    jupiter.update();
-    planet.update();
-    // sun.update();
-
-    shapes.pCircle(sun);
-    shapes.pCircle(jupiter);
-    shapes.pCircle(planet);
-
-    rAF(update);
+  function gravitateToSun(planets) {
+    for (let i = 0; i < planets.length; i++) {
+      planets[i].gravitateTo(sun);
+      planets[i].update();
+      shapes.pCircle(planets[i]);
+    }
   }
 
-  document.addEventListener("click", function() {
-    console.log("click");
+  (function update() {
+    ctx.clearRect(0, 0, w, h);
+    gravitateToSun(masses);
+    shapes.pCircle(sun);
+    rAF(update);
+  })();
+
+  document.addEventListener("click", function(e) {
+    const newPlanet = particle.create({
+      position: vector.create(e.clientX, e.clientY),
+      direction: Math.random() * (Math.PI * 2),
+      magnitude: utils.randomRange(1, 3),
+      color: "#00ffff",
+      radius: utils.randomRange(3, 10),
+    });
+    masses.push(newPlanet);
   });
 
   window.focus();

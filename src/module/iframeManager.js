@@ -131,11 +131,11 @@ module.exports = function iframeHandler(document) {
     if (!exampleExists(id)) {
       // If we are not the first frame in the document.
       if (!firstState) {
-
         console.log("Example doesn't exsist but we are the next iframe.");
         // Toggle the state and remove old src and inject new src.
         const existingFrame = getFrame();
         removeFrameSrc(existingFrame);
+        existingFrame.setAttribute("data-example", id);
         return fetchExample(id)
           .then((src) => injectSrc(src, existingFrame))
           .catch((err) => console.error(err));
