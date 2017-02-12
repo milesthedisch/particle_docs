@@ -1,33 +1,38 @@
 
 window.onload = function () {
-  var particle = new particleLib.Particle();
-  var vector = new particleLib.Vector();
+  const particle = new particleLib.Particle();
 
-  var rAF = window.requestAnimationFrame;
-  var canvas = a;
-  var ctx = a.getContext("2d");
+  const rAF = window.requestAnimationFrame;
+  const canvas = a;
+  const ctx = a.getContext("2d");
+  const shapes = new particleLib.Shapes(ctx, document);
 
-  var w = canvas.width = window.innerWidth;
-  var h = canvas.height = window.innerHeight;
+  const w = canvas.width = window.innerWidth;
+  const h = canvas.height = window.innerHeight;
 
-  var cx = w / 2,
-      cy = h / 2,
-      p = particle.create();
-      accel = vector.create(0.02, 0.001);
+  const cx = w / 2;
+  const cy = h / 2;
+
+  const p = particle.create({
+    x: cx,
+    y: cy,
+    radius: 10,
+  });
+
+  let ax = 0.5;
+  let ay = 0.01;
 
   update();
 
   function update() {
     ctx.clearRect(0, 0, w, h);
-    p.accelerate(accel);
-    p.get("position")["+="](p.get("velocity"));
+    p.accelerate(ax, ay);
+    p.updatePos();
 
-    ctx.beginPath();
-    ctx.arc(p.get("position").get("x"), p.get("position").get("y"), 10, 0, Math.PI * 2, false);
-    ctx.fill();
-      
-    requestAnimationFrame(update);
+    shapes.pCircle(p);
 
+    ay += 0.001;
+    ax -= 0.02;
+    rAF(update);
   }
-
-}
+};
