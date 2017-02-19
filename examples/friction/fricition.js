@@ -1,5 +1,6 @@
 window.onload = function () {
   const particle = new particleLib.Particle();
+  const utils = particleLib.Utils;
   const vector = new particleLib.Vector();
 
   // When using id's the variable is exposed 
@@ -10,19 +11,20 @@ window.onload = function () {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
-  // const friction = vector.create(0.15, 0);
-  const _friction = vector.create(0.97, 0.97);
+  // const friction = 0.15;
+  const friction = 0.97;
 
   const p = particle.create({
-    position: vector.create(w/2, h/2),
+    x: w/2,
+    y: h/2,
     magnitude: 10,
     direction: Math.PI * Math.random() * 2,
     radius: 10,
-    friction: vector.create(0.96, 0.96),
+    friction,
   });
 
   function update(delta) {
-    ctx.clearRect(0, 0, w, h);
+    // ctx.clearRect(0, 0, w, h);
 
     /****************************/
     /*  This is to expensive 6  */
@@ -43,11 +45,9 @@ window.onload = function () {
     // (p.get("velocity"))["*="](_friction);
 
     p.update();
-    shapes.circle(
-      p.get("position").get("x"),
-      p.get("position").get("y"),
-      p.get("radius")
-    );
+    shapes.pCircle(p);
+
+    angularDelta++;
     rAF(update);
   }
 

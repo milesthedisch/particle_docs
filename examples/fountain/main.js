@@ -1,6 +1,7 @@
 window.onload = function () {
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
+  const utils = particleLib.Utils;
   
 
   // When using id's the variable is exposed 
@@ -23,18 +24,16 @@ window.onload = function () {
     endY: h,
   };
 
-  const particles = [];
-
-  for (let i = 0; i < pAmount; i += 1) {
-    let p = particle.create({
-      position: vector.create(w / 2, h, (5 + 8 * Math.random()).toFixed(2)), 
-      direction: -Math.PI / 2 + (Math.random() * .2 - .1), 
+  const particles = particle.generator(pAmount, {}, function(o, i, create) {
+    create({
+      x: w / 2,
+      y: h,
+      direction: -Math.PI / 2 + (Math.random() * .2 - .1),
       magnitude: 0.1,
-      gravity: vector.create(0, 0.1),
+      gravity: 0.1,
+      radius: Math.random() * 10 + 5,
     });
-    p.set("radius", Math.random() * 10 + 5);
-    particles.push(p);
-  }
+  }); 
 
   update();
 
@@ -44,19 +43,27 @@ window.onload = function () {
     for (let i = 0; i < particles.length; i += 1) {
       let p = particles[i];
       p.update();
-      shapes.circle(p.get("position").get("x"), p.get("position").get("y"), p.get("radius"));
-      if (p.get("position").get("y") - p.get("radius") > bound.endY) {
-        p.get("position").set("x", w / 2);
-        p.get("position").set("y", h);
-        p.get("velocity").setLength((5 + 8 * Math.random()).toFixed(2));
-        p.get("velocity").setAngle(-Math.PI / 2 + (Math.random() * .2 - .1));
+      shapes.pCircle(p);
+      if (p.state.y - p.state.radius > bound.endY) {
+        p.state.x = w / 2;
+        p.state.y = h;
+
+        const rLength = 5 + 8 * Math.random();
+        const vL = utils.setLength(rLength, p.state.vx, p.state.vy);
+        p.state.vx = vL[0];
+        p.state.vy = vL[1];
+
+        const rAngle = -Math.PI/2 + (Math.random()*.2-.1);
+        const vA = utils.setAngle(rAngle, p.state.vx, p.state.vy);
+        p.state.vx = vA[0];
+        p.state.vy = vA[1];
       }
     }
 
     rAF(update);
   }
 
-  // If the window is resizes fill the page again.
+  // If the window  resizes fill the page again.
   window.onresize = function() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;

@@ -12,12 +12,13 @@ window.onload = function () {
   const w = canvas.width = window.innerWidth;
   const h = canvas.height = window.innerHeight;
   const p = particle.create({
-    position: vector.create(w / 2, h / 2),
+    x: w/2,
+    y: h/2,
     magnitude: 10,
     direction: Math.random() * Math.PI * 2,
   });
 
-  p.set("radius", 100);
+  p.state.radius = 100;
 
   const bound = {
     startX: 0,
@@ -32,22 +33,22 @@ window.onload = function () {
     ctx.clearRect(0, 0, w, h);
     p.update();
 
-    shapes.circle(p.get("position").get("x"), p.get("position").get("y"), p.get("radius"));
+    shapes.circle(p.state.x, p.state.y, p.state.radius);
 
-    if(p.get("position").get("x") - p.get("radius") > bound.endX) {
-      p.get("position").set("x", bound.startX-p.get("radius"));
+    if(p.state.x - p.state.radius > bound.endX) {
+      p.state.x = bound.startX - p.state.radius;
     }
 
-    if(p.get("position").get("x") + p.get("radius") < 0) {
-      p.get("position").set("x", bound.endX + p.get("radius"));
+    if(p.state.x + p.state.radius < 0) {
+      p.state.x = bound.endX + p.state.radius;
     }
 
-    if(p.get("position").get("y") - p.get("radius") > bound.endY) {
-      p.get("position").set("y", bound.startY-p.get("radius"));
+    if(p.state.y - p.state.radius > bound.endY) {
+      p.state.y = bound.startY - p.state.radius;
     }
 
-    if(p.get("position").get("y") + p.get("radius") < bound.startY) {
-      p.get("position").set("y", bound.endY + p.get("radius"));
+    if(p.state.y + p.state.radius < bound.startY) {
+      p.state.y = bound.endY + p.state.radius;
     }
 
     rAF(update);
