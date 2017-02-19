@@ -13,8 +13,8 @@ window.onload = function () {
 
   let numParticles = 1000;
   let particles = [];
-  let rocket = vector.create(0, -0.15);
-  let gravity = vector.create(0, 0.2);
+  let rocketX = 0;
+  let rocketY = -0.15;
   let boom = false;
 
   const cx = w / 2;
@@ -22,22 +22,27 @@ window.onload = function () {
 
   function rocketUp(particles) {
     particles.forEach(function(p) {
-      p.accelerate(rocket);
-      p.get("position")["+="](p.get("velocity"));
+      p.accelerate(rocketX, rocketY);
+      p.updatePos();
     });
   }
 
   function explode(particles) {
     particles.forEach(function(p) {
-      p.get("velocity").setLength(Math.random() * 10 + 2);
-      p.get("velocity").setAngle(Math.random() * Math.PI * 2);
+      const vL = utils.setLength(Math.random() * 10 + 2, p.state.vx, p.state.vy);
+      p.state.vx = vL[0];
+      p.state.vy = vL[1];
+
+      const vA = utils.setAngle(Math.random() * Math.PI * 2, p.state.vx, p.state.vy);
+      p.state.vx = vA[0];
+      p.state.vy = vA[1];
     });
   }
 
   function fall(particles) {
     particles.forEach(function(p) {
-      p.set("radius", p.get("radius") * 0.95 + 0.001);
-      p.update();
+      p.state.radius = (p.state.radius * 0.95 + 0.001);
+      p.update(0.98);
     });
   }
 
@@ -52,7 +57,7 @@ window.onload = function () {
       rocketUp(particles);
     }
 
-    if (particles[0].get("position").get("y") < (h / 8) && !boom) {
+    if (particles[0].state.y < (h / 8) && !boom) {
       boom = true;
       explode(particles);
     }
@@ -62,17 +67,23 @@ window.onload = function () {
     }
   }
 
-  function generate() {
-    return particle.generator(numParticles, {gravity: vector.create(0, 0.2)}, function(p) {
-      p.set("position", vector.create(cx, cy + 200));
-      p.set("velocity", vector.create(0, -2));
-      p.set("radius", utils.lerp(Math.random(), 2, 4));
-      p.set("color", "#000000");
-      return p;
+  function generate(numParticles, delta) {
+    return particle.generator(numParticles, {
+      gravity: 0.2,
+      x: cx,
+      y: cy + 200,
+      vy: -2,
+      color: "#000000",
+    }, function(ops, i, create) {
+      const newState = Object.assign({}, ops, { 
+        radius: utils.randomRange(2, delta) 
+      });
+
+      create(newState);
     });
   }
 
-  particles = generate();
+  particles = generate(numParticles, utils.randomRange(5, 10));
   update();
 
   var frame = 0;
@@ -84,7 +95,7 @@ window.onload = function () {
 
     if (frame % 150 === 0) {
       boom = false;
-      particles = generate();
+      particles = generate(numParticles, utils.randomRange(5, 10));
     }
 
     fireworks(particles);  

@@ -17,7 +17,6 @@ window.onload = function () {
   const µ = (Math.PI * 2) / w;
   const amp = h / 2 - dotRadius;
   const phaseShift = 0;
-  const Ω = 0.01;
 
   let x = vSine.get("x");
   let y = vSine.get("y");

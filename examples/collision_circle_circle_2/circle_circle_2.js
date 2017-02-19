@@ -13,46 +13,38 @@ window.onload = function () {
   let h = canvas.height = window.innerHeight;
 
   const p1 = particle.create({
-    position: vector.create(w/2, h/2),
+    x: w/2, 
+    y: h/2,
     radius: 100,
     color: "#000000",
   });
 
   const p2 = particle.create({
     radius: 50,
-    position: vector.create(0, h/2),
+    x: 0, 
+    y: h/2,
     color: "#000000",
   });
 
   document.addEventListener("mousemove", function(e) {
-    let vec = vector.create(e.clientX, e.clientY);
-    p2.set("position", vec);
+    p2.state.x = e.clientX;
+    p2.state.y = e.clientY;
   });
 
   (function update() {
     ctx.clearRect(0, 0, w, h);
 
     if (utils.collisionCircle(p1, p2)) {
-      p1.set("color", "#ff0000");
-      p2.set("color", "#ff0000");
+      p1.state.color = "#ff0000";
+      p2.state.color = "#ff0000";
     } else {
-      p1.set("color", "#000000");
-      p2.set("color", "#000000");
+      p1.state.color = "#000000";
+      p2.state.color = "#000000";
     }
 
-    shapes.circle(
-      p1.get("position").get("x"),
-      p1.get("position").get("y"),
-      p1.get("radius"),
-      p1.get("color")
-    );
+    shapes.pCircle(p1);
+    shapes.pCircle(p2);
 
-    shapes.circle(
-      p2.get("position").get("x"),
-      p2.get("position").get("y"),
-      p2.get("radius"),
-      p1.get("color")
-    );
     rAF(update);
   })();
 };

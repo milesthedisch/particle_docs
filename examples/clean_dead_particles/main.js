@@ -20,31 +20,29 @@ window.onload = function () {
     endY: h,
   };
 
-  const particles = [];
-
-  for (let i = 0; i < pAmount; i += 1) {
-    let p = particle.create({
-      position: vector.create(w / 2, h / 2),
-      magnitude: (2 * Math.random()).toFixed(2),
+  const particles = particle.generator(pAmount, {}, function(opts, i, create) {
+    const newState = {
+      x: w / 2,
+      y: h / 2,
+      magnitude: Number((2 * Math.random()).toFixed(2)),
       direction: Math.random() * Math.PI * 2,
-    });
-    p.set("radius", Math.random() * 10);
-    particles.push(p);
-  }
+      radius: Math.random() * 10,
+    };
+    create(newState);
+  });
 
-  update();
-
-  function update() {
+  console.log(particles);
+  (function update() {
     ctx.clearRect(0, 0, w, h);
 
     for (let i = 0; i < particles.length; i += 1) {
       particles[i].update();
-      shapes.circle(particles[i].get("position").get("x"), particles[i].get("position").get("y"), particles[i].get("radius"));
+      shapes.pCircle(particles[i]);
     }
 
     removeDeadParticle();
     rAF(update);
-  }
+  })();
 
   function removeDeadParticle () {
     for (let i = particles.length - 1; i >= 0; i -= 1) {
@@ -58,10 +56,10 @@ window.onload = function () {
 
   function checkOutOfBounds(p) { 
     return(
-      p.get("position").get("x") - p.get("radius") > bound.endX ||
-      p.get("position").get("x") + p.get("radius") < bound.startX ||
-      p.get("position").get("y") - p.get("radius") > bound.endY ||
-      p.get("position").get("y") + p.get("radius") < bound.startY
+      p.state.x - p.state.radius > bound.endX ||
+      p.state.x + p.state.radius < bound.startX ||
+      p.state.y - p.state.radius > bound.endY ||
+      p.state.y + p.state.radius < bound.startY
     );
   }
 

@@ -13,36 +13,40 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   const p1 = particle.create({
-    position: vector.create(w/2 - 100, h/2 - 50),
+    x: w/2 - 50,
+    y: h/2 - 25,
     width: 100,
     height: 50,
     color: "#000000",
   });
 
   const p2 = particle.create({
-    position: vector.create(0, 0),
+    x: 0,
+    y: 0,
     width: 100,
     height: 50,
     color: "#000000",
   });
 
   document.addEventListener("mousemove", function(e) {
-    p2.set("position", vector.create(e.clientX, e.clientY));
+    p2.state.x = e.clientX;
+    p2.state.y = e.clientY;
   });
 
   (function update() {
     ctx.clearRect(0, 0, w, h);
 
     if (utils.collisionRect(p1, p2)) {
-      p1.set("color", "#ff0000");
-      p2.set("color", "#ff0000");
+      p1.state.color = "#ff0000";
+      p2.state.color = "#ff0000";
     } else {
-      p1.set("color", "#000000");
-      p2.set("color", "#000000");
+      p1.state.color = "#000000";
+      p2.state.color = "#000000";
     }
 
     shapes.pRect(p1);
     shapes.pRect(p2);
+
     rAF(update);
   })();
 };

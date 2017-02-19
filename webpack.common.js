@@ -28,5 +28,5 @@ module.exports = {
     filename: "bundle.js",
     path: path.join(__dirname, "public/build/js"),
   },
-  bail: true
+  bail: true,
 };

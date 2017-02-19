@@ -9,33 +9,28 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   const particle = new particleLib.Particle();
-  const vec = new particleLib.Vector();
   const shapes = new particleLib.Shapes(ctx, document);
 
-  const centerVec = vec.create(w * .5, h * .5);
-  const objRadius = 2;
-  const radius = centerVec.get("x") - objRadius;
+  let cx = w/2;
+  let cy = h/2;
+
+  const objRadius = 3;
+  const circleRadius = 100;
   const numObjects = 10;
   const slice = 2 * Math.PI / numObjects;
-  const arr = [];
-  for (let i = 0; i < numObjects; i += 1) {
 
-    // Center are the particles //
-    let position = vec.create();
-    position["+="](centerVec);
+  const particles = particle.generator(numObjects, undefined, function(opts, i, create) {
+    const direction = i * slice;
+    const newState = {
+      x: (Math.cos(direction) * 1) + cx,
+      y: (Math.sin(direction) * 1) + cy,
+      direction,
+      radius: objRadius,
+      magnitude: 1,
+    };
 
-    arr.push(
-      particle.create({
-        // Each slice is slice of Math.PI //
-        direction: i * slice,
-        // How far its from the center //
-        magnitude: 1,
-        // Radius fo the particles drawn //
-        radius: objRadius,
-        position: position,
-      })
-    );
-  }
+    return create(newState);
+  });
 
   let µ = 0.01;
   let µDelta = 0.1;
@@ -45,23 +40,20 @@ window.onload = function() {
 
     µDelta += 0.1;
 
-    arr.forEach(function(particle) {
-      let position = particle.get("position").addTo(vec.create(Math.sin(µDelta), Math.sin(µDelta)));
-      let velocity = particle.get("velocity");
-      let directionDelta = particle.get("direction") + µ;
+    particles.forEach(function(particle) {
+      console.log(particle);
+      particle.state.x += Math.sin(µDelta);
+      particle.state.y += Math.sin(µDelta);
 
-      particle.set("direction", directionDelta);
-      velocity.setAngle(directionDelta);
-      particle.get("position")["+="](velocity);
+      particle.state.direction += µ;
 
-      shapes.circle(
-        particle.get("position").get("x"),
-        particle.get("position").get("y"),
-        particle.get("radius"),
-        0,
-        Math.PI * 2,
-        false
-      );
+      // Set angle of velocity vector
+      const length = Math.hypot(particle.state.vx, particle.state.vy);
+      particle.state.vx = Math.cos(particle.state.direction) * length;
+      particle.state.vy = Math.sin(particle.state.direction) * length;
+
+      particle.update();
+      shapes.pCircle(particle);
     });
 
     rAF(animate);
