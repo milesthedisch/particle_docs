@@ -12,7 +12,7 @@ window.onload = function () {
 
   const w = canvas.width = window.innerWidth;
   const h = canvas.height = window.innerHeight;
-  const pAmount = 10;
+  const pAmount = 1000;
 
   const bound = {
     startX: 0,
@@ -26,7 +26,7 @@ window.onload = function () {
     const newState = {
       x: w / 2,
       y: h / 2,
-      magnitude: Number((2 * Math.random()).toFixed(2)),
+      magnitude: Number((1 * Math.random()).toFixed(2)),
       direction: Math.random() * Math.PI * 2,
       width: r,
       height: r, 
@@ -35,16 +35,19 @@ window.onload = function () {
     create(newState);
   });
 
+  document.body.insertAdjacentHTML("afterBegin", "<span>" + particles.length + "</span>");
+
   (function update() {
     ctx.clearRect(0, 0, w, h);
-
+    const target = document.querySelector("span");
+    target.innerText = particles.length;
     for (let i = 0; i < particles.length; i += 1) {
       particles[i].update();
       shapes.pRect(particles[i]);
     }
 
     if (particles.length) {
-      removeDeadParticle();  
+      removeDeadParticle();
     }
     rAF(update);
   })();
@@ -60,17 +63,24 @@ window.onload = function () {
     }
   }
 
-  function checkBounds(p) { 
+  function checkBounds(p) {
 
     /* For a rect */
     return !(
-      utils.inRange(p.state.x + p.state.width, bound.endX, bound.startX)
+      utils.inRange(
+        p.state.x + p.state.width,
+        bound.endX + p.state.width,
+        bound.startX - p.state.width
+      )
         &&
-      utils.inRange(p.state.y + p.state.height, bound.endY, bound.startY)
+      utils.inRange(
+        p.state.y + p.state.height,
+        bound.endY + p.state.height,
+        bound.startY - p.state.height
+      )
     );
 
-    
-    /* 
+    /*
       For a circle
 
       return(
@@ -79,7 +89,7 @@ window.onload = function () {
         p.state.y - p.state.radius > bound.endY ||
         p.state.y + p.state.radius < bound.startY
       );
-    */ 
+    */
   }
 
   // If the window is resizes fill the page again.

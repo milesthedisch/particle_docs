@@ -15,7 +15,6 @@ window.onload = function () {
   let cx = w / 2;
   let cy = h / 2;
 
-  console.log(utils.randomRange(-0.1, 0.1));
   const particles = particle.generator(1000, {}, function map(opts, i, create) {
     const newState = {
       x: cx,

@@ -1,5 +1,5 @@
 // 'use strict';
-
+const utils = particleLib.Utils;
 window.onload = function () {
 
   // When using id's the variable is exposed 

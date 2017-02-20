@@ -3,10 +3,11 @@
 window.onload = function() {
   window.document.body.insertAdjacentHTML(
     "beforeBegin",
-    "<div style=\"position: fixed; top: 20%; left: 50%; color: rgba(0,0,0,0.8)\">" +
-      "Use the arrow keys." +
+    "<div style=\"position: fixed; top: 20%; left: 50%; color: rgba(150,0,0,0.8)\">" +
+      "Use the arrow keys" +
     "</div>"
   );
+
   window.focus();
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
@@ -20,8 +21,9 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   const ship = particle.create({
-    position: vector.create(w/2, h/2),
-    friction: vector.create(0.99, 0.99),
+    x: w/2,
+    y: h/2,
+    friction: 0.99,
   });
   const thrust = vector.create(0, 0);
 

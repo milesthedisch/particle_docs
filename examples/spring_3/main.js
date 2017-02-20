@@ -17,8 +17,8 @@ window.onload = function() {
 
   const p1 = particle.create({
     position: vector.create(w * Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
-    magnitude: utils.randomRange(1, 10),
-    direction: utils.randomRange(0, Math.PI * 2),
+    magnitude: utils.randomBetween(1, 10),
+    direction: utils.randomBetween(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
     friction: vector.create(0.95, 0.95),
@@ -26,8 +26,8 @@ window.onload = function() {
 
   const p2 = particle.create({
     position: vector.create(w* Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
-    magnitude: utils.randomRange(1, 10),
-    direction: utils.randomRange(0, Math.PI * 2),
+    magnitude: utils.randomBetween(1, 10),
+    direction: utils.randomBetween(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
     friction: vector.create(0.96, 0.96),
@@ -35,8 +35,8 @@ window.onload = function() {
 
   const p3 = particle.create({
     position: vector.create(w* Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
-    magnitude: utils.randomRange(1, 2),
-    direction: utils.randomRange(0, Math.PI * 2),
+    magnitude: utils.randomBetween(1, 2),
+    direction: utils.randomBetween(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
     friction: vector.create(0.94, 0.94),

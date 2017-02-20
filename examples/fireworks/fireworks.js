@@ -76,7 +76,7 @@ window.onload = function () {
       vy: -2,
       color: "#000000",
     }, function(ops, i, create) {
-      const r = utils.randomRange(2, delta);
+      const r = utils.randomBetween(2, delta);
       const newState = Object.assign({}, ops, { 
         width: r,
         height: r,
@@ -86,7 +86,7 @@ window.onload = function () {
     });
   }
 
-  particles = generate(numParticles, utils.randomRange(5, 10));
+  particles = generate(numParticles, utils.randomBetween(5, 10));
   update();
 
   var frame = 0;
@@ -98,7 +98,7 @@ window.onload = function () {
 
     if (frame % 150 === 0) {
       boom = false;
-      particles = generate(numParticles, utils.randomRange(5, 10));
+      particles = generate(numParticles, utils.randomBetween(5, 10));
     }
 
     fireworks(particles);  

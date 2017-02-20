@@ -15,31 +15,34 @@ window.onload = function() {
   // are the same as 0,0 on
   // a cartiesian cordinate map.
 
-  const numObjects = 1000;
+  const numObjects = 500;
   const size = 10;
 
   const bounds = vector.random(w / 3 - size, h / 3 - size);
   const centerVec = vector.create(w / 2, h / 2);
 
-  const _particles = particle.generator(numObjects, undefined, function(p) {
-    return p.create({
-      "color": {h: 180*Math.random(), s: 100 * Math.random(), l: 60},
-      "position": vector.create(0, 0),
-      "direction": 1,
-      "size": Math.round(utils.lerp(Math.random(), 0, size)),
-      "angle": vector.random(0, 0.3),
-      "magnitude": utils.lerp(Math.random(), 0.01, 0.02),
+  const _particles = particle.generator(numObjects, {}, function(opts, i, create) {
+    create({
+      color: {h: 180*Math.random(), s: 100 * Math.random(), l: 60},
+      x: centerVec.get("x"),
+      y: centerVec.get("y"),
+      direction: utils.lerp(Math.random(), 0.96, 1),
+      size: Math.round(utils.lerp(Math.random(), 0, size)),
+      ax: 0,
+      ay: 0.3,
+      magnitude: utils.lerp(Math.random(), 0.01, 0.02),
     });
   });
 
   function updateParticles(particles) {
     particles.forEach(function(p) {
-      let x = centerVec.get("x") + bounds.get("x") * Math.sin(p.get("angle").get("x"));
-      let y = centerVec.get("y") + bounds.get("y") * Math.sin(p.get("angle").get("y"));
-      p.get("position").set("x", x);
-      p.get("position").set("y", y);
-      p.speed();
-      p.get("angle")["+="](p.get("velocity"));
+      let x = centerVec.get("x") + bounds.get("x") * Math.sin(p.state.ax);
+      let y = centerVec.get("y") + bounds.get("y") * Math.sin(p.state.ay);
+      p.state.x = x;
+      p.state.y = y;
+      p.updatePos();
+      p.state.ax += p.state.vx;
+      p.state.ay += p.state.vy;
     });
     return particles;
   };
@@ -47,14 +50,17 @@ window.onload = function() {
   (function render() {
     ctx.clearRect(0, 0, w, h);
     updateParticles(_particles).forEach(function(p) {
-      let c = p.get("color");
+      // const p = _particles[0];
+      let c = p.state.color;
+
       shapes.circle(
-        p.get("position").get("x"),
-        p.get("position").get("y"),
-        p.get("size"),
+        p.state.x,
+        p.state.y,
+        p.state.size,
         "hsl(" +c.h+ "," +c.s+ "%," +c.l+ "%)"
       );
-      p.get("color").h += (p.get("velocity").get("x") + p.get("velocity").get("y")) * p.get("size") + 0.1;
+
+      p.state.color.h += (p.state.vx + p.state.vy) * p.state.size + 0.1;
     });
     rAF(render);
   })();
