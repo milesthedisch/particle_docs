@@ -41,14 +41,15 @@ window.onload = function () {
 
   function fall(particles) {
     particles.forEach(function(p) {
-      p.state.radius = (p.state.radius * 0.95 + 0.001);
+      p.state.width = (p.state.width * 0.95 + 0.001);
+      p.state.height = p.state.width;
       p.update(0.98);
     });
   }
 
   function draw(particles) {
     particles.forEach(function(p) {
-      shapes.pCircle(p);
+      shapes.pRect(p);
     });
   }
 
@@ -75,8 +76,10 @@ window.onload = function () {
       vy: -2,
       color: "#000000",
     }, function(ops, i, create) {
+      const r = utils.randomRange(2, delta);
       const newState = Object.assign({}, ops, { 
-        radius: utils.randomRange(2, delta) 
+        width: r,
+        height: r,
       });
 
       create(newState);

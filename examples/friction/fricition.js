@@ -19,10 +19,12 @@ window.onload = function () {
     y: h/2,
     magnitude: 10,
     direction: Math.PI * Math.random() * 2,
-    radius: 10,
+    width: 2,
+    height: 2,
     friction,
   });
 
+  let i = 0;
   function update(delta) {
     // ctx.clearRect(0, 0, w, h);
 
@@ -43,11 +45,14 @@ window.onload = function () {
     /**************/
 
     // (p.get("velocity"))["*="](_friction);
+      
+    // Increase the angle every frame.
+    const vA = utils.setAngle(i += 0.001, p.state.vx, p.state.vy);
+    p.state.vx = vA[0];
+    p.state.vy = vA[1];
 
     p.update();
-    shapes.pCircle(p);
-
-    angularDelta++;
+    shapes.pRect(p);
     rAF(update);
   }
 
