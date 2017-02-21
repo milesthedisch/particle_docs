@@ -16,34 +16,33 @@ window.onload = function() {
   let springLength = 50;
 
   const p1 = particle.create({
-    position: vector.create(w * Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
+    x: w * Math.random() + (radius * 2),
+    y: h * Math.random() - (radius * 2),
     magnitude: utils.randomBetween(1, 10),
     direction: utils.randomBetween(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
-    friction: vector.create(0.95, 0.95),
+    friction: 0.95,
   });
 
   const p2 = particle.create({
-    position: vector.create(w* Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
+    x: w * Math.random() + (radius * 2),
+    y: h * Math.random() - (radius * 2),
     magnitude: utils.randomBetween(1, 10),
     direction: utils.randomBetween(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
-    friction: vector.create(0.96, 0.96),
+    friction: 0.96,
   });
 
   const p3 = particle.create({
-    position: vector.create(w* Math.random() + (radius * 2), h * Math.random() - (radius * 2)),
+    x: w * Math.random() + (radius * 2),
+    y: h * Math.random() - (radius * 2),
     magnitude: utils.randomBetween(1, 2),
     direction: utils.randomBetween(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
-    friction: vector.create(0.94, 0.94),
-  });
-
-  document.addEventListener("mousemove", function(e) {
-    springPoint = vector.create(e.clientX, e.clientY);
+    friction: 0.94,
   });
 
   (function update() {
@@ -61,9 +60,9 @@ window.onload = function() {
     shapes.pCircle(p2);
     shapes.pCircle(p3);
 
-    shapes.drawLineVec(p3.get("position"), p1.get("position"));
-    shapes.drawLineVec(p2.get("position"), p3.get("position"));
-    shapes.drawLineVec(p1.get("position"), p2.get("position"));
+    shapes.drawLineXY(p3.state.x, p3.state.y, p1.state.x, p1.state.y);
+    shapes.drawLineXY(p2.state.x, p2.state.y, p3.state.x, p3.state.y);
+    shapes.drawLineXY(p1.state.x, p1.state.y, p2.state.x, p2.state.y);
 
     rAF(update);
   })();

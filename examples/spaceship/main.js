@@ -1,5 +1,4 @@
 'use strict';
-
 window.onload = function() {
   window.document.body.insertAdjacentHTML(
     "beforeBegin",
@@ -11,6 +10,7 @@ window.onload = function() {
   window.focus();
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
+  const utils = particleLib.Utils;
 
   // When using id's the variable is exposed
   const canvas = a;
@@ -23,9 +23,10 @@ window.onload = function() {
   const ship = particle.create({
     x: w/2,
     y: h/2,
-    friction: 0.99,
+    ax: 0,
+    ay: 0,
+    friction: 0.9,
   });
-  const thrust = vector.create(0, 0);
 
   let angle = 0;
   let turningLeft = false;
@@ -77,19 +78,25 @@ window.onload = function() {
       angle += 0.05;
     }
 
-    thrust.setAngle(angle);
+    const aV = utils.setAngle(angle, ship.state.vx, ship.state.vy);
+    ship.state.ax = aV[0];
+    ship.state.ay = aV[1];
 
     if (thrusting) {
-      thrust.setLength(0.5);
+      const lV = utils.setLength(0.5, ship.state.ax, ship.state.ay);
+      ship.state.ax = lV[0];
+      ship.state.ay = lV[1];
     } else {
-      thrust.setLength(0);
+      const lV = utils.setLength(0, ship.state.ax, ship.state.ay);
+      ship.state.ax = lV[0];
+      ship.state.ay = lV[1];
     }
 
-    ship.accelerate(thrust);
-    ship.update();
+    ship.accelerate(ship.state.ax, ship.state.ay);
+    ship.updatePos();
 
     ctx.save();
-    ctx.translate(ship.get("position").get("x"), ship.get("position").get("y"));
+    ctx.translate(ship.state.x, ship.state.y);
     ctx.rotate(angle);
 
     ctx.beginPath();
@@ -107,20 +114,20 @@ window.onload = function() {
     ctx.restore();
 
     // Boundries //
-    if (ship.get("position").get("x") > w) {
-      ship.get("position").set("x", 0);
+    if (ship.state.x > w) {
+      ship.state.x = 0;
     }
 
-    if (ship.get("position").get("x") < 0) {
-      ship.get("position").set("x", w);
+    if (ship.state.x < 0) {
+      ship.state.x = w;
     }
 
-    if (ship.get("position").get("y") > h) {
-      ship.get("position").set("y", 0);
+    if (ship.state.y > h) {
+      ship.state.y = 0;
     }
 
-    if (ship.get("position").get("y") < 0) {
-      ship.get("position").set("y", h);
+    if (ship.state.y < 0) {
+      ship.state.y = h;
     }
 
     rAF(update);
