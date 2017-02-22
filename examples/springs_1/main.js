@@ -17,12 +17,13 @@ window.onload = function() {
   let k = 0.1;
 
   const heavyObj = particle.create({
-    position: vector.create(w*Math.random() + (radius * 2), h*Math.random() - (radius * 2)),
+    x: w*Math.random() + (radius * 2),
+    y: h*Math.random() - (radius * 2),
     magnitude: 0,
     direction: 0,
     radius: radius,
     color: "#000000",
-    friction: vector.create(0.9, 0.9),
+    friction: 0.9,
   });
 
   // Set the spring point in the center of the screen. //
@@ -49,7 +50,10 @@ window.onload = function() {
 
     shapes.circle(springPoint.get("x"), springPoint.get("y"));
     shapes.pCircle(heavyObj);
-    shapes.drawLineVec(heavyObj.get("position"), springPoint);
+    shapes.drawLineXY(
+      heavyObj.state.x, heavyObj.state.y,
+      springPoint.state.x, springPoint.state.y
+    );
 
     rAF(update);
   })();
