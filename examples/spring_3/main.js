@@ -12,7 +12,7 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
   let radius = 10;
-  let k = 0.005;
+  let k = 0.05;
   let springLength = 1000;
 
  
@@ -26,7 +26,7 @@ window.onload = function() {
     friction: 0.94,
   });
 
-  const pArray = particle.generator(50, {}, function(opts, i, create) {
+  const pArray = particle.generator(20, {}, function(opts, i, create) {
     create({
       x: (w/2) * Math.random() + (radius * 2),
       y: (h/2) * Math.random() - (radius * 2),
@@ -35,7 +35,7 @@ window.onload = function() {
       radius: radius,
       color: "#000000",
       friction: 0.95,
-      gravity: 0.9,
+      gravity: 0.7,
     });
   });
 
