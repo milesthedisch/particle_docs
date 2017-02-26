@@ -13,7 +13,7 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
   let radius = 10;
 
-  const k = utils.randomBetween(0.05, 1);
+  const k = utils.randomBetween(0.05, 0.5);
   const springLength = utils.randomBetween(150, 1000);
 
  
@@ -53,7 +53,7 @@ window.onload = function() {
 
     for (var i = pArray.length - 1; i >= 0; i--) {
       let p = pArray[i];
-      p.springFromTo(sun, k, 200);
+      p.springFromTo(sun, 0.009, 0);
       shapes.drawLineXY(p.state.x, p.state.y, sun.state.x, sun.state.y);
       for (var j = pArray.length - 1; j >= 0; j--) {
         let p2 = pArray[j];

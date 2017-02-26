@@ -87,10 +87,6 @@ module.exports = {
     "name": "spaceship", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/spaceship/main.js"
   },
-	"spring_3": { 
-    "name": "spring_3", 
-    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/spring_3/main.js"
-  },
 	"springs_1": { 
     "name": "springs_1", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/springs_1/main.js"
@@ -98,5 +94,13 @@ module.exports = {
 	"springs_2": { 
     "name": "springs_2", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/springs_2/main.js"
+  },
+	"springs_3": { 
+    "name": "springs_3", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/springs_3/main.js"
+  },
+	"springs_4": { 
+    "name": "springs_4", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/springs_4/main.js"
   },
  }

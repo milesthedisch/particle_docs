@@ -27,12 +27,13 @@ window.onload = function() {
   });
 
   // Set the spring point in the center of the screen. //
-  let springPoint = vector.create(w/2, h/2);
+  let springPoint = {
+    point: vector.create(w/2, h/2),
+    spring: k,
+    offset: 0,
+  };
 
-  // Make the spring follow the mouse pointer. //
-  document.addEventListener("mousemove", function(e) {
-    springPoint = vector.create(e.clientX, e.clientY);
-  });
+  heavyObj.addSpring(springPoint);
 
   (function update() {
     ctx.clearRect(0, 0, w, h);
@@ -45,14 +46,13 @@ window.onload = function() {
       accelerate and the futher its is the faster it will accelerate.
      */
 
-    heavyObj.springToPoint(springPoint, k, 0);
     heavyObj.update();
 
-    shapes.circle(springPoint.get("x"), springPoint.get("y"));
+    shapes.circle(springPoint.point.get("x"), springPoint.point.get("y"));
     shapes.pCircle(heavyObj);
     shapes.drawLineXY(
       heavyObj.state.x, heavyObj.state.y,
-      springPoint.state.x, springPoint.state.y
+      springPoint.point.get("x"), springPoint.point.get("y")
     );
 
     rAF(update);

@@ -28,18 +28,16 @@ window.onload = function() {
       y: centerVec.get("y"),
       direction: utils.lerp(Math.random(), 0.96, 1),
       size: Math.round(utils.lerp(Math.random(), 0, size)),
-      ax: 0,
-      ay: 0.3,
+      ax: utils.randomBetween(0, 0.01),
+      ay: utils.randomBetween(0, 0.01 ),
       magnitude: utils.lerp(Math.random(), 0.01, 0.02),
     });
   });
 
   function updateParticles(particles) {
     particles.forEach(function(p) {
-      let x = centerVec.get("x") + bounds.get("x") * Math.sin(p.state.ax);
-      let y = centerVec.get("y") + bounds.get("y") * Math.sin(p.state.ay);
-      p.state.x = x;
-      p.state.y = y;
+      p.state.x = centerVec.get("x") + bounds.get("x") * Math.sin(p.state.ax);
+      p.state.y = centerVec.get("y") + bounds.get("y") * Math.sin(p.state.ay);
       p.updatePos();
       p.state.ax += p.state.vx;
       p.state.ay += p.state.vy;
