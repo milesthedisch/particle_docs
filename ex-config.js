@@ -59,6 +59,10 @@ module.exports = {
     "name": "friction", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/friction/fricition.js"
   },
+	"gravitations": { 
+    "name": "gravitations", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/gravitations/main.js"
+  },
 	"lissajous_curves": { 
     "name": "lissajous_curves", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/lissajous_curves/lissajous_curves.js"
