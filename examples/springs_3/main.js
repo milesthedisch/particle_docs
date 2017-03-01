@@ -13,8 +13,8 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
   let radius = 10;
 
-  const k = utils.randomBetween(0.05, 0.5);
-  const springLength = utils.randomBetween(150, 1000);
+  const k = utils.randomBetween(0.05, 0.4);
+  const springLength = utils.randomBetween(50, 1000);
 
  
   const sun = particle.create({
@@ -28,7 +28,7 @@ window.onload = function() {
   });
 
   const pArray = particle.generator(utils.randomBetween(2, 50), {
-    friction: utils.randomBetween(0.95, 0.99),
+    friction: utils.randomBetween(0.82, 0.99),
     gravity: k,
   }, function(opts, i, create) {
     create(Object.assign({}, {
@@ -53,7 +53,7 @@ window.onload = function() {
 
     for (var i = pArray.length - 1; i >= 0; i--) {
       let p = pArray[i];
-      p.springFromTo(sun, 0.009, 0);
+      p.springFromTo(sun, 0.09, 10);
       shapes.drawLineXY(p.state.x, p.state.y, sun.state.x, sun.state.y);
       for (var j = pArray.length - 1; j >= 0; j--) {
         let p2 = pArray[j];

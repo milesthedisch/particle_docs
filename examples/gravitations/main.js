@@ -14,41 +14,58 @@ window.onload = function () {
 
   const m1 = {
     state: {
-      mass: 10000,
-      x: h / 3,
-      y: w / 3,
+      mass: 100,
+      x: w - 100,
+      y: h / 2,
     },
   };
 
   const m2 = {
     state: {
-      mass: 10000,
-      x: h,
-      y: w / 3,
+      mass: 100,
+      x: w / 2,
+      y: h / 3,
     },
   };
 
-  const p = particle.create({
-    x: w/2,
-    y: h/2,
-    magnitude: 10,
-    mass: 100,
-    direction: utils.randomBetween(0, Math.PI * 2),
-    radius: 2,
-    friction: 0.98,
-    gravitations: [],
+  const emitter = {
+    x: 10,
+    y: 10,
+    radius: 5
+  };
+
+  const particles = particle.generator(1000, {}, function(opts, i, create) {
+    const newState = {
+      magnitude: utils.lerp(Math.random(), 10, 100),
+      mass: 10,
+      direction: utils.lerp(Math.random(), 0, Math.PI * 2),
+      friction: 0.99,
+      masses: [m1, m2],
+      x: emitter.x,
+      y: emitter.y,
+      radius: emitter.radius,
+    }
+    return create(newState);
   });
 
-  p.addMass(m1);
-  p.addMass(m2);
-
-  console.log(p);
   (function update(delta) {
     ctx.clearRect(0, 0, w, h);
 
-    p.update();
+    for(var i = 0; i < particles.length; i++) {
+      let p = particles[i];
+      p.update();
 
-    shapes.pCircle(p);
+      if (p.state.x > w ||
+          p.state.x < 0 ||
+          p.state.y > h ||
+          p.state.y < 0) {
+        p.state.x = emitter.x;
+        p.state.y = emitter.y;
+      }
+
+      shapes.pCircle(p);
+    }
+
     shapes.circle(m1.state.x, m1.state.y, 10);
     shapes.circle(m2.state.x, m2.state.y, 10);
     rAF(update);
