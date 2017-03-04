@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 // Theres probably a better way to do this but watever this works for me.
-// Get the nodemodule particle lib and write the file in to the public vendor folder.
+// Get the nodemodule particle lib and write the file in to the public vendor
+// folder.
 const fse = require("fs-extra");
 const path = require("path");
 
@@ -11,26 +12,28 @@ const pathToDocs = path.resolve(`${pathToParticleLib}/../docs`);
 const outputLib = path.resolve(__dirname, "../src/vendor/particle_lib.js");
 const outputDocs = path.resolve(__dirname, "../public/files/docs");
 
-function writeLibraryIn(callback) {
-  fse.copy(pathToParticleLib, outputLib, function(err) {
-    if (err) {
-      console.log(err);
-      process.exit(1);
-    }
-    console.log("Copied in library successfully!");
-    callback();
+const writeLibraryIn = () =>
+  new Promise((resolve, reject) => {
+    fse.copy(pathToParticleLib, outputLib, function(err) {
+      if (err) {
+        reject(err);
+      }
+      console.log("Copied in library successfully!");
+      resolve(null);
+    });
   });
-}
 
-function writeDocsIn() {
-  fse.copy(pathToDocs, outputDocs, function(err) {
-    if (err) {
-      console.log(err);
-      process.exit(1);
-    }
-    console.log("Copied in docs successfully!");
-    process.exit(0);
+const writeDocsIn = () =>
+  new Promise((resolve, reject) => {
+    fse.copy(pathToDocs, outputDocs, function(err) {
+      if (err) {
+        console.log(err);
+        reject(err);
+      }
+      console.log("Copied in docs successfully!");
+      resolve(null);
+    });
   });
-}
 
-writeLibraryIn(writeDocsIn);
+Promise.all([writeDocsIn(), writeLibraryIn()])
+  .catch((err) => console.error(err));
