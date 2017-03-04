@@ -1,8 +1,0 @@
-#!/usr/bin/env node
-
-const fs = require("fs-extra");
-
-fs.ensureDir(dir, (err) => {
-  console.log(err) // => null
-  // dir has now been created, including the directory it is to be placed in
-});
