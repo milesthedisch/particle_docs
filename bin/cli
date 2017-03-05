@@ -20,9 +20,15 @@ const jsTemplate = handlebars.compile(exampleFile);
 const name = path.join(paths.exampleDir, options["<name>"]);
 
 handlebars.registerHelper("lib", function() {
-  return this === "Utils" ?
-    `const ${this.toLowerCase()} = particleLib.${this};` :
-    `const ${this.toLowerCase()} = new particleLib.${this}();`;
+  if (this === "Utils") {
+    return `const ${this.toLowerCase()} = particleLib.${this};`;
+  }
+
+  if (this === "Shapes") {
+    return `const ${this.toLowerCase()} = new particleLib.${this}(ctx, document);`;
+  }
+    
+  return `const ${this.toLowerCase()} = new particleLib.${this}();`;
 });
 
 const createDir = (_path) => {
@@ -52,18 +58,17 @@ const createFile = (_path) => {
   });
 };
 
-const exampleExists = (file) => {
+const exampleExists = (file) =>
   fs.readdirSync(paths.exampleDir).indexOf(file) > -1;
-};
 
-if (exampleExists(name)) {
+if (exampleExists(options["<name>"])) {
   console.error("Example already exsits");
   process.exit(1);
+} else {
+  createDir(name)
+    .then(createFile)
+    .then((filePath) => {
+      console.log(`Success!\nYour files has been written -> ${filePath}`);
+    })
+    .catch((err) => console.error(err));
 }
-
-createDir(name)
-  .then(createFile)
-  .then((filePath) => {
-    console.log(`Success!\nYour files has been written -> ${filePath}`);
-  })
-  .catch((err) => console.error(err));
