@@ -20,14 +20,15 @@ const jsTemplate = handlebars.compile(exampleFile);
 const name = path.join(paths.exampleDir, options["<name>"]);
 
 handlebars.registerHelper("lib", function() {
-  if (this === "Utils") {
+  console.log(this);
+  if (this.toString() === "Utils") {
     return `const ${this.toLowerCase()} = particleLib.${this};`;
   }
 
-  if (this === "Shapes") {
+  if (this.toString() === "Shapes") {
     return `const ${this.toLowerCase()} = new particleLib.${this}(ctx, document);`;
   }
-    
+
   return `const ${this.toLowerCase()} = new particleLib.${this}();`;
 });
 

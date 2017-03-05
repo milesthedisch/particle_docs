@@ -3,9 +3,9 @@ window.onload = function() {
   const canvas = a;
   const ctx = a.getContext("2d");
 
-  const utils = new particleLib.Utils();
+  const utils = particleLib.Utils;
   const vector = new particleLib.Vector();
-  const shapes = new particleLib.Shapes();
+  const shapes = new particleLib.Shapes(ctx, document);
   const particle = new particleLib.Particle();
 
   let w = canvas.width = window.innerWidth;
