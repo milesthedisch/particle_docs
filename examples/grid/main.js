@@ -17,7 +17,6 @@ window.onload = function() {
   document.addEventListener("mousemove", function(e) {
     x = utils.roundToMultiple(e.clientX, 40);
     y = utils.roundToMultiple(e.clientY, 40);
-    console.log(x, y);
   });
 
   (function render() {

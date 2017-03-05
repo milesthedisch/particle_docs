@@ -11,6 +11,10 @@ module.exports = {
     "name": "basic_2", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/basic_2/trig.js"
   },
+	"bezier_1": { 
+    "name": "bezier_1", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/bezier_1/main.js"
+  },
 	"circles": { 
     "name": "circles", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/circles/circle.js"
