@@ -14,44 +14,44 @@ window.onload = function () {
 
   const m1 = {
     state: {
-      mass: 100,
-      x: w - 100,
-      y: h / 2,
+      mass: 3000,
+      x: 700,
+      y: 50,
     },
   };
 
   const m2 = {
     state: {
-      mass: 100,
-      x: w / 2,
-      y: h / 3,
+      mass: 3000,
+      x: 350,
+      y: 290,
     },
   };
 
   const emitter = {
-    x: 10,
-    y: 10,
-    radius: 5
+    x: 50,
+    y: 50,
+    radius: 5,
   };
 
   const particles = particle.generator(1000, {}, function(opts, i, create) {
     const newState = {
-      magnitude: utils.lerp(Math.random(), 10, 100),
+      magnitude: utils.lerp(Math.random(), 8, 10),
       mass: 10,
-      direction: utils.lerp(Math.random(), 0, Math.PI * 2),
-      friction: 0.99,
+      direction: utils.lerp(Math.random(), Math.PI / 20, Math.PI / 19),
+      friction: 0.9999,
       masses: [m1, m2],
       x: emitter.x,
       y: emitter.y,
       radius: emitter.radius,
-    }
+    };
     return create(newState);
   });
 
   (function update(delta) {
     ctx.clearRect(0, 0, w, h);
 
-    for(var i = 0; i < particles.length; i++) {
+    for(let i = 0; i < particles.length; i++) {
       let p = particles[i];
       p.update();
 
@@ -61,6 +61,7 @@ window.onload = function () {
           p.state.y < 0) {
         p.state.x = emitter.x;
         p.state.y = emitter.y;
+        p.setHeading(utils.lerp(Math.random(), 0, Math.PI / 20));
       }
 
       shapes.pCircle(p);

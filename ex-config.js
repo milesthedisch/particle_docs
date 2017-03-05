@@ -63,6 +63,10 @@ module.exports = {
     "name": "gravitations", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/gravitations/main.js"
   },
+	"grid": { 
+    "name": "grid", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/grid/main.js"
+  },
 	"lissajous_curves": { 
     "name": "lissajous_curves", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/lissajous_curves/lissajous_curves.js"
