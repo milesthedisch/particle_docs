@@ -12,10 +12,6 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   const points = [
-    { 
-      x: utils.randomBetween(200, w - 200),
-      y: utils.randomBetween(200, h - 200),
-    },
     {
       x: utils.randomBetween(200, w - 200),
       y: utils.randomBetween(200, h - 200),
@@ -23,7 +19,11 @@ window.onload = function() {
     {
       x: utils.randomBetween(200, w - 200),
       y: utils.randomBetween(200, h - 200),
-    }
+    },
+    {
+      x: utils.randomBetween(200, w - 200),
+      y: utils.randomBetween(200, h - 200),
+    },
   ];
 
   (function render() {
