@@ -12,7 +12,7 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   const points = [
-    {
+    { 
       x: utils.randomBetween(200, w - 200),
       y: utils.randomBetween(200, h - 200),
     },
@@ -23,11 +23,7 @@ window.onload = function() {
     {
       x: utils.randomBetween(200, w - 200),
       y: utils.randomBetween(200, h - 200),
-    },
-    // {
-    //   x: utils.randomBetween(200, w - 200),
-    //   y: utils.randomBetween(200, h - 200),
-    // },
+    }
   ];
 
   (function render() {
@@ -55,7 +51,10 @@ window.onload = function() {
     }
 
     for (let i = 0; i < 1; i += 0.1) {
-
+      let point = utils.quadtraticBezierPoint(points[0], points[1], points[2], i);
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, 10, 0, Math.PI * 2, false);
+      ctx.stroke();
     }
   })();
 
