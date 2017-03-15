@@ -29,6 +29,7 @@ window.onload = function() {
   (function render() {
     ctx.clearRect(0, 0, w, h);
 
+    // Use canvas's bezier curve.
     ctx.beginPath();
     ctx.moveTo(points[0].x, points[0].y);
     ctx.bezierCurveTo(points[0].x, points[0].y, points[1].x, points[1].y, points[2].x, points[2].y);
@@ -51,7 +52,7 @@ window.onload = function() {
     }
 
     for (let i = 0; i < 1; i += 0.1) {
-      let point = utils.quadtraticBezierPoint(points[0], points[1], points[2], i);
+      let point = utils.quadraticBezierPoint(points[0], points[1], points[2], i);
       ctx.beginPath();
       ctx.arc(point.x, point.y, 10, 0, Math.PI * 2, false);
       ctx.stroke();

@@ -2,11 +2,13 @@ window.onload = function() {
   const rAF = window.requestAnimationFrame;
   const canvas = a;
   const ctx = a.getContext("2d");
-
+  
+  // Libs
   {{#each .}}
   {{{ lib }}}
   {{/each}}
-
+  
+  // Boundries
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
