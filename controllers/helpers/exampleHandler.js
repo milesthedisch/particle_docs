@@ -37,6 +37,7 @@ module.exports = function exampleHandler(id, cb) {
       js: contextObj.js,
       title: contextObj.title,
       css: contextObj.css,
+      html: contextObj.html,
       particleLib,
     };
 

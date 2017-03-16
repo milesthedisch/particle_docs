@@ -25,20 +25,22 @@ window.onload = function() {
   const shapes = new particleLib.Shapes(ctx, document);
   const particle = new particleLib.Particle();
 
-  ctx.clearRect(-w/2, -h/2, w/2, h/2);
-
   // Move the context to the center of the screen.
   ctx.translate(w/2, h/2);
 
-  // Perspective fomulae that gives us the coordinate based on the perspective //
-  // focalLength / (focalLength + distance) //
-  var perspective = fl / (fl + shapePos.z);
-  ctx.translate(shapePos.x * perspective, shapePos.y * perspective);
-  ctx.scale(perspective, perspective);
-  ctx.fillRect(-100, -100, 200, 200);
+  // Clear the whole canvas //
+  ctx.clearRect(-w/2, -h/2, w/2, h/2);
+  ctx.save();
 
   (function render() {
-   
+
+    // Perspective fomulae that gives us the coordinate based on the perspective //
+    // focalLength / (focalLength + distance) //
+    var perspective = fl / (fl + shapePos.z);
+    
+    ctx.translate(shapePos.x * perspective, shapePos.y * perspective);
+    ctx.scale(perspective, perspective);
+    ctx.fillRect(-100, -100, 200, 200);
 
     rAF(render);
   })();
