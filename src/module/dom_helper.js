@@ -18,7 +18,7 @@ module.exports = function (document) {
    * @param  {DOMElememt} elm   DOMElememt
    * @return {Array}            Array
    */
-  const mapText = function mapText(elm) {
+  const mapToText = function mapText(elm) {
     const elmList = $$(elm, document);
     const textNodes = [];
 
@@ -55,6 +55,6 @@ module.exports = function (document) {
     });
   };
 
-  return {elmDelegator, mapText, isElement};
+  return {elmDelegator, mapToText, isElement};
 };
 

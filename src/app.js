@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
   window.particleLib = particleLib;
   const hash = window.location.hash;
   const pathname = window.location.pathname;
-  const textNodes = utils.mapText(".list-examples li a");
+  const textNodes = utils.mapToText(".list-examples li a");
   const $ = shims.$;
 
   if (textNodes.length === 0) {

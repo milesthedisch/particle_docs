@@ -25,8 +25,6 @@ module.exports = function exampleHandler(id, cb) {
 
   // Find the config associated with that ID.
   const config = examplesConfig[id];
-
-  // Stub these out for now.
   config.css = "<style>body{margin:0!important}</style>";
   config.title = config.name;
 

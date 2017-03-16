@@ -1,4 +1,8 @@
 module.exports = { 	
+	"3D_1": { 
+    "name": "3D_1", 
+    "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/3D_1/main.js"
+  },
 	"accelerating": { 
     "name": "accelerating", 
     "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/accelerating/accel.js"
