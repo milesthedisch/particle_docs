@@ -1,3 +1,4 @@
+/* eslint valid-jsdoc: 0 */
 const path = require("path");
 const fs = require("fs");
 
@@ -11,7 +12,7 @@ fs.readdir(examplesDir, function(err, dirs) {
 
   const validDirs = dirs
     .filter((dir) =>
-      !/\./.test(dir) && 
+      !/\./.test(dir) &&
       fs.statSync(path.resolve(dir, examplesDir)).isDirectory()
     )
     .map((dir) => {
@@ -20,14 +21,22 @@ fs.readdir(examplesDir, function(err, dirs) {
       const result = isValidCssName(dirName); // Miles explain this please...
 
       // Check if it was success.
-      if (result[1]) {
+      if (result) {
         const key = path.parse(_path).name;
-        const html = !!checkHtmlInConfig(_path) ?
-          `"${checkHtmlInConfig(_path)}"` : null;
+
+        const html = !!isHtmlInDir(_path) ?
+          `"${isHtmlInDir(_path)}"` : null;
+
+        const css = isCssInDir(_path) ?
+          `"${isCssInDir(_path)}"` : null;
+
+        const js = isJsInDir(_path) ?
+          `"${isJsInDir(_path)}"` : null;
 
         return `\t"${key}": { 
           "name": "${key}",
-          "js": "${checkJsInConfig(_path)}",
+          "js": ${js},
+          "css": ${css},
           "html": ${html}
         },\n`;
       }
@@ -39,55 +48,82 @@ fs.readdir(examplesDir, function(err, dirs) {
 });
 
 /**
- * checkJsInConfig
- * Check the js file in the example directory.
- * If it dosent exsist throw and error
- * If it does exsist return the path that its in.
- * @param  {String} dir directory
- * @return {String}     a file path
+ * @name readDir
+ * @alias fs.readDirSync
+ * @type {String => String}
  */
-function checkJsInConfig(dir) {
-  const jsFiles =
-    fs.readdirSync(dir)
-      .filter((file) => path.extname(file) === ".js");
-
-  if (jsFiles.length > 0) {
-    return path.resolve(dir, jsFiles[0]);
-  }
-
-  throw new Error(
-    `There is no js file for this example ${dir}`
-  );
-}
+const readDir =
+  (dir) => fs.readdirSync(dir);
 
 /**
- * @name checkJsInConfig
- * @param  {Array} dir
- * @return {Path|null}
+ * @name extension
+ * @description Takes a string and prepends a '.'
+ * @type {String => String}
  */
-function checkHtmlInConfig(dir) {
-  const jsFiles =
-    fs.readdirSync(dir)
-      .filter((file) => path.extname(file) === ".html");
-
-  if (jsFiles.length > 0) {
-    return path.resolve(dir, jsFiles[0]);
-  }
-
-  return null;
-}
+const extension =
+  (string) => "." + string;
 
 /**
- * isValidCssName
- * @param  {String}  name
- * @return {Boolean}
+ * @name isExtensionType
+ * @description Tells you wether that files is the
+ * extension type given.
+ * @type {String => String => Boolean}
  */
-function isValidCssName(name) {
-  const valid = /-?[_a-zA-Z]+[_a-zA-Z0-9-]*/.test(name);
+const isExtensionType =
+  (type) =>
+    (file) => path.extname(file) === extension(type);
 
-  if (!valid) {
-    return [name];
-  }
+/**
+ * @name filterExtInDir
+ * @description Take a directory and return the files
+ * that match the extension give.
+ * @type {String, String => Array<String>}
+ */
+const filterExtInDir =
+  (ext, dir) => readDir(dir).filter(isExtensionType(ext));
 
-  return [null, true];
-};
+/**
+ * @name filterExtInDirErr
+ * @description Creates an error given the extension and directory.
+ * @type {String, String => Error}
+ */
+const filterExtInDirErr =
+  (ext, dir) => new Error(`There is no ${ext} file for this example ${dir}`);
+
+/**
+ * @name resolveFromDir
+ * @type {String => String => Path}
+ */
+const resolveFromDir =
+  (dir) =>
+    (_path) => path.resolve(dir, _path);
+
+/**
+  * isValidCssName
+  * @param  {String}  name
+  * @return {Boolean}
+*/
+const isValidCssName =
+  (name) => /-?[_a-zA-Z]+[_a-zA-Z0-9-]*/.test(name);
+
+/**
+ * @name filterDirForExt
+ * @description Checks fo extension in the directory.
+ * If it finds the one return the first one it finds.
+ * @param  {String} dir
+ * @param  {String} ext
+ * @return {String}
+ */
+const filterDirForExt =
+  (ext) =>
+    (dir) => {
+      const files = filterExtInDir(ext, dir);
+
+      if (files.length > 0) {
+        return resolveFromDir(dir)(files[0]);
+      }
+    };
+
+const isJsInDir = filterDirForExt("js");
+const isCssInDir = filterDirForExt("css");
+const isHtmlInDir = filterDirForExt("html");

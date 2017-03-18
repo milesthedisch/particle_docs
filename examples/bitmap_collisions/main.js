@@ -2,14 +2,15 @@ window.onload = function() {
   const rAF = window.requestAnimationFrame;
   const canvas = a;
   const ctx = a.getContext("2d");
-  const targetContext = a.
-  
+  const targetCanvas = target;
+  const targetContext = targetCanvas.getContext("2d");
+
   // Libs
   const utils = particleLib.Utils;
   const vector = new particleLib.Vector();
   const shapes = new particleLib.Shapes(ctx, document);
   const particle = new particleLib.Particle();
-  
+
   // Boundries
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
