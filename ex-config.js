@@ -7,17 +7,17 @@ module.exports = {
 	"accelerating": { 
           "name": "accelerating",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/accelerating/accel.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/accelerating/index.html"
+          "html": null
         },
 	"basic": { 
           "name": "basic",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/basic/main.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/basic/index.html"
+          "html": null
         },
 	"basic_2": { 
           "name": "basic_2",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/basic_2/trig.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/basic_2/index.html"
+          "html": null
         },
 	"bezier_1": { 
           "name": "bezier_1",
@@ -47,12 +47,12 @@ module.exports = {
 	"circles": { 
           "name": "circles",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/circles/circle.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/circles/index.html"
+          "html": null
         },
 	"clean_dead_particles": { 
           "name": "clean_dead_particles",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/clean_dead_particles/main.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/clean_dead_particles/index.html"
+          "html": null
         },
 	"collision_circle_circle_2": { 
           "name": "collision_circle_circle_2",
@@ -82,22 +82,22 @@ module.exports = {
 	"colors": { 
           "name": "colors",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/colors/velocity.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/colors/index.html"
+          "html": null
         },
 	"fireworks": { 
           "name": "fireworks",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/fireworks/fireworks.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/fireworks/index.html"
+          "html": null
         },
 	"forever_on_screen": { 
           "name": "forever_on_screen",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/forever_on_screen/main.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/forever_on_screen/index.html"
+          "html": null
         },
 	"fountain": { 
           "name": "fountain",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/fountain/main.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/fountain/index.html"
+          "html": null
         },
 	"friction": { 
           "name": "friction",
@@ -117,37 +117,37 @@ module.exports = {
 	"lissajous_curves": { 
           "name": "lissajous_curves",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/lissajous_curves/lissajous_curves.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/lissajous_curves/index.html"
+          "html": null
         },
 	"normalizeEx": { 
           "name": "normalizeEx",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/normalizeEx/main.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/normalizeEx/index.html"
+          "html": null
         },
 	"orbits": { 
           "name": "orbits",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/orbits/main.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/orbits/index.html"
+          "html": null
         },
 	"pointer": { 
           "name": "pointer",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/pointer/5.5.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/pointer/index.html"
+          "html": null
         },
 	"pointer_2": { 
           "name": "pointer_2",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/pointer_2/arctangent.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/pointer_2/index.html"
+          "html": null
         },
 	"random_vectors": { 
           "name": "random_vectors",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/random_vectors/main.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/random_vectors/index.html"
+          "html": null
         },
 	"spaceship": { 
           "name": "spaceship",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/spaceship/main.js",
-          "html": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/spaceship/index.html"
+          "html": null
         },
 	"springs_1": { 
           "name": "springs_1",

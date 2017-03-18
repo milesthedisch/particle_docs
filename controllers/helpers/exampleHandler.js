@@ -1,8 +1,12 @@
-const exampleLoader = require("./exampleLoader.js");
+const loadExample = require("./exampleLoader.js");
 const examplesConfig = require("../../ex-config.js");
-const fs = require("fs");
-const path = require("path");
-const handlebars = require("handlebars");
+
+// Hard coded references to the particle library.
+// The code is in the parent frame.
+const particleLib =
+"<script>" +
+  "window.particleLib = window.particleLib || window.top.particleLib" +
+"</script>";
 
 module.exports = function exampleHandler(id, cb) {
   try {
@@ -16,43 +20,19 @@ module.exports = function exampleHandler(id, cb) {
     }
   }
 
-  // Hard coded references to the particle library.
-  // The code is in the parent frame.
-  const particleLib =
-  "<script>" +
-    "window.particleLib = window.particleLib || window.top.particleLib" +
-  "</script>";
-
   // Find the config associated with that ID.
   const config = examplesConfig[id];
-  config.css = "<style>body{margin:0!important}</style>";
+
+  config.css = config.css;
+  config.html = config.html;
   config.title = config.name;
+  config.particleLib = particleLib;
 
-  // Based on the config read in the associated js file.
-  exampleLoader(config, function(err, contextObj) {
-    if (err) cb(err);
-
-    // Abstract all the nesaccary data.
-    const ctx = {
-      js: contextObj.js,
-      title: contextObj.title,
-      css: contextObj.css,
-      html: contextObj.html,
-      particleLib,
-    };
-
-    const templatePath =
-      path.resolve(__dirname, "../../views/templates/example.handlebars");
-
-    // Read in the template and pass in context
-    fs.readFile(templatePath, "utf8", function(err, data) {
-      if (err) return cb(err);
-      // compile the template
-      const template = handlebars.compile(data);
-      // Pass context into the template
-      const html = template(ctx);
-      // Send of string to the client so that it can put it in to the srcdoc.
-      cb(null, html);
+  loadExample(config)
+    .then(function(data) {
+      cb(null, data);
+    })
+    .catch(function(err) {
+      cb(err);
     });
-  });
 };
