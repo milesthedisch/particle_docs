@@ -51,6 +51,27 @@ function getHtml(file) {
 };
 
 /**
+ * @name  getCss
+ * @description gets the html from file given.
+ * @param  {[type]} file [description]
+ * @return {[type]}      [description]
+ */
+function getCss(file) {
+  return new Promise(function(resolve, reject) {
+    if (!file) {
+      return resolve("");
+    }
+
+    fs.readFile(file, "utf8", function(err, data) {
+      if (err) {
+        return reject(`There was an unexpected err ${err}`);
+      };
+      return resolve({css: data});
+    });
+  });
+};
+
+/**
  * @name  compileTemplate
  * @description Uses the example to template to construct the example HTML
  * that will be executed in the iframe.
@@ -75,18 +96,11 @@ function compileTemplate(ctx) {
 }
 
 module.exports = function({js, css, html, title, particleLib}) {
-  return Promise.all([getJs(js), getHtml(html)])
+  return Promise.all([getJs(js), getHtml(html), getCss(css)])
     .then((data) => {
-      let js;
-      let html;
-
-      if (data.findIndex((jsOrHtml) => Object.keys(jsOrHtml)[0] === "js")) {
-        js = data[1].js;
-        html = data[0].html;
-      }
-
-      js = data[0].js;
-      html = data[1].html;
+      const {html, js, css} = data.reduce((prev, next) => {
+        return Object.assign(prev, next);
+      }, {});
 
       return {
         html,
