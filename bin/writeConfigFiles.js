@@ -24,14 +24,14 @@ fs.readdir(examplesDir, function(err, dirs) {
       if (result) {
         const key = path.parse(_path).name;
 
-        const html = !!isHtmlInDir(_path) ?
-          `"${isHtmlInDir(_path)}"` : null;
+        const html = htmlInDir(_path) ?
+          `"${htmlInDir(_path)}"` : null;
 
-        const css = isCssInDir(_path) ?
-          `"${isCssInDir(_path)}"` : null;
+        const css = cssInDir(_path) ?
+          `"${cssInDir(_path)}"` : null;
 
-        const js = isJsInDir(_path) ?
-          `"${isJsInDir(_path)}"` : null;
+        const js = jsInDir(_path) ?
+          `"${jsInDir(_path)}"` : null;
 
         return `\t"${key}": { 
           "name": "${key}",
@@ -83,14 +83,6 @@ const filterExtInDir =
   (ext, dir) => readDir(dir).filter(isExtensionType(ext));
 
 /**
- * @name filterExtInDirErr
- * @description Creates an error given the extension and directory.
- * @type {String, String => Error}
- */
-const filterExtInDirErr =
-  (ext, dir) => new Error(`There is no ${ext} file for this example ${dir}`);
-
-/**
  * @name resolveFromDir
  * @type {String => String => Path}
  */
@@ -122,8 +114,10 @@ const filterDirForExt =
       if (files.length > 0) {
         return resolveFromDir(dir)(files[0]);
       }
+
+      return false;
     };
 
-const isJsInDir = filterDirForExt("js");
-const isCssInDir = filterDirForExt("css");
-const isHtmlInDir = filterDirForExt("html");
+const jsInDir = filterDirForExt("js");
+const cssInDir = filterDirForExt("css");
+const htmlInDir = filterDirForExt("html");
