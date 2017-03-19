@@ -2,7 +2,7 @@ const particle = new particleLib.Particle();
 const vector = new particleLib.Vector();
 const utils = particleLib.Utils;
 
-window.onload = function () {
+window.onload = function() {
   window.focus();
   const rAF = window.requestAnimationFrame;
   const canvas = a;

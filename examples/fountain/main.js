@@ -1,10 +1,10 @@
-window.onload = function () {
+window.onload = function() {
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
   const utils = particleLib.Utils;
-  
 
-  // When using id's the variable is exposed 
+
+  // When using id's the variable is exposed
   const canvas = a;
   const rAF = window.requestAnimationFrame;
   const ctx = a.getContext("2d");
@@ -33,7 +33,7 @@ window.onload = function () {
       gravity: 0.1,
       radius: Math.random() * 10 + 5,
     });
-  }); 
+  });
 
   update();
 

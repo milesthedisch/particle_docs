@@ -1,10 +1,9 @@
-window.onload = function () {
-
+window.onload = function() {
   const vec = new particleLib.Vector();
   const vScale = vec.create(1, 1);
   const vSine = vec.create(1, 1);
 
-  // When using id's the variable is exposed 
+  // When using id's the variable is exposed
   const canvas = a;
   const ctx = a.getContext("2d");
   const w = canvas.width = window.innerWidth;

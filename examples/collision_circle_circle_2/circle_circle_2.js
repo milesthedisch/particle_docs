@@ -1,8 +1,8 @@
 const particle = new particleLib.Particle();
 const vector = new particleLib.Vector();
-const utils = particleLib.Utils
+const utils = particleLib.Utils;
 
-window.onload = function () {
+window.onload = function() {
   window.focus();
   const rAF = window.requestAnimationFrame;
   const canvas = a;
@@ -13,7 +13,7 @@ window.onload = function () {
   let h = canvas.height = window.innerHeight;
 
   const p1 = particle.create({
-    x: w/2, 
+    x: w/2,
     y: h/2,
     radius: 100,
     color: "#000000",
@@ -21,7 +21,7 @@ window.onload = function () {
 
   const p2 = particle.create({
     radius: 50,
-    x: 0, 
+    x: 0,
     y: h/2,
     color: "#000000",
   });

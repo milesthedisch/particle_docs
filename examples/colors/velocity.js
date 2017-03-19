@@ -2,8 +2,7 @@ const particle = new particleLib.Particle();
 const vector = new particleLib.Vector();
 const utils = particleLib.Utils;
 
-window.onload = function () {
-  
+window.onload = function() {
   const rAF = window.requestAnimationFrame;
   const canvas = a;
   const ctx = a.getContext("2d");

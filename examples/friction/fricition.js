@@ -1,9 +1,9 @@
-window.onload = function () {
+window.onload = function() {
   const particle = new particleLib.Particle();
   const utils = particleLib.Utils;
   const vector = new particleLib.Vector();
 
-  // When using id's the variable is exposed 
+  // When using id's the variable is exposed
   const canvas = a;
   const rAF = window.requestAnimationFrame;
   const ctx = a.getContext("2d");
@@ -28,24 +28,24 @@ window.onload = function () {
   function update(delta) {
     // ctx.clearRect(0, 0, w, h);
 
-    /****************************/
+    /** **************************/
     /*  This is to expensive 6  */
     /*  trig calls for friction */
-    /****************************/
+    /** **************************/
 
     // friction.setAngle((p.get("velocity")).getAngle());
     // if (p.get("velocity").getLength() >= friction.getLength()) {
-    //   (p.get("velocity"))["-="](friction);  
+    //   (p.get("velocity"))["-="](friction);
     // } else {
     //   p.get("velocity").setLength(0);
     // }
 
-    /**************/
+    /** ************/
     /* easier way */
-    /**************/
+    /** ************/
 
     // (p.get("velocity"))["*="](_friction);
-      
+
     // Increase the angle every frame.
     const vA = utils.setAngle(i += 0.001, p.state.vx, p.state.vy);
     p.state.vx = vA[0];

@@ -1,8 +1,7 @@
-window.onload = function () {
-
+window.onload = function() {
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
-  // When using id's the variable is exposed 
+  // When using id's the variable is exposed
   const rAF = window.requestAnimationFrame;
 
   let canvas = a;

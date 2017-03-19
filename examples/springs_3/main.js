@@ -16,7 +16,7 @@ window.onload = function() {
   const k = utils.randomBetween(0.05, 0.4);
   const springLength = utils.randomBetween(50, 1000);
 
- 
+
   const sun = particle.create({
     x: w * 0.5,
     y: 100,
@@ -44,18 +44,18 @@ window.onload = function() {
   console.log(pArray);
 
   window.addEventListener("mousemove", function(e) {
-    sun.state.x = e.clientX; 
+    sun.state.x = e.clientX;
     sun.state.y = e.clientY;
   });
 
   (function update() {
     ctx.clearRect(0, 0, w, h);
 
-    for (var i = pArray.length - 1; i >= 0; i--) {
+    for (let i = pArray.length - 1; i >= 0; i--) {
       let p = pArray[i];
       p.springFromTo(sun, 0.09, 10);
       shapes.drawLineXY(p.state.x, p.state.y, sun.state.x, sun.state.y);
-      for (var j = pArray.length - 1; j >= 0; j--) {
+      for (let j = pArray.length - 1; j >= 0; j--) {
         let p2 = pArray[j];
         if (i != j) {
           p.springFromTo(p2, k, springLength);

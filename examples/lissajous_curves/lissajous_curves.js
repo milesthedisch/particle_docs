@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 const particle = new particleLib.Particle();
 const vector = new particleLib.Vector();
 const utils = particleLib.Utils;

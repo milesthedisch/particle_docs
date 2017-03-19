@@ -1,5 +1,5 @@
 
-window.onload = function () {
+window.onload = function() {
   const particle = new particleLib.Particle();
 
   const rAF = window.requestAnimationFrame;
@@ -17,6 +17,7 @@ window.onload = function () {
     x: cx,
     y: cy,
     radius: 10,
+    magnitude: 1,
   });
 
   let ax = 0.5;
@@ -27,7 +28,7 @@ window.onload = function () {
   function update() {
     ctx.clearRect(0, 0, w, h);
     p.accelerate(ax, ay);
-    p.updatePos();
+    p.update();
 
     shapes.pCircle(p);
 

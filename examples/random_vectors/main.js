@@ -9,7 +9,7 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
-  function update () {
+  function update() {
     // Make sure the maximum range of the vectors is the edges of the screen.
     const vecWidth = vector.random(0, w);
     const vecHeight = vector.random(0, h);

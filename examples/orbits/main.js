@@ -1,5 +1,5 @@
-// 
-window.onload = function () {
+//
+window.onload = function() {
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
   const utils = particleLib.Utils;

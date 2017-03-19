@@ -15,7 +15,7 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   // Focal length //
-  const fl = 300;
+  const fl = 30;
 
   let squares = [];
   const numsquares = 100;
@@ -29,22 +29,22 @@ window.onload = function() {
   }
 
   // Move the context to the center of the screen.
+  // Which is are vanshing point.
   ctx.translate(w/2, h/2);
-  let i = 10;
+  let i = 1;
 
   update();
 
   function update() {
-    i += 0.1;
+    i += 0.01;
     // Clear the whole canvas //
     ctx.clearRect(-w/2, -h/2, w, h);
     console.log(i);
     squares.forEach(function(shape) {
-
       ctx.save();
       // Perspective fomulae that gives us the coordinate based on the perspective //
       // focalLength / (focalLength + distance) //
-      var perspective = fl / (fl + shape.z);  
+      let perspective = fl / (fl + shape.z);
 
       ctx.translate(shape.x * perspective, shape.y * perspective);
       ctx.scale(perspective, perspective);

@@ -1,6 +1,5 @@
-window.onload = function () {
-
-  // When using id's the variable is exposed 
+window.onload = function() {
+  // When using id's the variable is exposed
   const particle = new particleLib.Particle();
   const vector = new particleLib.Vector();
   const utils = particleLib.Utils;
@@ -29,7 +28,7 @@ window.onload = function () {
       magnitude: Number((1 * Math.random()).toFixed(2)),
       direction: Math.random() * Math.PI * 2,
       width: r,
-      height: r, 
+      height: r,
       // radius: Math.random() * 10,
     };
     create(newState);
@@ -52,7 +51,7 @@ window.onload = function () {
     rAF(update);
   })();
 
-  function removeDeadParticle () {
+  function removeDeadParticle() {
     for (let i = particles.length - 1; i >= 0; i -= 1) {
       let p = particles[i];
 
@@ -64,7 +63,6 @@ window.onload = function () {
   }
 
   function checkBounds(p) {
-
     /* For a rect */
     return !(
       utils.inRange(

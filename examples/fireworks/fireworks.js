@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function() {
   const vector = new particleLib.Vector();
   const particle = new particleLib.Particle();
   const utils = particleLib.Utils;
@@ -77,7 +77,7 @@ window.onload = function () {
       color: "#000000",
     }, function(ops, i, create) {
       const r = utils.randomBetween(2, delta);
-      const newState = Object.assign({}, ops, { 
+      const newState = Object.assign({}, ops, {
         width: r,
         height: r,
       });
@@ -89,7 +89,7 @@ window.onload = function () {
   particles = generate(numParticles, utils.randomBetween(5, 10));
   update();
 
-  var frame = 0;
+  let frame = 0;
 
   function update(dt) {
     frame++;
@@ -101,7 +101,7 @@ window.onload = function () {
       particles = generate(numParticles, utils.randomBetween(5, 10));
     }
 
-    fireworks(particles);  
+    fireworks(particles);
     draw(particles);
     rAF(update);
   };

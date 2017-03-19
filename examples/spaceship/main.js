@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 window.onload = function() {
   window.document.body.insertAdjacentHTML(
     "beforeBegin",
