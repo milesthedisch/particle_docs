@@ -89,7 +89,7 @@ window.onload = function() {
   particles = generate(numParticles, utils.randomBetween(5, 10));
   update();
 
-  let frame = 0;
+  var frame = 0;
 
   function update(dt) {
     frame++;

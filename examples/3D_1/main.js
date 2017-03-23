@@ -18,7 +18,7 @@ window.onload = function() {
   const fl = 30;
 
   let squares = [];
-  const numsquares = 100;
+  const numsquares = 1000;
 
   for(let i = 0; i < numsquares; i++) {
     squares[i] = {
@@ -53,7 +53,7 @@ window.onload = function() {
 
       shape.z -= i;
       if(shape.z < 0) {
-        shape.z = 0;
+        shape.z = 10000;
       }
     });
 

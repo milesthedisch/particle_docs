@@ -17,6 +17,12 @@ module.exports = {
           "css": null,
           "html": null
         },
+	"3D_4": { 
+          "name": "3D_4",
+          "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/3D_4/main.js",
+          "css": null,
+          "html": null
+        },
 	"accelerating": { 
           "name": "accelerating",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/accelerating/accel.js",
