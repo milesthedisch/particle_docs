@@ -16,19 +16,39 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   const numOfObjects = 20;
+  const baseZ = 1000;
+  const baseAngle = 0;
+  const radius = 2000;
+  const focalLength = 200;
+
+  let angleVeloctiy = 0.01;
 
   fetchCats()
     .then(createObjects)
-    .then(function init(objects) {
-      console.log(objects);
-      // Move to center //
-      ctx.translate(w/2, h/2);
+    .catch(function(err){ console.error(err) });
 
-      (function render() {
-        ctx.clearRect(0, 0, w, h);
-        rAF(render);
-      })();
-    });
+  function init(objects) {
+
+    // Move to center //
+    ctx.translate(w/2, h/2);
+
+    (function render() {
+      ctx.clearRect(-w/2, -h/2, w/2, h/2);
+
+      for (let i = 0; i < objects.length; i++) {
+        let o = objects[i];
+
+        ctx.save();
+        perspective = focalLength / focalLength + o.z;
+        ctx.scale(perspective, perspective);
+        ctx.translate(o.x, o.y);
+        ctx.translate(o.image.width / 2, -o.image.width / 2);
+        ctx.restore();
+      }
+
+      rAF(render);
+    })();
+  }
 
   function createObjects(catGifs) {
     let cats = [];
@@ -36,7 +56,8 @@ window.onload = function() {
     for (let i = 0; i < catGifs.length; i++) {
       cats[i] = {
         angle: (Math.PI * 2 / catGifs.length) * i,
-        y: 0,
+        x: Math.cos(catz[i] + baseAngle) * radius,
+        z: (Math.sin(catz[i] + baseAngle) * radius) + centerZ,
         image: document.createElement("image"),
       };
 
@@ -52,7 +73,8 @@ window.onload = function() {
       .then(toJSON)
       .then(getCatGifs)
       .catch(function(err) {
-        console.error("Couldn't fetch cats", err);
+        document.write("Sorry please connect to the internet.");
+        throw err;
       });
   }
 

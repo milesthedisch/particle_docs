@@ -80,6 +80,8 @@ window.onload = function() {
       ctx.scale(perspective, perspective);
       ctx.translate(card.x, card.y);
 
+      // Move the context so when we draw the image the center of the image
+      // will align with the actual coordinates of the square.
       ctx.translate(-card.image.width / 2, -card.image.height / 2);
       ctx.drawImage(card.image, 0, 0);
 
