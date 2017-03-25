@@ -16,38 +16,61 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   const numOfObjects = 20;
-  const baseZ = 1000;
-  const baseAngle = 0;
-  const radius = 2000;
-  const focalLength = 200;
+  const radius = 1000;
+  const focalLength = 300;
+  const centerZ = 1000;
 
   let angleVeloctiy = 0.01;
+  let baseAngle = 0;
+  let x = 0;
+  let y = 0;
+  
+
+  document.addEventListener("mousemove", function (e) {
+    angleVeloctiy = utils.map(e.clientX, 0, w, -w/2 / 10000, w / 10000);
+  });
+
+  document.addEventListener("mousewheel", function (e) {
+    y = e.deltaY;
+  });
 
   fetchCats()
     .then(createObjects)
+    .then(init)
     .catch(function(err){ console.error(err) });
 
   function init(objects) {
-
     // Move to center //
     ctx.translate(w/2, h/2);
 
     (function render() {
-      ctx.clearRect(-w/2, -h/2, w/2, h/2);
+      baseAngle += angleVeloctiy;
+      objects.sort(zsort);
+
+      ctx.clearRect(-w/2, -h/2, w, h);
 
       for (let i = 0; i < objects.length; i++) {
         let o = objects[i];
-
         ctx.save();
-        perspective = focalLength / focalLength + o.z;
+        perspective = focalLength / (focalLength + o.z);
         ctx.scale(perspective, perspective);
         ctx.translate(o.x, o.y);
-        ctx.translate(o.image.width / 2, -o.image.width / 2);
+        ctx.translate(-o.image.width / 2, -o.image.width / 2);
+        ctx.drawImage(o.image, 0, 0);
         ctx.restore();
+
+        y = Math.abs(y) === 1 ? 0 : y;
+        o.y += y * .5;
+        o.x = Math.cos(o.angle + baseAngle) * radius;
+        o.z = centerZ + Math.sin(o.angle + baseAngle) * radius;
       }
 
       rAF(render);
     })();
+  }
+
+  function zsort(squareA, squareB) {
+    return squareB.z - squareA.z;
   }
 
   function createObjects(catGifs) {
@@ -56,11 +79,12 @@ window.onload = function() {
     for (let i = 0; i < catGifs.length; i++) {
       cats[i] = {
         angle: (Math.PI * 2 / catGifs.length) * i,
-        x: Math.cos(catz[i] + baseAngle) * radius,
-        z: (Math.sin(catz[i] + baseAngle) * radius) + centerZ,
-        image: document.createElement("image"),
+        y: 0,
+        image: document.createElement("img"),
       };
 
+      cats[i].x = Math.cos(cats[i].angle + baseAngle) * radius;
+      cats[i].z = centerZ + Math.sin(cats[i].angle + baseAngle) * radius;
       cats[i].image.src = catGifs[i];
     }
 
