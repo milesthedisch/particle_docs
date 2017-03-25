@@ -4,7 +4,7 @@ window.onload = function() {
   const rAF = window.requestAnimationFrame;
   const canvas = a;
   const ctx = a.getContext("2d");
-  
+
   // Libs
   const utils = particleLib.Utils;
   const vector = new particleLib.Vector();
@@ -15,34 +15,44 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
-  var catGifUrls;
-  const numberOfCards = 20;
+  const numOfObjects = 20;
 
-  // Move to center //
-  ctx.translate(w/2, h/2);
+  fetchCats()
+    .then(createObjects)
+    .then(function init(objects) {
+      console.log(objects);
+      // Move to center //
+      ctx.translate(w/2, h/2);
 
-  (function render() {
-    ctx.clearRect(0, 0, w, h);
-    rAF(render);
-  })();
+      (function render() {
+        ctx.clearRect(0, 0, w, h);
+        rAF(render);
+      })();
+    });
 
-  function createObjects(num) {
-    if (!!+num) {
-      throw new Error("Please provide a number.");
+  function createObjects(catGifs) {
+    let cats = [];
+
+    for (let i = 0; i < catGifs.length; i++) {
+      cats[i] = {
+        angle: (Math.PI * 2 / catGifs.length) * i,
+        y: 0,
+        image: document.createElement("image"),
+      };
+
+      cats[i].image.src = catGifs[i];
     }
 
-    for (let obj = 0; i < num; i++) {
-       
-    }
-  };
+    return cats;
+  }
 
-  function fetchCats(url) {
-    return fetch(url)
+  function fetchCats() {
+    return fetch(CATS)
       .then(checkStatus)
       .then(toJSON)
       .then(getCatGifs)
       .catch(function(err) {
-        console.error("couldn't fetch cats", err);
+        console.error("Couldn't fetch cats", err);
       });
   }
 
@@ -63,7 +73,7 @@ window.onload = function() {
   }
 
   function getCatGifs(gifData) {
-    catGifUrls = gifData.data.slice(0, numberOfCards)
+    return gifData.data.slice(0, numOfObjects)
       .map(function(d) {
         return d.images.preview_gif === undefined ?
           "" :

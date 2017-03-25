@@ -4,24 +4,27 @@ window.onload = function() {
   // When using id's the variable is exposed
   const canvas = a;
   const ctx = a.getContext("2d");
+  const shapes = new particleLib.Shapes(ctx, document);
+  const i = 0;
 
   // Make the canvas a full portrait.
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
-  function update() {
-    // Make sure the maximum range of the vectors is the edges of the screen.
-    const vecWidth = vector.random(0, w);
-    const vecHeight = vector.random(0, h);
+  let startPoint = vector.create(w/2, h/2);
 
-    ctx.beginPath();
-    ctx.moveTo(vecWidth.state.x, vecHeight.state.x);
-    ctx.lineTo(vecWidth.state.y, vecHeight.state.y);
-    ctx.stroke();
+  document.addEventListener("mousemove", function(e) {
+    startPoint = vector.create(e.clientX, e.clientY);
+    ctx.clearRect(0, 0, w, h);  
+  });
+
+  function update(lineTo) {
+    // Make sure the maximum range of the vectors is the edges of the screen.
+    shapes.drawLineVec(startPoint, vector.random(-1000, 1000));
   }
 
-  (function animate() {
-    update();
+  (function animate(i) {
+    update(vector.randomBetween(0, w, 0, h));
     window.requestAnimationFrame(animate);
   })();
 
