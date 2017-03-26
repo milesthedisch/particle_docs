@@ -15,8 +15,8 @@ window.onload = function() {
 
   // Radius //
   const radius = w/3;
-  const zOffset = 1000;
-  const circles = createCircles(1000);
+  const zOffset = 500;
+  const circles = createCircles(500);
   const focalLength = 300;
 
   let baseAngle = 0;
@@ -33,20 +33,18 @@ window.onload = function() {
   });
 
   function createCircles(num) {
-    const slices = (Math.PI * Math.sqrt(num)) / num;
     let circles = [];
 
     for (let i = 0; i < num; i++) {
       let c = {
         x: 0,
-        y: 0,
+        y: 3000 - 5000 / num * i,
         z: 0,
-        angle: slices * i,
+        angle: 0.2 * i,
       };
 
       c.x = Math.cos(c.angle) * radius;
       c.z = zOffset + Math.sin(c.angle) * radius;
-      c.y = (i + 100) - h;
       circles[i] = c;
     }
 
