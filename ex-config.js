@@ -29,6 +29,18 @@ module.exports = {
           "css": null,
           "html": null
         },
+	"3D_6": { 
+          "name": "3D_6",
+          "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/3D_6/main.js",
+          "css": null,
+          "html": null
+        },
+	"3D_7": { 
+          "name": "3D_7",
+          "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/3D_7/main.js",
+          "css": null,
+          "html": null
+        },
 	"accelerating": { 
           "name": "accelerating",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/accelerating/accel.js",
