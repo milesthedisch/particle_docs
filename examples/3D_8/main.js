@@ -25,16 +25,29 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
-  context.tranlsate(w/2, h/2);
+  ctx.translate(w/2, h/2);
 
   (function render() {
     ctx.clearRect(-w/2, -h/2, w, h);
     project(points);
+    drawModel(points);
     rAF(render);
   })();
 
+  function drawModel(points) {
+    let p = points.map(function(point) { 
+      return {x: point.sx, y: point.sy};
+    });
+    shapes.drawLinePoints(p[0], p[1], p[2], p[3], p[0]);
+    shapes.drawLinePoints(p[0], p[4]);
+    shapes.drawLinePoints(p[1], p[5]);
+    shapes.drawLinePoints(p[2], p[6]);
+    shapes.drawLinePoints(p[3], p[7]);
+    shapes.drawLinePoints(p[4], p[5], p[6], p[7], p[4]);
+  }
+
   function project(points) {
-    for (let i = 0; points.lenght; i++) {
+    for (let i = 0; i < points.length; i++) {
       let p = points[i];
           scale = fl / (fl + p.z);
 
