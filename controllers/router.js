@@ -40,8 +40,8 @@ module.exports = function router(config) {
     const id = req.params.id;
 
     exampleHandler(id, function(err, data) {
-      if (err) next(err);
-      res.send(data);
+      if (err) return next(err);
+      return res.send(data);
     });
   });
 

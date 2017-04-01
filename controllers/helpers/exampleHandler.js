@@ -9,15 +9,8 @@ const particleLib =
 "</script>";
 
 module.exports = function exampleHandler(id, cb) {
-  try {
-    examplesConfig[id];
-  } catch (err) {
-    if (err) {
-      cb(`There was an unexpected error: [[ ${err} ]]`);
-    }
-    if (example === undefined) {
-      cb(`There was no example named ${id}`);
-    }
+  if (!examplesConfig[id]) {
+    return cb(`There was no example named ${id}`);
   }
 
   // Find the config associated with that ID.
@@ -30,9 +23,9 @@ module.exports = function exampleHandler(id, cb) {
 
   loadExample(config)
     .then(function(data) {
-      cb(null, data);
+      return cb(null, data);
     })
     .catch(function(err) {
-      cb(err);
+      return cb(err);
     });
 };

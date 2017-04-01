@@ -32,6 +32,7 @@ module.exports = function(config) {
 
   // Fallback to 404 is we cant handle the request.
   app.use(function(req, res, next) {
+    logger("warn").warn(404);
     res.status(404);
     res.render("errors/404", {layout: false});
   });
