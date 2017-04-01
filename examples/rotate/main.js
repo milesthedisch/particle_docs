@@ -13,12 +13,19 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
-  let vectorA = vector.create(5, 3);
+  let v = vector.create(w/6, h/6); 
+  const point = {
+    x: w/6,
+    y: h/6,
+  };
 
-  context.translate(w/2, h/2);
+  let delta = 0.1;
+  ctx.translate(w/2, h/2);
 
   (function render() {
-    ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(-w/2, -h/2, w, h);
+    shapes.circle(v.get("x"), v.get("y"), 10, "red");
+    v.rotate(delta);
     rAF(render);
   })();
 
@@ -26,5 +33,8 @@ window.onload = function() {
   window.onresize = function() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
+
+    ctx.translate(w/2, h/2);
+    ctx.clearRect(-w/2, -h/2, w, h);
   };
 };
