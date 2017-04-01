@@ -13,7 +13,7 @@ module.exports = function iframeHandler(document) {
 
   const checkStatus = (res) => {
     const status = res.status;
-    if (status > 200 && status < 400) {
+    if (status >= 200 && status < 400) {
       return res;
     }
     throw res.statusText;
@@ -169,6 +169,7 @@ module.exports = function iframeHandler(document) {
   };
 
   const loadIframeError = function(err) {
+    console.error(err);
     $(".wrapper__error").style.display = "block";
     $(".wrapper__error").style.height = "100vh";
     $(".wrapper__error").style.width = "100%";
