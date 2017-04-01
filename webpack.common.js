@@ -17,7 +17,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "particles$": path.resolve("./node_modules/particle_library"),
+      "particles$": path.resolve("./node_modules/particle_library/main.min.js"),
     },
     root: [
       path.resolve("src/module"),

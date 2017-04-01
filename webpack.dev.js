@@ -1,5 +1,4 @@
 const common = require("./webpack.common.js");
-const webpack = require("webpack");
 const extend = require("extend");
 const path = require("path");
 

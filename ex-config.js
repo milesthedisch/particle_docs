@@ -215,6 +215,12 @@ module.exports = {
           "css": null,
           "html": null
         },
+	"rotate": { 
+          "name": "rotate",
+          "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/rotate/main.js",
+          "css": null,
+          "html": null
+        },
 	"spaceship": { 
           "name": "spaceship",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/spaceship/main.js",

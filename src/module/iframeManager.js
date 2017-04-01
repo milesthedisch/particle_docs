@@ -1,10 +1,10 @@
-  const FIRST_IFRAME = true;
+const FIRST_IFRAME = true;
 
 module.exports = function iframeHandler(document) {
   document = document || this.document;
 
-  const domHelper = require("./dom_helper")(document);
-  const shims = require("./shims")(document);
+  const domHelper = require("dom_helper")(document);
+  const shims = require("shims")(document);
 
   const $ = shims.$;
   const $$ = shims.$$;

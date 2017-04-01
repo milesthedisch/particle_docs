@@ -5,7 +5,7 @@ window.onload = function() {
   const ctx = a.getContext("2d");
   const fl = 300;
   const points = [];
-  var needsUpdate = true;
+  let needsUpdate = true;
 
   // Model of a cube.
   points[0] = {x: -500, y: -500, z: 1000};
@@ -22,7 +22,7 @@ window.onload = function() {
   const vector = new particleLib.Vector();
   const shapes = new particleLib.Shapes(ctx, document);
   const particle = new particleLib.Particle();
-  
+
   // Boundries
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
@@ -50,7 +50,7 @@ window.onload = function() {
       } else {
         translateBox(0, 20, 0);
       }
-      break;  
+      break;
     }
   });
 
@@ -66,7 +66,7 @@ window.onload = function() {
   })();
 
   function drawModelSquare(points) {
-    let p = points.map(function(point) { 
+    let p = points.map(function(point) {
       return {x: point.sx, y: point.sy};
     });
 
@@ -92,10 +92,10 @@ window.onload = function() {
   function project(points) {
     for (let i = 0; i < points.length; i++) {
       let p = points[i];
-          scale = fl / (fl + p.z);
+      scale = fl / (fl + p.z);
 
       p.sx = scale * p.x;
-      p.sy = scale * p.y; 
+      p.sy = scale * p.y;
     }
   }
 

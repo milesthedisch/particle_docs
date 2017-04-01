@@ -1,7 +1,7 @@
 const iframe = require("iframeManager.js")(document);
 const shims = require("shims.js")(document);
 const utils = require("dom_helper.js")(document);
-const particleLib = require("./vendor/particle_lib.js");
+const particleLib = require("particles");
 const DEFAULT_EXAMPLE = "random_vectors";
 
 const sethash = (fragment) => {
