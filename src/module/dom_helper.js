@@ -9,9 +9,7 @@ module.exports = function (document) {
    * @param  {Object}  obj
    * @return {Boolean}
    */
-  const isElement = function isElm(obj) {
-    return obj instanceof HTMLElement;
-  };
+  const isElement = (obj) => obj instanceof HTMLElement;
 
   /**
    * mapText takes an elment list and return a array of textNodes.
@@ -35,24 +33,26 @@ module.exports = function (document) {
 
   /**
    * elmDelegator delegate items
-   * @param  {DOMElement} elm         The parent element of the delegates.
-   * @param  {Function}   checkTarget Boolean to check which elements to delegate to.
-   * @param  {Function}   callback    A callback that is passed a error as its first
-   *                                     argugmet and second argument as the delegate.
+   * @param  {DOMElement} elm The parent element of the delegates.
+   * @param  {String} event Boolean to check which elements to delegate to.
+   * @return {Function}
+   * Curried function that takes a checkTarget function and a callback.
    */
-  const elmDelegator = function elmDelegator(elm, event, checkTarget, callback) {
+  const elmDelegator = function elmDelegator(elm, event) {
     if (!isElement(elm)) throw new Error(elm + " needs to be a element.");
     if (elm.length) throw new Error(elm + " needs to be element list");
 
-    elm.addEventListener(event, function(e) {
-      e.preventDefault();
+    return function(checkTarget, callback) {
+      elm.addEventListener(event, function(e) {
+        e.preventDefault();
 
-      if (checkTarget(e.target)) {
-        return callback(null, e.target, e);
-      }
+        if (checkTarget(e.target)) {
+          return callback(null, e.target, e);
+        }
 
-      return callback(new Error("No target matched"));
-    });
+        return callback(new Error("No target matched"));
+      });
+    };
   };
 
   return {elmDelegator, mapToText, isElement};

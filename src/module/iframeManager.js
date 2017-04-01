@@ -11,6 +11,14 @@ module.exports = function iframeHandler(document) {
   
   let firstState = FIRST_IFRAME;
 
+  const checkStatus = (res) => {
+    const status = res.status;
+    if (status > 200 && status < 400) {
+      return res;
+    }
+    throw res.statusText;
+  };
+
   /**
    * [fetchExample description]
    * @param  {[type]} id [description]
@@ -18,13 +26,12 @@ module.exports = function iframeHandler(document) {
    */
   const fetchExample = function fetchExample(id) {
     return fetch("/examples/" + id)
+    .then(checkStatus)
     .then(function(response) {
-      return response.text().then(function(txt) {
-        return txt;
-      });
+      return response.text();
     })
     .catch(function(err) {
-      console.error(new Error(err));
+      throw new Error(err);
     });
   };
 
@@ -139,7 +146,7 @@ module.exports = function iframeHandler(document) {
         existingFrame.setAttribute("data-example", id);
         return fetchExample(id)
           .then((src) => injectSrc(src, existingFrame))
-          .catch((err) => console.error(err));
+          .catch(loadIframeError);
       }
 
       console.log("Example doesn't exsist but we are the first iframe ever.");
@@ -153,7 +160,7 @@ module.exports = function iframeHandler(document) {
       return fetchExample(id)
         .then((src) => injectSrc(src, firstFrame))
         .then((newFrame) => writeFrame(parentDiv, newFrame))
-        .catch((err) => console.error(err));
+        .catch(loadIframeError);
     }
 
     console.log("Example already exsists dont do anything..");
@@ -161,6 +168,12 @@ module.exports = function iframeHandler(document) {
     return false;
   };
 
+  const loadIframeError = function(err) {
+    $(".wrapper__error").style.display = "block";
+    $(".wrapper__error").style.height = "100vh";
+    $(".wrapper__error").style.width = "100%";
+    $(".wrapper__error #error").insertAdjacentText("afterBegin", err);
+  };
 
   return {
     removeFrameSrc,

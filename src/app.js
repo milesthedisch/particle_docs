@@ -25,9 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
     break;
   }
   case("/examples"): {
-    utils.elmDelegator($(".list-examples"), "click", function check(elm) {
-      return elm.tagName === "A";
-    }, function(err, target, evt) {
+    const onClickOfList = utils.elmDelegator($(".list-examples"), "click");
+    const isAnchor = (elm) => elm.tagName === "A";
+
+    onClickOfList(isAnchor, function(err, target, evt) {
       if (err) throw err;
 
       sethash(target.text);

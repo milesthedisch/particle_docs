@@ -23,7 +23,7 @@ function getJs(file) {
         return reject(`There was an unexpected err ${err}`);
       };
 
-      const js = `<script>\n${data}\n</script>`;
+      const js = `<script>\n${data}\n//# sourceURL=dynamic.js</script>`;
       return resolve({js});
     });
   });
@@ -98,9 +98,7 @@ function compileTemplate(ctx) {
 module.exports = function({js, css, html, title, particleLib}) {
   return Promise.all([getJs(js), getHtml(html), getCss(css)])
     .then((data) => {
-      const {html, js, css} = data.reduce((prev, next) => {
-        return Object.assign(prev, next);
-      }, {});
+      const {html, js, css} = data.reduce((p, n) => Object.assign(p, n), {});
 
       return {
         html,

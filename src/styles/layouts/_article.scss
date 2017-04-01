@@ -19,3 +19,15 @@
     border: none;
   }
 }
+
+.wrapper__error {
+  display: none;
+  height: 0;
+  width: 0;
+
+  #error {
+    display: none;
+    height: 0;
+    width: 0;    
+  }
+}
