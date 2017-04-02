@@ -2,12 +2,12 @@
 module.exports = function shims(document) {
   document = document || this.document;
 
-  const $ = function qs(selector, baseNode) {
-    return document.querySelector(selector, baseNode);
+  const $ = function qs(...args) {
+    return document.querySelector(...args);
   };
 
-  const $$ = function qsAll(selector, baseNode) {
-    return document.querySelectorAll(selector, baseNode);
+  const $$ = function qsAll(...args) {
+    return document.querySelectorAll(...args);
   };
 
   return {$, $$};

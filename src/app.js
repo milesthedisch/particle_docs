@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   switch (pathname) {
   case("/"): {
-    console.log("home");
     break;
   }
   case("/examples"): {
@@ -52,11 +51,9 @@ document.addEventListener("DOMContentLoaded", function() {
     break;
   }
   case("/docs"): {
-    console.log("docs");
     break;
   }
   case("/maths"): {
-    console.log("maths");
     break;
   }
   default: {
