@@ -149,6 +149,12 @@ module.exports = {
           "css": null,
           "html": null
         },
+	"easing-simple-ease2": { 
+          "name": "easing-simple-ease2",
+          "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/easing-simple-ease2/main.js",
+          "css": null,
+          "html": null
+        },
 	"fireworks": { 
           "name": "fireworks",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/fireworks/fireworks.js",

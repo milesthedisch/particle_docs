@@ -23,38 +23,29 @@ window.onload = function() {
     y: h/2,
   };
 
-  let ease = 0.1;
-
-  const pointVec = vector.randomBetween(w/4, w, 0, h);
-  const targetVec = vector.create(0, h/2);
-  const easeVec = vector.create(0.1, 0.1);
+  const ease = 0.1;
+  let easing = true;
 
   document.addEventListener("mousemove", function(event) {
     target.x = event.x;
     target.y = event.y;
+
+    if (!easing) {
+      render();
+    }
   });
 
-  (function render() {
+  function render() {
     ctx.clearRect(0, 0, w, h);
-
     shapes.circle(point.x, point.y, 10);
-    shapes.circle(pointVec.get("x"), pointVec.get("y"), 10, "red");
+    easing = utils.easeTo(ease, point, target);
+    console.log("rendering");
+    if (easing) {
+      rAF(render);
+    }
+  }
 
-    let dVec = targetVec["-"](pointVec);
-    let vVec = dVec["*"](easeVec);
-    pointVec["+="](vVec);
-
-    let dx = target.x - point.x;
-    let dy = target.y - point.y;
-
-    let vx = dx * ease;
-    let vy = dy * ease;
-
-    point.x += vx;
-    point.y += vy;
-
-    rAF(render);
-  })();
+  render();
 
   // If the window is resizes fill the page again.
   window.onresize = function() {
