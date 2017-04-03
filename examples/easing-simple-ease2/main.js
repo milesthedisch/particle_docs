@@ -41,6 +41,7 @@ window.onload = function() {
     easing = utils.easeTo(ease, point, target);
     console.log("rendering");
     if (easing) {
+      console.log("stop rendering, distance is too small to be performant to render");
       rAF(render);
     }
   }

@@ -155,6 +155,12 @@ module.exports = {
           "css": null,
           "html": null
         },
+	"easing-tween-1": { 
+          "name": "easing-tween-1",
+          "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/easing-tween-1/main.js",
+          "css": null,
+          "html": null
+        },
 	"fireworks": { 
           "name": "fireworks",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/fireworks/fireworks.js",
