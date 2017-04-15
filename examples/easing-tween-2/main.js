@@ -54,7 +54,7 @@ window.onload = function() {
   /**
    * easingTween
    * @param  {Number} t time delta
-   * @param  {Number} b start value
+   * @param  {Number} b begining value
    * @param  {Number} c change in value
    * @param  {Number} d duration
    * @return {Number} A value in between the start and the end value at a given timestamp
