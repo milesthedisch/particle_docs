@@ -275,4 +275,10 @@ module.exports = {
           "css": null,
           "html": null
         },
+	"tween_1": { 
+          "name": "tween_1",
+          "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/tween_1/main.js",
+          "css": null,
+          "html": null
+        },
  }
