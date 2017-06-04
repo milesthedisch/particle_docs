@@ -13,33 +13,46 @@ window.onload = function() {
 
   const YAT = particleLib.YAT.init({
     clock: particleLib.Clock,
-    fps: 10,
   });
 
   const t1 = YAT.create({
     obj: {
-      x: 10,
-      y: 10,
-    },
-    props: {
       x: 100,
       y: 100,
     },
-    duration: 10000,
+    props: {
+      x: 500,
+      y: 500,
+    },
+    duration: 5000,
+    easing: "easeInOutQuad",
+  });
+
+  const t2 = YAT.create({
+    obj: {
+      x: w/2,
+      y: h/2,
+    },
+    props: {
+      x: w,
+      y: h,
+    },
+    duration: 5000,
+    easing: "easeInOutQuad",
   });
 
   YAT._clock.on("render", function render() {
     ctx.font = "20px serif";
     ctx.clearRect(0, 0, w, h);
-    ctx.fillText(`${JSON.stringify(YAT.tweens[0].state)}`, 30, 30);
-    shapes.circle(t1.state.x, t1.state.y, 20);
+
+    YAT.tweens.forEach(function(t, i) {
+      ctx.fillText(`${JSON.stringify(t.state)}`, w/3, 30 + i * 20);
+      shapes.circle(t.state.x, t.state.y, 20);
+    });
   });
 
 
   YAT.startAll();
-  setTimeout(function() {
-    t1.delay(1000);
-  }, 2000);
 
   // If the window is resizes fill the page again.
   window.onresize = function() {
