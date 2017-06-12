@@ -15,39 +15,47 @@ window.onload = function() {
     clock: particleLib.Clock,
   });
 
-  const t1 = YAT.create({
-    obj: {
-      x: 100,
-      y: 100,
-    },
-    props: {
-      x: 500,
-      y: 500,
-    },
-    duration: 5000,
-    easing: "easeInOutQuad",
-  });
+  function generateTweens(num, YAT) {
+    for (let i = 0; i < num; i++) {
+      YAT.create({
+        obj: {
+          x: Math.cos(i) * 500,
+          y: Math.sin(i) * 500,
+        },
+        props: {
+          x: w/2,
+          y: h/2,
+        },
+        color: randomColor(),
+        duration: 5000,
+        easing: "easeInOutQuad",
+      });
+    }
+  }
 
-  const t2 = YAT.create({
-    obj: {
-      x: w/2,
-      y: h/2,
-    },
-    props: {
-      x: w,
-      y: h,
-    },
-    duration: 5000,
-    easing: "easeInOutQuad",
-  });
+  function randomRGBHex() {
+    return Math.round(Math.random() * 255 + 50).toString(16);
+  }
 
+  function randomColor() {
+   return ["R", "G", "B"].reduce(function(prev, next, i) {
+      if (!i) {
+        return "#" + randomRGBHex();  
+      }
+      return prev + randomRGBHex();
+    }, 0);
+  }
+
+  generateTweens(1000, YAT);
+
+  console.log(YAT.tweens);
   YAT._clock.on("render", function render() {
     ctx.font = "20px serif";
     ctx.clearRect(0, 0, w, h);
 
     YAT.tweens.forEach(function(t, i) {
-      ctx.fillText(`${JSON.stringify(t.state)}`, w/3, 30 + i * 20);
-      shapes.circle(t.state.x, t.state.y, 20);
+      // ctx.fillText(`${JSON.stringify(t.state)}`, w/3, 30 + i * 20);
+      shapes.circle(t.state.x, t.state.y, 20, t.state.color);
     });
   });
 
