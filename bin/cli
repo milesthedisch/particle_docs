@@ -28,6 +28,12 @@ handlebars.registerHelper("lib", function() {
     return `const ${this.toLowerCase()} = new particleLib.${this}(ctx, document);`;
   }
 
+  if (this.toString() === "YAT") {
+
+    `const clock = particleLib.Clock;
+    const tween = particleLib.${this}.init({ clock })`;
+  }
+
   return `const ${this.toLowerCase()} = new particleLib.${this}();`;
 });
 
@@ -45,7 +51,7 @@ const createFile = (_path) => {
 
   let libs;
   if (!options["<libs>"].length) {
-    libs = ["Utils", "Vector", "Shapes", "Particle"];
+    libs = ["Utils", "Vector", "Shapes", "Particle", "YAT"];
   }
 
   const data = jsTemplate(libs);

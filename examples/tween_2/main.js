@@ -17,7 +17,7 @@ window.onload = function() {
 
   function generateTweens(num, YAT) {
     for (let i = 0; i < num; i++) {
-      YAT.create({
+      let tw = YAT.create({
         obj: {
           x: Math.cos(i) * 500,
           y: Math.sin(i) * 500,
@@ -26,10 +26,11 @@ window.onload = function() {
           x: w/2,
           y: h/2,
         },
-        color: randomColor(),
         duration: 5000,
         easing: "easeInOutQuad",
       });
+
+      tw.color = randomColor();
     }
   }
 
@@ -48,14 +49,12 @@ window.onload = function() {
 
   generateTweens(1000, YAT);
 
-  console.log(YAT.tweens);
   YAT._clock.on("render", function render() {
     ctx.font = "20px serif";
     ctx.clearRect(0, 0, w, h);
 
     YAT.tweens.forEach(function(t, i) {
-      // ctx.fillText(`${JSON.stringify(t.state)}`, w/3, 30 + i * 20);
-      shapes.circle(t.state.x, t.state.y, 20, t.state.color);
+      shapes.circle(t.state.x, t.state.y, 20, t.color);
     });
   });
 
