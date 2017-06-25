@@ -101,7 +101,7 @@ window.onload = function() {
       needsUpdate = true;
     };
   };
-    debugger;
+
   points.rotateY = rotateY.bind(points);
   points.rotateX = rotateX.bind(points);
   points.rotateZ = rotateZ.bind(points);
@@ -158,7 +158,7 @@ window.onload = function() {
     for (let i = 0; i < points.length; i++) {
       let p = points[i];
       scale = fl / (fl + p.z + centerZ);
-
+ 
       p.sx = scale * p.x;
       p.sy = scale * p.y;
     }
