@@ -9,7 +9,7 @@
   "scripts": {
     "build": "webpack --config=./webpack.production.js --bail",
     "build:watch": "webpack --config=./webpack.dev.js --bail --watch",
-    "dev": "npm run setup && npm-run-all --parallel build:watch style:dev serve",
+    "dev": "npm run setup && npm run build:watch & npm run style:dev serve & wait",
     "serve": "nodemon -e js,handlebars,json, --watch ./controllers --watch ./views server.js | bunyan",
     "setup": "./bin/setup && node ./bin/writeConfigFiles.js",
     "start": "npm run setup && node server.js",
