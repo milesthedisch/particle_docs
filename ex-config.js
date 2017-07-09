@@ -209,6 +209,12 @@ module.exports = {
           "css": null,
           "html": null
         },
+	"line_intersection": { 
+          "name": "line_intersection",
+          "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/line_intersection/main.js",
+          "css": null,
+          "html": null
+        },
 	"lissajous_curves": { 
           "name": "lissajous_curves",
           "js": "/Users/milesdisch/dev/Home/Side/particle_docs/examples/lissajous_curves/lissajous_curves.js",

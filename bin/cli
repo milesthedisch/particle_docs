@@ -29,9 +29,7 @@ handlebars.registerHelper("lib", function() {
   }
 
   if (this.toString() === "YAT") {
-
-    `const clock = particleLib.Clock;
-    const tween = particleLib.${this}.init({ clock })`;
+    return `const clock = particleLib.Clock;\n\tconst tween = particleLib.${this}.init({ clock });`;
   }
 
   return `const ${this.toLowerCase()} = new particleLib.${this}();`;

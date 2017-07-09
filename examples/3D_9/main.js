@@ -35,7 +35,7 @@ window.onload = function() {
   function sphere(val, idx) {
     let x = _.randomBetween(-w/2, w/2);
     let y = _.randomBetween(-h/2 - 500, h/2 + 500);
-    let sz = _.randomBetween(10, 20);
+    let sz = _.randomBetween(5, 20);
 
     return {
       sz,
@@ -48,25 +48,32 @@ window.onload = function() {
   function update() {
     const x = utils.map(mvCoord.x, 0, w, -100, 100);
     const y = utils.map(mvCoord.y, 0, h, -100, 100);
+
     baseAngle += 0.01;
     xAngleSpeed += 0.01 * (y / 30);
+
     spheres.forEach((s, idx) => {
       s.sz -= 0.1 * Math.random();
 
       if (s.y > h + 4000 || s.y < -h/2 || s.sz <= 0) {
-        s.y = (h * Math.random()) + 4000;
+        s.y = Math.cos(idx) * y;
+        s.z = Math.sin(idx) * 300 + 1200;
         s.sz = _.randomBetween(10, 20);
       }
 
       s.y += -10;
-      s.x += Math.cos(idx) * 20;
-      s.z += Math.sin(idx) * 20;
+      s.x += Math.cos(baseAngle) * 30;
+      s.z += Math.sin(baseAngle) * 30;
     });
   }
 
   function draw() {
     ctx.clearRect(-w/2, -h/2, w, h);
     ctx.fillRect(-w/2, -h/2, w, h, "black");
+
+    ctx.shadowColor = "white";
+    ctx.shadowBlur = 10;
+
     spheres.forEach((s) => {
       ctx.save();
       // Save
@@ -92,7 +99,9 @@ window.onload = function() {
     rAF(render);
   }
 
-  render();
+  setTimeout(function() {
+    render();  
+  }, 100);
   // If the window is resizes fill the page again.
   window.onresize = function() {
     w = canvas.width = window.innerWidth;

@@ -11,9 +11,9 @@ window.onload = function() {
 
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
-  let radius = 10;
+  let radius = 20;
 
-  const k = utils.randomBetween(0.05, 0.4);
+  const k = utils.randomBetween(0.005, 0.4);
   const springLength = utils.randomBetween(50, 1000);
 
 
@@ -41,11 +41,10 @@ window.onload = function() {
     }, opts));
   });
 
-  console.log(pArray);
-
   window.addEventListener("mousemove", function(e) {
     sun.state.x = e.clientX;
     sun.state.y = e.clientY;
+    sun.state.radius = 10;
   });
 
   (function update() {
@@ -53,6 +52,7 @@ window.onload = function() {
 
     for (let i = pArray.length - 1; i >= 0; i--) {
       let p = pArray[i];
+      p.state.radius = i * 2 + 2;
       p.springFromTo(sun, 0.09, 10);
       shapes.drawLineXY(p.state.x, p.state.y, sun.state.x, sun.state.y);
       for (let j = pArray.length - 1; j >= 0; j--) {
@@ -65,9 +65,9 @@ window.onload = function() {
 
       p.update();
       shapes.pCircle(p);
-      shapes.pCircle(sun);
     }
 
+    shapes.pCircle(sun);
     rAF(update);
   })();
 };
