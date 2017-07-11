@@ -15,37 +15,85 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   const p0 = {
-    x: 300,
-    y: 300,
+    id: 1,
+    state: {
+      x: 300,
+      y: 300,
+      radius: 10,
+    },
   };
 
   const p1 = {
-    x: 300,
-    y: 700,
+    id: 2,
+    state: {
+      x: 300,
+      y: 700,
+      radius: 10,
+    },
   };
 
   const p2 = {
-    x: 200,
-    y: 500,
+    id: 3,
+    state: {
+      x: 500,
+      y: 500,
+      radius: 10,
+    },
   };
 
   const p3 = {
-    x: 700,
-    y: 200,
+    id: 4,
+    state: {
+      x: 500,
+      y: 200,
+      radius: 10,
+    },
   };
 
-  function pointOfIntersection(p0, p1, p2, p3) {
-    const A1 = p0.y - p1.y;
-    const B1 = p1.x - p0.x;
-    // Standard form of a line.
-    // Ax + By = C;
-    const C1 = A1 * p0.x + B1 * p0.y;
+  let x;
+  let y;
+  let clicked;
+  let selected;
 
-    const A2 = p2.y - p3.y;
-    const B2 = p3.x - p2.x;
+  window.addEventListener("mousedown", function(e) {
+    const collision = [p0, p1, p2, p3].filter((p) =>
+      utils.collisionCirclePoint(e.clientX, e.clientY, p));
+
+    console.log(collision);
+    if (collision.length) {
+      selected = collision[0];
+    } else {
+      selected = null;
+    }
+
+    clicked = true;
+  });
+
+  window.addEventListener("mouseup", function() {
+    clicked = false;
+    selected = false;
+  });
+
+  window.addEventListener("mousemove", function(e) {
+    console.log(clicked, selected);
+    if (clicked && selected) {
+      selected.state.x = e.clientX;
+      selected.state.y = e.clientY;
+    }
+  });
+
+  function pointOfIntersection(p0, p1, p2, p3) {
+    const A1 = p0.state.y - p1.state.y;
+    const B1 = p1.state.x - p0.state.x;
     // Standard form of a line.
     // Ax + By = C;
-    const C2 = A2 * p2.x + B2 * p2.y;
+    const C1 = A1 * p0.state.x + B1 * p0.state.y;
+
+    const A2 = p2.state.y - p3.state.y;
+    const B2 = p3.state.x - p2.state.x;
+    // Standard form of a line.
+    // Ax + By = C;
+    const C2 = A2 * p2.state.x + B2 * p2.state.y;
 
     // THe thing on the bottom of the divide symbol.
     const denominator = A1 * B2 - A2 * B1;
@@ -53,26 +101,27 @@ window.onload = function() {
     const x = (B2 * C1 - B1 * C2) / denominator;
     const y = (A1 * C2 - A2 * C1) / denominator;
 
-    shapes.circle(x, y, 10, "red");
+    shapes.circle(x, y, 3, "red");
+    console.log(x, y);
     return {x, y};
   }
 
   function render() {
-    // ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(0, 0, w, h);
+
+    [p0, p1, p2, p3].forEach(shapes.pCircle.bind(shapes));
 
     ctx.beginPath();
 
-    ctx.moveTo(p0.x, p0.y);
-    ctx.lineTo(p1.x, p1.y);
-    ctx.moveTo(p2.x, p2.y);
-    ctx.lineTo(p3.x, p3.y);
+    ctx.moveTo(p0.state.x, p0.state.y);
+    ctx.lineTo(p1.state.x, p1.state.y);
+    ctx.moveTo(p2.state.x, p2.state.y);
+    ctx.lineTo(p3.state.x, p3.state.y);
 
     ctx.stroke();
 
-    shapes.circle(100, 100, 10, "red");
-
-    // pointOfIntersection(p0, p1, p2, p3);
-    // rAF(render);
+    pointOfIntersection(p0, p1, p2, p3);
+    rAF(render);
   }
 
   setTimeout(function() {
@@ -83,5 +132,6 @@ window.onload = function() {
   window.onresize = function() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
+    render();
   };
 };
