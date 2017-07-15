@@ -17,7 +17,7 @@ window.onload = function() {
   const p0 = {
     id: 1,
     state: {
-      x: 300,
+      x: 700,
       y: 300,
       radius: 10,
     },
@@ -26,7 +26,7 @@ window.onload = function() {
   const p1 = {
     id: 2,
     state: {
-      x: 300,
+      x: 100,
       y: 700,
       radius: 10,
     },
@@ -109,7 +109,7 @@ window.onload = function() {
   function render() {
     ctx.clearRect(0, 0, w, h);
 
-    [p0, p1, p2, p3].forEach(shapes.pCircle.bind(shapes));
+    [p0, p1, p2, p3].forEach((p) => shapes.pCircle(p));
 
     ctx.beginPath();
 
