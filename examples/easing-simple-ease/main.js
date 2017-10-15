@@ -40,9 +40,9 @@ window.onload = function() {
     shapes.circle(point.x, point.y, 10);
     shapes.circle(pointVec.get("x"), pointVec.get("y"), 10, "red");
 
-    let dVec = targetVec["-"](pointVec);
-    let vVec = dVec["*"](easeVec);
-    pointVec["+="](vVec);
+    let dVec = targetVec.subtract(pointVec);
+    let vVec = dVec.multiply(easeVec);
+    pointVec.addTo(vVec);
 
     let dx = target.x - point.x;
     let dy = target.y - point.y;

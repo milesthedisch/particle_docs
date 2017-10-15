@@ -11,7 +11,7 @@
     "build:watch": "webpack --config=./webpack.dev.js --bail --watch",
     "dev": "npm run setup && npm run build:watch & npm run style:dev & npm run serve",
     "serve": "nodemon -e js,handlebars,json, --watch ./controllers --watch ./views server.js | bunyan",
-    "setup": "./bin/setup && node ./bin/writeConfigFiles.js",
+    "setup": "node ./bin/writeConfigFiles.js",
     "start": "npm run setup && node server.js",
     "style:build": "node-sass --recursive --output ./public/build/css --source-map true --source-map-contents ./src/styles && npm run style:postbuild && npm run style:clean",
     "style:clean": "cleancss -o ./public/build/css/main.css ./public/build/css/main.css",

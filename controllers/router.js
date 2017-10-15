@@ -18,12 +18,7 @@ module.exports = function router(config) {
   router.get("/", function(req, res, next) {
     res.render("home");
   });
-
-  // Docs //
-  router.get("/api", function(req, res, next) {
-    res.redirect("/public/files/docs/Particle.html");
-  });
-
+  
   // Examples //
   router.get("/examples", function(req, res, next) {
     const names = getExampleNames(exConfig);

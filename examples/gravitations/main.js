@@ -14,8 +14,8 @@ window.onload = function() {
 
   const m1 = {
     state: {
-      mass: 3000,
-      x: 700,
+      mass: 3200,
+      x: 720,
       y: 50,
     },
   };
@@ -34,9 +34,9 @@ window.onload = function() {
     radius: 5,
   };
 
-  const particles = particle.generator(1000, {}, function(opts, i, create) {
+  const particles = particle.generator(100, {}, function(opts, i, create) {
     const newState = {
-      magnitude: utils.lerp(Math.random(), 8, 10),
+      magnitude: utils.lerp(Math.random(), 8, 9),
       mass: 10,
       direction: utils.lerp(Math.random(), Math.PI / 20, Math.PI / 19),
       friction: 0.9999,

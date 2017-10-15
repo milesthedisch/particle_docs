@@ -102,7 +102,6 @@ window.onload = function() {
     const y = (A1 * C2 - A2 * C1) / denominator;
 
     shapes.circle(x, y, 3, "red");
-    console.log(x, y);
     return {x, y};
   }
 
