@@ -16,12 +16,10 @@ module.exports = {
     ],
   },
   resolve: {
-    alias: {
-      "particles": path.join(__dirname, "/node_modules/particle_library"),
-    },
     root: [
       path.resolve("src/module"),
       path.resolve("src/vendor"),
+      path.resolve("node_modules")
     ],
   },
   output: {

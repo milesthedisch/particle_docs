@@ -22,6 +22,7 @@ window.onload = function() {
   let baseAngle = 0;
   let angleVelocity = 0;
   let delta = 0;
+  let yOffset = 0;
 
   // Subscribe to values //
   let y = 0;
@@ -57,6 +58,8 @@ window.onload = function() {
     for (let i = 0; i < circles.length; i++) {
       let c = circles[i];
 
+      yOffset = i * i / 40000;
+
       ctx.save();
       perspective = focalLength / (focalLength + c.z);
       ctx.scale(perspective, perspective);
@@ -64,10 +67,17 @@ window.onload = function() {
       shapes.circle(c.x, c.y, 20);
       ctx.restore();
 
-      c.y += delta;
+      if (c.y < w/8 + 1) {
+        c.y += delta + yOffset;
+      } 
+
+      if (c.y > w/8 - 1) {
+        c.y -= (delta + yOffset);
+      }
+
       c.z = zOffset + Math.sin(c.angle + baseAngle) * radius;
-      c.x = Math.cos(c.angle + baseAngle) * radius;
-    }
+      c.x = Math.cos(c.angle + baseAngle) * radius;  
+    } 
   }
 
   ctx.translate(w/2, h/2);

@@ -8,7 +8,9 @@ window.onload = function() {
   const utils = particleLib.Utils;
   const vector = new particleLib.Vector();
   const shapes = new particleLib.Shapes(ctx, document);
-  const particle = new particleLib.Particle();
+  const Particle = particleLib.Particle;
+  const particle = new Particle();
+
 
   // Boundries
   let w = canvas.width = window.innerWidth;
@@ -23,7 +25,7 @@ window.onload = function() {
   const slice = Math.PI * 2 / numCards;
 
   const particles =
-    particle.generator(
+    Particle.generate(
       numCards,
       {},
       function(opts, i, create) {

@@ -39,7 +39,7 @@ window.onload = function() {
     i += 0.01;
     // Clear the whole canvas //
     ctx.clearRect(-w/2, -h/2, w, h);
-    console.log(i);
+
     squares.forEach(function(shape) {
       ctx.save();
       // Perspective fomulae that gives us the coordinate based on the perspective //
