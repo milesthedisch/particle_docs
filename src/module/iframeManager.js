@@ -133,13 +133,11 @@ module.exports = function iframeHandler(document) {
    * @param  {[type]} name [description]
    * @return {[type]}      [description]
    */
-  const loadInIframe = function loadInIframe(id) {
-    console.log("load in iFrame");
-    // If the example already exsists dont do anything.
+  const loadInIframe = function loadInIframe(id) {  
     if (!exampleExists(id)) {
-      // If we are not the first frame in the document.
+  
       if (!firstState) {
-        console.log("Example doesn't exsist but we are the next iframe.");
+  
         // Toggle the state and remove old src and inject new src.
         const existingFrame = getFrame();
         removeFrameSrc(existingFrame);
@@ -148,8 +146,6 @@ module.exports = function iframeHandler(document) {
           .then((src) => injectSrc(src, existingFrame))
           .catch(loadIframeError);
       }
-
-      console.log("Example doesn't exsist but we are the first iframe ever.");
 
       // Toggle the state.
       firstState = !firstState;
@@ -162,8 +158,6 @@ module.exports = function iframeHandler(document) {
         .then((newFrame) => writeFrame(parentDiv, newFrame))
         .catch(loadIframeError);
     }
-
-    console.log("Example already exsists dont do anything..");
 
     return false;
   };

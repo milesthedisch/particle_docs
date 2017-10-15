@@ -1,10 +1,10 @@
 "use strict";
 
 window.onload = function() {
+  console.log(particle);
   const particle = new particleLib.Particle();
   const rAF = window.requestAnimationFrame;
 
-  // When using id's the variable is exposed
   const canvas = a;
   const ctx = a.getContext("2d");
   const shapes = new particleLib.Shapes(ctx, document);

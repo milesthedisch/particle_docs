@@ -50,9 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     break;
   }
-  case("/docs"): {
-    break;
-  }
+
   case("/maths"): {
     break;
   }
