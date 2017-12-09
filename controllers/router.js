@@ -1,9 +1,9 @@
 const express = require("express");
-
-const exConfig = require("../ex-config.js");
+const {resolve} = require("path");
 const log = require("./helpers/logger.js")("info");
 const exampleHandler = require("./helpers/exampleHandler");
-const getExampleNames = require("./helpers/getExampleNames");
+
+const EXAMPLE_PATH = resolve(__dirname, "../../examples");
 
 module.exports = function router() {
   const router = express.Router(); //eslint-disable-line
@@ -16,13 +16,18 @@ module.exports = function router() {
     res.render("home");
   });
 
-  router.get("/examples", function(req, res, next) {
-    const names = getExampleNames(exConfig);
-    res.render("examples", {
-      layout: "examples",
-      showExamples: true,
-      names,
-    });
+  router.get("/examples", async function(req, res, next) {
+    try {
+      const names = await fs.readdir(EXAMPLE_PATH);
+
+      res.render("examples", {
+        layout: "examples",
+        showExamples: true,
+        names,
+      });
+    } catch (e) {
+      next(e);
+    }
   });
 
   // Example //
