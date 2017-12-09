@@ -1,23 +1,25 @@
 #!/usr/bin/env node
 
+/* eslint max-len: 0*/
+
 const handlebars = require("handlebars");
 const docopt = require("docopt");
 const fs = require("fs-extra");
 const path = require("path");
 
 const usage = `
-Usage: cli create example <name> [<libs>...]
+Usage: cli create <name> [<libs>...]
 `;
-
 const options = docopt.docopt(usage);
+
 const paths = {
   template: path.join(__dirname, "../views/templates/example.js.handlebars"),
-  exampleDir: path.join(__dirname, "../examples"),
+  exampleDir: path.join(__dirname, "../examples/"),
 };
 
 const exampleFile = fs.readFileSync(paths.template, "utf8");
 const jsTemplate = handlebars.compile(exampleFile);
-const name = path.join(paths.exampleDir, options["<name>"]);
+const exampleName = path.join(paths.exampleDir, options["<name>"]);
 
 handlebars.registerHelper("lib", function() {
   if (this.toString() === "Utils") {
@@ -35,16 +37,7 @@ handlebars.registerHelper("lib", function() {
   return `const ${this.toLowerCase()} = new particleLib.${this}();`;
 });
 
-const createDir = (_path) => {
-  return new Promise((resolve, reject) => {
-    fs.ensureDir(_path, (err) => {
-      if (err) return reject(err);
-      return resolve(_path);
-    });
-  });
-};
-
-const createFile = (_path) => {
+const createExample = async (_path) => {
   const filePath = path.join(_path, "/main.js");
 
   let libs;
@@ -54,25 +47,32 @@ const createFile = (_path) => {
 
   const data = jsTemplate(libs);
 
-  return new Promise((resolve, reject) => {
-    fs.writeFile(filePath, data, (err) => {
-      if (err) return reject(err);
-      return resolve(filePath);
-    });
-  });
+  await fs.outputFile(filePath, data);
 };
 
-const exampleExists = (file) =>
-  fs.readdirSync(paths.exampleDir).indexOf(file) > -1;
+const exampleExists = async (file) => {
+  try {
+    const dirs = await fs.readdir(paths.exampleDir);
+    return dirs.indexOf(file) > -1;
+  } catch (e) {
+    console.error(e);
+    process.exit(1);
+  }
+};
 
-if (exampleExists(options["<name>"])) {
-  console.error("Example already exsits");
-  process.exit(1);
-} else {
-  createDir(name)
-    .then(createFile)
-    .then((filePath) => {
-      console.log(`Success!\nYour files has been written -> ${filePath}`);
-    })
-    .catch((err) => console.error(err));
-}
+(async () => {
+  const exsists = await exampleExists(options["<name>"]);
+
+  if (exsists) {
+    console.error("Example already exsits");
+    process.exit(1);
+  }
+
+  try {
+    await createExample(exampleName);
+    console.log(`Success!\nYour files has been written -> ${exampleName}`);
+  } catch (e) {
+    console.error(e);
+    process.exit(1);
+  }
+})();

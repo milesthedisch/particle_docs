@@ -5,6 +5,10 @@ const fs = require("fs");
 const examplesDir = path.resolve(__dirname, "../examples");
 const outputDir = path.resolve(examplesDir, "../ex-config.js");
 
+(async () => {
+
+});
+
 fs.readdir(examplesDir, function(err, dirs) {
   if (err) throw err;
 

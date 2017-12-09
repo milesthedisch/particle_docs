@@ -1,0 +1,17 @@
+.dialog {
+  position: fixed;
+  z-index: 1;
+  top: 50%
+  transform: translateY(-50%);
+
+  div {
+    margin: 0 auto;
+  }
+}
+
+.dialog_error {
+  @extends .dialog;
+  color: white;
+  background: $warn-color;
+  text-align: center;
+}

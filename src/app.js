@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     onClickOfList(isAnchor, function(err, target, evt) {
       if (err) throw err;
+      if (!target && !evt) return;
 
       sethash(target.text);
       iframe.loadInIframe(target.text);

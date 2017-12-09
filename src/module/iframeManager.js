@@ -8,14 +8,17 @@ module.exports = function iframeHandler(document) {
 
   const $ = shims.$;
   const $$ = shims.$$;
-  
+
   let firstState = FIRST_IFRAME;
 
   const checkStatus = (res) => {
     const status = res.status;
+
     if (status >= 200 && status < 400) {
       return res;
     }
+
+    console.log(`Bad status: ${status}`);
     throw res.statusText;
   };
 
@@ -27,12 +30,8 @@ module.exports = function iframeHandler(document) {
   const fetchExample = function fetchExample(id) {
     return fetch("/examples/" + id)
     .then(checkStatus)
-    .then(function(response) {
-      return response.text();
-    })
-    .catch(function(err) {
-      throw new Error(err);
-    });
+    .then((res) => res.text())
+    .catch(console.error);
   };
 
 
@@ -129,24 +128,16 @@ module.exports = function iframeHandler(document) {
   };
 
   /**
-   * [loadInIframe description]
+   * loadInIframe
    * @param  {[type]} name [description]
    * @return {[type]}      [description]
    */
-  const loadInIframe = function loadInIframe(id) {  
-    if (!exampleExists(id)) {
+  const loadInIframe = function loadInIframe(id) { 
+    if (exampleExists(id)) {
+      return false;
+    }
   
-      if (!firstState) {
-  
-        // Toggle the state and remove old src and inject new src.
-        const existingFrame = getFrame();
-        removeFrameSrc(existingFrame);
-        existingFrame.setAttribute("data-example", id);
-        return fetchExample(id)
-          .then((src) => injectSrc(src, existingFrame))
-          .catch(loadIframeError);
-      }
-
+    if (firstState) {
       // Toggle the state.
       firstState = !firstState;
       // Create the frame
@@ -156,18 +147,21 @@ module.exports = function iframeHandler(document) {
       return fetchExample(id)
         .then((src) => injectSrc(src, firstFrame))
         .then((newFrame) => writeFrame(parentDiv, newFrame))
-        .catch(loadIframeError);
+        .catch(errorDialog);
     }
 
-    return false;
+    // Toggle the state and remove old src and inject new src.
+    const existingFrame = getFrame();
+    removeFrameSrc(existingFrame);
+    existingFrame.setAttribute("data-example", id);
+    return fetchExample(id)
+      .then((src) => injectSrc(src, existingFrame))
+      .catch(loadIframeError);
   };
 
-  const loadIframeError = function(err) {
-    console.error(err);
-    $(".wrapper__error").style.display = "block";
-    $(".wrapper__error").style.height = "100vh";
-    $(".wrapper__error").style.width = "100%";
-    $(".wrapper__error #error").insertAdjacentText("afterBegin", err);
+  const errorDialog = function(err) {
+    $(".error_dialog").style.display = "block";
+    $(".error_dialog").insertAdjacentText("afterBegin", err);
   };
 
   return {

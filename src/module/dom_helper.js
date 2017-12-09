@@ -50,7 +50,7 @@ module.exports = function (document) {
           return callback(null, e.target, e);
         }
 
-        return callback(new Error("No target matched"));
+        return callback(null);
       });
     };
   };
