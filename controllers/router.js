@@ -1,9 +1,10 @@
 const express = require("express");
+const fs = require("fs-extra");
 const {resolve} = require("path");
-const log = require("./helpers/logger.js")("info");
+const logger = require("./helpers/logger.js")("info");
 const exampleHandler = require("./helpers/exampleHandler");
 
-const EXAMPLE_PATH = resolve(__dirname, "../../examples");
+const EXAMPLE_PATH = resolve(__dirname, "../examples");
 
 module.exports = function router() {
   const router = express.Router(); //eslint-disable-line
@@ -13,34 +14,46 @@ module.exports = function router() {
   });
 
   router.get("/", function(req, res, next) {
-    res.render("home");
+    return res.render("home");
   });
 
   router.get("/examples", async function(req, res, next) {
     try {
       const names = await fs.readdir(EXAMPLE_PATH);
+      const filteredNames = names.filter((name) => {
+        return !name.match(/\.[\w-_]+$/);
+      });
 
-      res.render("examples", {
+      return res.render("examples", {
         layout: "examples",
         showExamples: true,
-        names,
+        filteredNames,
+        helpers: {
+          debug: (val) => {
+            console.log("=======");
+            console.log("debug: ", val);
+            console.log("=======");
+          },
+        },
       });
     } catch (e) {
-      next(e);
+      return next(e);
     }
   });
 
   // Example //
-  router.get("/examples/:id", function(req, res, next) {
+  router.get("/examples/:id", async function(req, res, next) {
     // Grab the id from the url
     const id = req.params.id;
 
-    log(`GET: /examples/${id}`);
+    logger.debug(`GET: /examples/${id}`);
 
-    exampleHandler(id, function(err, data) {
-      if (err) return next(err);
+    try {
+      const data = await exampleHandler(id);
       return res.send(data);
-    });
+    } catch (e) {
+      return next(e);
+    }
   });
 
   // Downloadable //

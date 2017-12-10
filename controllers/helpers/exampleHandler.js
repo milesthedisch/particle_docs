@@ -12,8 +12,10 @@ const particleLib =
 const EXAMPLES_PATH = resolve(__dirname, "../../examples");
 
 const isExtension = (ext) => (file) => file.match(new RegExp(`\\.${ext}$`));
+const filterFileType = (files) => (ext) => files.find(isExtension(ext));
 
 module.exports = async function exampleHandler(id) {
+  console.log(id);
   const pathToExample = resolve(EXAMPLES_PATH, id);
   const exsists = await fs.pathExists(pathToExample);
 
@@ -23,21 +25,19 @@ module.exports = async function exampleHandler(id) {
 
   // Find the config associated with that ID.
   const files = await fs.readdir(pathToExample);
-  const filePaths = files.map((file) => resolve(EXAMPLES_PATH, file));
+  const filePaths = files.map((file) => resolve(pathToExample, file));
+  const filterCurrentDirFor = filterFileType(filePaths);
 
   const config = {
-    js: filePaths.find(isExtension("js")),
-    css: filePaths.find(isExtension("css")),
-    html: filePaths.find(isExtension("html")),
+    js: filterCurrentDirFor("js"),
+    css: filterCurrentDirFor("css"),
+    html: filterCurrentDirFor("html"),
     title: id,
     particleLib: particleLib,
   };
 
-  loadExample(config)
-    .then(function(data) {
-      return cb(null, data);
-    })
-    .catch(function(err) {
-      return cb(err);
-    });
+  console.log(config);
+  const examplePayload = await loadExample(config);
+
+  return examplePayload;
 };
