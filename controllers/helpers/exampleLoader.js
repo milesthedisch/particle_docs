@@ -56,8 +56,6 @@ module.exports = async function({js, css, html, title, particleLib}) {
     getFile(css, "css"),
   ]);
 
-  console.log(jsData);
-
   const context = {
     html: htmlData,
     js: jsData,

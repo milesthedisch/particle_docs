@@ -15,7 +15,6 @@ const isExtension = (ext) => (file) => file.match(new RegExp(`\\.${ext}$`));
 const filterFileType = (files) => (ext) => files.find(isExtension(ext));
 
 module.exports = async function exampleHandler(id) {
-  console.log(id);
   const pathToExample = resolve(EXAMPLES_PATH, id);
   const exsists = await fs.pathExists(pathToExample);
 
@@ -36,7 +35,6 @@ module.exports = async function exampleHandler(id) {
     particleLib: particleLib,
   };
 
-  console.log(config);
   const examplePayload = await loadExample(config);
 
   return examplePayload;
