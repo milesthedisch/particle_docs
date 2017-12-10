@@ -14,7 +14,7 @@ window.onload = function() {
     y: 0,
   };
 
-  const fl = 300;
+  let fl = 300;
   const particleNum = 1000;
   let baseAngle = 3.14;
   let xAngleSpeed = 0;
@@ -30,6 +30,10 @@ window.onload = function() {
       x: e.clientX,
       y: e.clientY,
     };
+  }, {passive: true});
+
+  document.addEventListener("mousewheel", (e) => {
+    fl += e.movementY/2;
   }, {passive: true});
 
   function sphere(val, idx) {
@@ -50,20 +54,12 @@ window.onload = function() {
     const y = utils.map(mvCoord.y, 0, h, -100, 100);
 
     baseAngle += 0.01;
-    xAngleSpeed += 0.01 * (y / 30);
+    xAngleSpeed = Math.sin(baseAngle * 3) / 3;
 
     spheres.forEach((s, idx) => {
-      s.sz -= 0.1 * Math.random();
-
-      if (s.y > h + 4000 || s.y < -h/2 || s.sz <= 0) {
-        s.y = Math.cos(idx) * y;
-        s.z = Math.sin(idx) * 300 + 1200;
-        s.sz = _.randomBetween(10, 20);
-      }
-
-      s.y += -10;
-      s.x += Math.cos(baseAngle) * 30;
-      s.z += Math.sin(baseAngle) * 30;
+      s.y += -baseAngle * xAngleSpeed;
+      s.x += baseAngle * xAngleSpeed;
+      s.z += Math.sin(baseAngle) * 3;
     });
   }
 

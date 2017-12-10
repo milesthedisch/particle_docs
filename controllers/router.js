@@ -9,11 +9,11 @@ const EXAMPLE_PATH = resolve(__dirname, "../examples");
 module.exports = function router() {
   const router = express.Router(); //eslint-disable-line
 
-  router.use("/docs", function(req, res, next) {
+  router.use("/docs", function(req, res) {
     res.redirect("https://github.com/milesthedisch/particle_library");
   });
 
-  router.get("/", function(req, res, next) {
+  router.get("/", function(req, res) {
     return res.render("home");
   });
 
@@ -57,7 +57,7 @@ module.exports = function router() {
   });
 
   // Downloadable //
-  router.get("/code", function(req, res, next) {
+  router.get("/code", function(req, res) {
     const _path = require.resolve("particle_library");
 
     res.download(_path, "particle_library.js", function(err) {
