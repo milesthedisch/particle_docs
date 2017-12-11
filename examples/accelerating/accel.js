@@ -13,7 +13,7 @@ window.onload = function() {
   const cx = w / 2;
   const cy = h / 2;
 
-  const p = particle.create({
+  const p = Particle.create({
     x: cx,
     y: cy,
     radius: 10,

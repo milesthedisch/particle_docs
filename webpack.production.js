@@ -9,7 +9,11 @@ module.exports = extend(true, {
     path.resolve("./src/app.js"),
   ],
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}}),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
   ],
 }, common);
 

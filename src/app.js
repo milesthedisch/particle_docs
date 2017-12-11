@@ -1,5 +1,4 @@
 window.particleLib = require("particle_library");
-
 const iframe = require("iframeManager.js")(document);
 const shims = require("shims.js")(document);
 const utils = require("dom_helper.js")(document);

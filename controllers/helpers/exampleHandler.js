@@ -6,7 +6,8 @@ const loadExample = require("./exampleLoader.js");
 // The code is in the parent frame.
 const particleLib =
 "<script>" +
-  "window.particleLib = window.particleLib || window.top.particleLib" +
+  "window.particleLib = window.top.particleLib;" +
+  "Object.assign(window, window.top.particleLib);" +
 "</script>";
 
 const EXAMPLES_PATH = resolve(__dirname, "../../examples");

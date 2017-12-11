@@ -9,10 +9,9 @@
   "scripts": {
     "build": "webpack --config=./webpack.production.js --bail",
     "build:watch": "webpack --config=./webpack.dev.js --bail --watch",
-    "dev": "npm run setup && npm run build:watch & npm run style:dev & npm run serve",
+    "dev": "npm run build:watch & npm run style:dev & npm run serve",
     "serve": "nodemon -e js,handlebars,json, --watch ./controllers --watch ./views server.js --watch ./examples | bunyan",
-    "setup": "node ./bin/writeConfigFiles.js",
-    "start": "npm run setup && node server.js",
+    "start": "node server.js",
     "style:build": "node-sass --recursive --output ./public/build/css --source-map true --source-map-contents ./src/styles && npm run style:postbuild && npm run style:clean",
     "style:clean": "cleancss -o ./public/build/css/main.css ./public/build/css/main.css",
     "style:dev": "node-sass --recursive --watch --output ./public/build/css --source-map true --source-map-contents ./src/styles",

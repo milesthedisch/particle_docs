@@ -156,7 +156,7 @@ module.exports = function iframeHandler(document) {
     existingFrame.setAttribute("data-example", id);
     return fetchExample(id)
       .then((src) => injectSrc(src, existingFrame))
-      .catch(loadIframeError);
+      .catch(errorDialog);
   };
 
   const errorDialog = function(err) {

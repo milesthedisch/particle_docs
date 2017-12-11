@@ -10,47 +10,48 @@ window.onload = function() {
 
   const particle = new particleLib.Particle();
   const shapes = new particleLib.Shapes(ctx, document);
+  const radius = 200;
 
   let cx = w/2;
   let cy = h/2;
 
   const objRadius = 3;
   const circleRadius = 100;
-  const numObjects = 10;
+  const numObjects = 1000;
   const slice = 2 * Math.PI / numObjects;
 
-  const particles = particle.generator(numObjects, undefined, function(opts, i, create) {
+  const particles = Particle.generate(numObjects).map((p, i) => {
     const direction = i * slice;
     const newState = {
-      x: (Math.cos(direction) * 1) + cx,
-      y: (Math.sin(direction) * 1) + cy,
+      x: cx,
+      y: cy,
       direction,
       radius: objRadius,
-      magnitude: 1,
+      magnitude: 4,
+      color: "rgba(0,0,0,0.02)",
     };
 
-    return create(newState);
+    return Particle.create(newState);
   });
 
-  let µ = 0.01;
   let µDelta = 0.1;
 
   (function animate() {
-    // ctx.clearRect(0, 0, w, h);
-
     µDelta += 0.1;
+    let Ω = Math.abs(Math.sin(µDelta));
+    // let π = Math.cos(µDelta) / 10 + 0.02;
 
-    particles.forEach(function(particle) {
-      console.log(particle);
-      particle.state.x += Math.sin(µDelta);
-      particle.state.y += Math.sin(µDelta);
+    particles.forEach(function(particle, i) {
+      particle.state.color = `rgba(0, 0, 0, ${0.02 /* π */})`;
 
-      particle.state.direction += µ;
+      particle.state.x += Math.cos(Math.pow(µDelta, 2)/2) / 2;
+      particle.state.y += Math.cos(Math.pow(µDelta, 2)/2) / 2;
 
-      // Set angle of velocity vector
       const length = Math.hypot(particle.state.vx, particle.state.vy);
       particle.state.vx = Math.cos(particle.state.direction) * length;
       particle.state.vy = Math.sin(particle.state.direction) * length;
+
+      particle.state.direction += 0.01;
 
       particle.update();
       shapes.pCircle(particle);
