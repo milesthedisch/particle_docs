@@ -20,7 +20,7 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
-  const ship = particle.create({
+  const ship = Particle.create({
     x: w/2,
     y: h/2,
     ax: 0,

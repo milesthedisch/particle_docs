@@ -19,7 +19,7 @@ window.onload = function() {
     spring: utils.randomBetween(0.05, 0.2),
   };
 
-  const heavyObj = particle.create({
+  const heavyObj = Particle.create({
     x: w * Math.random() + (radius * 2),
     y: h * Math.random() - (radius * 2),
     magnitude: utils.randomBetween(10, 100),

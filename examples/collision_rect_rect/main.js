@@ -12,7 +12,7 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
-  const p1 = particle.create({
+  const p1 = Particle.create({
     x: w/2 - 50,
     y: h/2 - 25,
     width: 100,
@@ -20,7 +20,7 @@ window.onload = function() {
     color: "#000000",
   });
 
-  const p2 = particle.create({
+  const p2 = Particle.create({
     x: 0,
     y: 0,
     width: 100,

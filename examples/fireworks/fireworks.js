@@ -69,20 +69,20 @@ window.onload = function() {
   }
 
   function generate(numParticles, delta) {
-    return particle.generator(numParticles, {
+    return Particle.generate(numParticles, {
       gravity: 0.2,
       x: cx,
       y: cy + 200,
       vy: -2,
       color: "#000000",
-    }, function(ops, i, create) {
+    }).map((p, i) => {
       const r = utils.randomBetween(2, delta);
-      const newState = Object.assign({}, ops, {
+      const newState = Object.assign({}, p.state, {
         width: r,
         height: r,
       });
 
-      create(newState);
+      return Particle.create(newState);
     });
   }
 

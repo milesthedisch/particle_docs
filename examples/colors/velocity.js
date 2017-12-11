@@ -14,7 +14,7 @@ window.onload = function() {
   let cx = w / 2;
   let cy = h / 2;
 
-  const particles = particle.generator(1000, {}, function map(opts, i, create) {
+  const particles = Particle.generate(1000).map((p, i) => {
     const newState = {
       x: cx,
       y: cy,
@@ -27,7 +27,8 @@ window.onload = function() {
       radius: Math.random() * 10 + 5,
       color: "hsl("+ 360*Math.random() +",100%,50%)",
     };
-    create(newState);
+
+    return Particle.create(newState);
   });
 
   (function update() {

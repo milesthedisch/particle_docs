@@ -14,32 +14,32 @@ window.onload = function() {
   let radius = 20;
 
   const k = utils.randomBetween(0.005, 0.4);
-  const springLength = utils.randomBetween(50, 1000);
+  const springLength = utils.randomBetween(400, 1000);
 
 
-  const sun = particle.create({
+  const sun = Particle.create({
     x: w * 0.5,
     y: 100,
     magnitude: utils.randomBetween(1, 10),
     direction: utils.randomBetween(0, Math.PI * 2),
     radius: radius,
     color: "#000000",
-    friction: 0.94,
+    friction: 0.9999,
   });
 
-  const pArray = particle.generator(utils.randomBetween(2, 50), {
+  const pArray = Particle.generate(utils.randomBetween(2, 50), {
     friction: utils.randomBetween(0.82, 0.99),
     gravity: k,
-  }, function(opts, i, create) {
-    create(Object.assign({}, {
+  }).map((p, i) =>
+    Particle.create(Object.assign({}, p.state, {
       x: (w/2) * Math.random() + (radius * 2),
       y: (h/2) * Math.random() - (radius * 2),
       magnitude: utils.randomBetween(0, 0),
       direction: utils.randomBetween(0, Math.PI * 2),
       radius: radius,
       color: "#000000",
-    }, opts));
-  });
+    }))
+  );
 
   window.addEventListener("mousemove", function(e) {
     sun.state.x = e.clientX;
@@ -52,7 +52,7 @@ window.onload = function() {
 
     for (let i = pArray.length - 1; i >= 0; i--) {
       let p = pArray[i];
-      p.state.radius = i * 2 + 2;
+      // p.state.radius = i * 2 + 2;
       p.springFromTo(sun, 0.09, 10);
       shapes.drawLineXY(p.state.x, p.state.y, sun.state.x, sun.state.y);
       for (let j = pArray.length - 1; j >= 0; j--) {

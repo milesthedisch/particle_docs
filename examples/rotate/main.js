@@ -25,7 +25,7 @@ window.onload = function() {
   (function render() {
     ctx.clearRect(-w/2, -h/2, w, h);
     shapes.circle(v.get("x"), v.get("y"), 10, "red");
-    v.rotate(delta);
+    v.rotateBy(delta);
     rAF(render);
   })();
 

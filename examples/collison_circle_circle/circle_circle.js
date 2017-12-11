@@ -12,7 +12,7 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
-  const p1 = particle.create({
+  const p1 = Particle.create({
     direction: -Math.PI,
     radius: 10,
     magnitude: 4,
@@ -22,7 +22,7 @@ window.onload = function() {
     y: h/2,
   });
 
-  const p2 = particle.create({
+  const p2 = Particle.create({
     direction: Math.PI * 2,
     radius: 10,
     magnitude: 4,

@@ -12,14 +12,14 @@ window.onload = function() {
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
 
-  const p1 = particle.create({
+  const p1 = Particle.create({
     x: w/2,
     y: h/2,
     radius: 100,
     color: "#000000",
   });
 
-  const p2 = particle.create({
+  const p2 = Particle.create({
     radius: 50,
     x: 0,
     y: h/2,

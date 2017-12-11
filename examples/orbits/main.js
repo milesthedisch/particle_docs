@@ -18,7 +18,7 @@ window.onload = function() {
   const PLANET = 1600;
   const JUPITER = 400;
 
-  const sun = particle.create({
+  const sun = Particle.create({
     x: w/2,
     y: h/2,
     color: "#ffff00",
@@ -26,7 +26,7 @@ window.onload = function() {
     mass: SUN,
   });
 
-  const planet = particle.create({
+  const planet = Particle.create({
     x: w/5,
     y: h/4,
     direction: -Math.PI / 2,
@@ -36,7 +36,7 @@ window.onload = function() {
     mass: PLANET,
   });
 
-  const jupiter = particle.create({
+  const jupiter = Particle.create({
     x: w/3,
     y: h/2,
     magnitude: 7,
@@ -73,7 +73,7 @@ window.onload = function() {
 
   document.addEventListener("click", function(e) {
     const m = utils.randomBetween(1000, 5000);
-    const newPlanet = particle.create({
+    const newPlanet = Particle.create({
       x: e.clientX,
       y: e.clientY,
       direction: Math.random() * (Math.PI),

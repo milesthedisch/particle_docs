@@ -24,16 +24,16 @@ window.onload = function() {
     endY: h,
   };
 
-  const particles = particle.generator(pAmount, {}, function(o, i, create) {
-    create({
+  const particles = Particle.generate(pAmount).map(() =>
+    Particle.create({
       x: w / 2,
       y: h,
       direction: -Math.PI / 2 + (Math.random() * .2 - .1),
       magnitude: 0.1,
       gravity: 0.1,
       radius: Math.random() * 10 + 5,
-    });
-  });
+    })
+  );
 
   update();
 

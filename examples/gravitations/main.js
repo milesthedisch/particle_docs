@@ -34,7 +34,7 @@ window.onload = function() {
     radius: 5,
   };
 
-  const particles = particle.generator(100, {}, function(opts, i, create) {
+  const particles = Particle.generate(100).map(() => {
     const newState = {
       magnitude: utils.lerp(Math.random(), 8, 9),
       mass: 10,
@@ -45,7 +45,7 @@ window.onload = function() {
       y: emitter.y,
       radius: emitter.radius,
     };
-    return create(newState);
+    return Particle.create(newState);
   });
 
   (function update(delta) {

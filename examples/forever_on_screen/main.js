@@ -10,7 +10,7 @@ window.onload = function() {
 
   const w = canvas.width = window.innerWidth;
   const h = canvas.height = window.innerHeight;
-  const p = particle.create({
+  const p = Particle.create({
     x: w/2,
     y: h/2,
     magnitude: 10,

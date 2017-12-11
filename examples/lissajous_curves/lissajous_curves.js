@@ -21,8 +21,8 @@ window.onload = function() {
   const bounds = vector.random(w / 3 - size, h / 3 - size);
   const centerVec = vector.create(w / 2, h / 2);
 
-  const _particles = particle.generator(numObjects, {}, function(opts, i, create) {
-    create({
+  const _particles = Particle.generate(numObjects).map(() =>
+    Particle.create({
       color: {h: 180*Math.random(), s: 100 * Math.random(), l: 60},
       x: centerVec.get("x"),
       y: centerVec.get("y"),
@@ -31,8 +31,8 @@ window.onload = function() {
       ax: utils.randomBetween(0, 0.01),
       ay: utils.randomBetween(0, 0.01 ),
       magnitude: utils.lerp(Math.random(), 0.01, 0.02),
-    });
-  });
+    })
+  );
 
   function updateParticles(particles) {
     particles.forEach(function(p) {
@@ -47,15 +47,19 @@ window.onload = function() {
 
   (function render() {
     ctx.clearRect(0, 0, w, h);
-    updateParticles(_particles).forEach(function(p) {
-      // const p = _particles[0];
+    ctx.shadowBlur = 10;
+
+    updateParticles(_particles).forEach(function(p, i) {
       let c = p.state.color;
+      let hsl = "hsl(" +c.h+ "," +c.s+ "%," +c.l+ "%)";
+
+      // ctx.shadowColor = hsl;
 
       shapes.circle(
         p.state.x,
         p.state.y,
         p.state.size,
-        "hsl(" +c.h+ "," +c.s+ "%," +c.l+ "%)"
+        hsl
       );
 
       p.state.color.h += (p.state.vx + p.state.vy) * p.state.size + 0.1;

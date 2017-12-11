@@ -14,7 +14,7 @@ window.onload = function() {
   // const friction = 0.15;
   const friction = 0.97;
 
-  const p = particle.create({
+  const p = Particle.create({
     x: w/2,
     y: h/2,
     magnitude: 10,

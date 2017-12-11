@@ -16,7 +16,7 @@ window.onload = function() {
   // k is the coeffiecent of fricition //
   let k = utils.randomBetween(0.1, 0.9);
 
-  const heavyObj = particle.create({
+  const heavyObj = Particle.create({
     x: w*Math.random() + (radius * 2),
     y: h*Math.random() - (radius * 2),
     magnitude: utils.randomBetween(0, 100),

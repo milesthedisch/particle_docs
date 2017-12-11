@@ -20,7 +20,7 @@ window.onload = function() {
     endY: h,
   };
 
-  const particles = particle.generator(pAmount, {}, function(opts, i, create) {
+  const particles = Particle.generate(pAmount).map((p, i) => {
     const r = Number((Math.random() * 10).toFixed(0));
     const newState = {
       x: w / 2,
@@ -31,7 +31,8 @@ window.onload = function() {
       height: r,
       // radius: Math.random() * 10,
     };
-    create(newState);
+
+    return Particle.create(newState);
   });
 
   document.body.insertAdjacentHTML("afterBegin", "<span>" + particles.length + "</span>");
