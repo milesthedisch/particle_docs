@@ -83,12 +83,12 @@ window.onload = function() {
       return {x: point.sx, y: point.sy};
     });
 
-    shapes.drawLinePoints(p[0], p[1], p[2], p[3], p[0]);
-    shapes.drawLinePoints(p[0], p[4]);
-    shapes.drawLinePoints(p[1], p[5]);
-    shapes.drawLinePoints(p[2], p[6]);
-    shapes.drawLinePoints(p[3], p[7]);
-    shapes.drawLinePoints(p[4], p[5], p[6], p[7], p[4]);
+    shapes.drawLinePoints([p[0], p[1], p[2], p[3], p[0]]);
+    shapes.drawLinePoints([p[0], p[4]]);
+    shapes.drawLinePoints([p[1], p[5]]);
+    shapes.drawLinePoints([p[2], p[6]]);
+    shapes.drawLinePoints([p[3], p[7]]);
+    shapes.drawLinePoints([p[4], p[5], p[6], p[7], p[4]]);
   }
 
   function translatePoints(ps) {

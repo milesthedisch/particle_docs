@@ -105,9 +105,9 @@ module.exports = function iframeHandler(document) {
   };
 
   /**
-   * [exampleExists description]
-   * @param  {[type]} example [description]
-   * @return {[type]}         [description]
+   * exampleExists - check if example exsists
+   * @param  {String} example
+   * @return {Boolean}
    */
   const exampleExists = function exampleExists(example) {
     if (!example) return false;
@@ -118,19 +118,17 @@ module.exports = function iframeHandler(document) {
       id = getFrame(example)
         .attributes["data-example"]
         .nodeValue;
-    } catch (e) {
-      if (e) {
-        id = false;
-      }
-    } finally {
+
       return id === example;
+    } catch (e) {
+      return false;
     }
   };
 
   /**
    * loadInIframe
-   * @param  {[type]} name [description]
-   * @return {[type]}      [description]
+   * @param  {String} name
+   * @return {Promise}
    */
   const loadInIframe = function loadInIframe(id) { 
     if (exampleExists(id)) {

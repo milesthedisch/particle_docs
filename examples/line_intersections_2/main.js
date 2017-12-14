@@ -2,15 +2,11 @@ window.onload = function() {
   const rAF = window.requestAnimationFrame;
   const canvas = a;
   const ctx = a.getContext("2d");
-  
+
   // Libs
   const utils = particleLib.Utils;
-  const vector = new particleLib.Vector();
   const shapes = new particleLib.Shapes(ctx, document);
-  const particle = new particleLib.Particle();
-  const clock = particleLib.Clock;
-	const tween = particleLib.YAT.init({ clock });
-  
+
   // Boundries
   let w = canvas.width = window.innerWidth;
   let h = canvas.height = window.innerHeight;
@@ -47,9 +43,6 @@ window.onload = function() {
     },
   };
 
-
-  let x;
-  let y;
   let clicked;
   let selected;
 
@@ -57,7 +50,6 @@ window.onload = function() {
     const collision = [p0, p1, p2, p3].filter((p) =>
       utils.collisionCirclePoint(e.clientX, e.clientY, p));
 
-    console.log(collision);
     if (collision.length) {
       selected = collision[0];
     } else {
@@ -73,7 +65,6 @@ window.onload = function() {
   });
 
   window.addEventListener("mousemove", function(e) {
-    console.log(clicked, selected);
     if (clicked && selected) {
       selected.state.x = e.clientX;
       selected.state.y = e.clientY;
@@ -92,8 +83,6 @@ window.onload = function() {
     const A2 = p2.state.y - p3.state.y;
     const B2 = p3.state.x - p2.state.x;
 
-    // Standard form of a line.
-    // Ax + By = C;
     const C2 = A2 * p2.state.x + B2 * p2.state.y;
 
     // THe thing on the bottom of the divide symbol.
@@ -111,25 +100,33 @@ window.onload = function() {
     const xIntercept = (B2 * C1 - B1 * C2) / denominator;
     const yIntercept = (A1 * C2 - A2 * C1) / denominator;
 
-    console.log(xIntercept);
-    console.log(yIntercept);
-
     // Line segments is the intercept in the range of x or y
     // We can deduce this by using the the range of x or y
-    // and divding it by the range of the intersection point 
-    rx0 = (xIntercept - p0.state.x) / (p0.state.x - p1.state.x);
-    ry0 = (yIntercept - p0.state.y) / (p0.state.y - p1.state.y);
+    // and divding it by the range of the intersection point
+    // if is greate than 1 than its outside of the range
+    // if its less than 0 its outside of the range.
+    const x0Range = (p1.state.x - p0.state.x);
+    const y0Range = (p1.state.y - p0.state.y);
+    const x0Val = (xIntercept - p0.state.x);
+    const y0Val = (yIntercept - p0.state.y);
 
-    rx1 = (xIntercept - p2.state.x) / (p3.state.x - p2.state.x);
-    ry1 = (yIntercept - p2.state.x) / (p3.state.y - p2.state.y);
+    const x1Range = (p3.state.x - p2.state.x);
+    const y1Range = (p3.state.y - p2.state.y);
+    const x1Val = (xIntercept - p2.state.x);
+    const y1Val = (yIntercept - p2.state.y);
 
-    console.log(rx0, ry0);
-    if ((rx0 > 0 && rx0 < 1) && (ry0 > 0 && ry0 < 1)) {
+    const rx0 = x0Val / x0Range;
+    const ry0 = y0Val / y0Range;
+    const rx1 = x1Val / x1Range;
+    const ry1 = y1Val / y1Range;
+
+    const insideLineSegement0 = (rx0 >= 0 && rx0 <= 1) || (ry0 >= 0 && ry0 <= 1);
+    const insideLineSegement1 = (rx1 > 0 && rx1 < 1) || (ry1 > 0 && ry1 < 1);
+
+    if (insideLineSegement0 && insideLineSegement1) {
       shapes.circle(xIntercept, yIntercept, 10, "red");
-      return {x, y}; 
+      // return {x, y};
     }
-
-
   }
 
   function render() {
@@ -148,7 +145,7 @@ window.onload = function() {
 
     segementIntersection(p0, p1, p2, p3);
   
-    // rAF(render);
+    rAF(render);
   };
 
   render();

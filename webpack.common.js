@@ -19,8 +19,9 @@ module.exports = {
     root: [
       path.resolve("src/module"),
       path.resolve("src/vendor"),
-      path.resolve("node_modules")
+      path.resolve("node_modules"),
     ],
+    particleLibrary: require.resolve("particle_library"),
   },
   output: {
     filename: "bundle.js",

@@ -4,9 +4,6 @@ const router = require("./router");
 const logger = require("./helpers/logger");
 const app = express();
 
-// This file should have all the middleware ordered by
-// priortiy.
-
 module.exports = function(config) {
   // Set the engine to handlebars and use layout main as the default.
   app.engine("handlebars", exphbs({
