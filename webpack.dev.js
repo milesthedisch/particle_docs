@@ -3,11 +3,8 @@ const extend = require("extend");
 const path = require("path");
 
 module.exports = extend(true, {
-  entry: [
-    "whatwg-fetch",
-    path.resolve("./src/app.js"),
-  ],
-  progress: true,
-  devtool: "#inline-source-map",
+  entry: path.resolve("./src/app.js"),
+  devtool: "source-map",
+  watch: true,
 }, common);
 

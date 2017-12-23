@@ -30,8 +30,7 @@ module.exports = function iframeHandler(document) {
   const fetchExample = function fetchExample(id) {
     return fetch("/examples/" + id)
     .then(checkStatus)
-    .then((res) => res.text())
-    .catch(console.error);
+    .then((res) => res.text());
   };
 
 
@@ -158,8 +157,9 @@ module.exports = function iframeHandler(document) {
   };
 
   const errorDialog = function(err) {
-    $(".error_dialog").style.display = "block";
-    $(".error_dialog").insertAdjacentText("afterBegin", err);
+    console.log(err);
+    $(".dialog_error").style.display = "block";
+    $(".dialog_error").insertAdjacentText("afterBegin", err);
   };
 
   return {
