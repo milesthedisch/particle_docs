@@ -130,6 +130,8 @@ module.exports = function iframeHandler(document) {
    * @return {Promise}
    */
   const loadInIframe = function loadInIframe(id) { 
+    const existingFrame = getFrame();
+
     if (exampleExists(id)) {
       return false;
     }
@@ -147,8 +149,10 @@ module.exports = function iframeHandler(document) {
         .catch(errorDialog);
     }
 
+    if (!existingFrame) {
+      return;
+    }
     // Toggle the state and remove old src and inject new src.
-    const existingFrame = getFrame();
     removeFrameSrc(existingFrame);
     existingFrame.setAttribute("data-example", id);
     return fetchExample(id)
@@ -157,9 +161,10 @@ module.exports = function iframeHandler(document) {
   };
 
   const errorDialog = function(err) {
-    console.log(err);
-    $(".dialog_error").style.display = "block";
-    $(".dialog_error").insertAdjacentText("afterBegin", err);
+    if ($(".dialog_error").textContent !== err) {
+      $(".dialog_error").style.display = "block";
+      $(".dialog_error").insertAdjacentText("afterBegin", err);
+    }
   };
 
   return {

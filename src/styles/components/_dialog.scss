@@ -1,16 +1,14 @@
 .dialog {
-  position: fixed;
+  height: 20vh;
+  width: 35vw;
+  line-height: 100px;
+  font-weight: bold;
+  display: none;
   z-index: 1;
-  top: 50%
-  transform: translateY(-50%);
-
-  div {
-    margin: 0 auto;
-  }
 }
 
 .dialog_error {
-  @extends .dialog;
+  @extend .dialog;
   color: white;
   background: $warn-color;
   text-align: center;
