@@ -29,8 +29,8 @@ module.exports = function iframeHandler(document) {
    */
   const fetchExample = function fetchExample(id) {
     return fetch("/examples/" + id)
-    .then(checkStatus)
-    .then((res) => res.text());
+      .then(checkStatus)
+      .then((res) => res.text());
   };
 
 
@@ -126,10 +126,10 @@ module.exports = function iframeHandler(document) {
 
   /**
    * loadInIframe
-   * @param  {String} name
+   * @param  {String} id
    * @return {Promise}
    */
-  const loadInIframe = function loadInIframe(id) { 
+  const loadInIframe = function loadInIframe(id) {
     const existingFrame = getFrame();
 
     if (exampleExists(id)) {
@@ -152,6 +152,7 @@ module.exports = function iframeHandler(document) {
     if (!existingFrame) {
       return;
     }
+
     // Toggle the state and remove old src and inject new src.
     removeFrameSrc(existingFrame);
     existingFrame.setAttribute("data-example", id);

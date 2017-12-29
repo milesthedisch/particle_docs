@@ -2,7 +2,7 @@ window.particleLib = require("particle_library");
 const iframe = require("iframeManager.js")(document);
 const shims = require("shims.js")(document);
 const utils = require("dom_helper.js")(document);
-const sass = require("./styles/main.scss");
+
 const DEFAULT_EXAMPLE = "random_vectors";
 
 const sethash = (fragment) => {

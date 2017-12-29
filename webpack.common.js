@@ -46,6 +46,8 @@ module.exports = {
           fallback: "style-loader",
         }),
       },
+      // We create the file-loader first to make sure the fonts are
+      // resolved when the sass loader is parsing the sass.
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
         loader: "file-loader",

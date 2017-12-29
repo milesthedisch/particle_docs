@@ -35,8 +35,8 @@ async function getFile(file, type) {
  * @name  compileTemplate
  * @description Uses the example to template to construct the example HTML
  * that will be executed in the iframe.
- * @param  {[type]} ctx
- * @return {[type]}     [description]
+ * @param  {Object} ctx
+ * @return {String}
  */
 async function compileTemplate(ctx) {
   // Read in the template and pass in context
