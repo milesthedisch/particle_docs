@@ -12,43 +12,38 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   const p0 = {
-    state: {
-      x: 400,
-      y: 100,
-      radius: 10,
-    },
+    x: 400,
+    y: 100,
+    radius: 10,
   };
 
   const p1 = {
-    state: {
-      x: 200,
-      y: 300,
-      radius: 10,
-    },
+    x: 200,
+    y: 300,
+    radius: 10,
   };
 
   const p2 = {
-    state: {
-      x: 500,
-      y: 400,
-      radius: 10,
-    },
+    x: 500,
+    y: 400,
+    radius: 10,
   };
 
   const p3 = {
-    state: {
-      x: 300,
-      y: 400,
-      radius: 10,
-    },
+    x: 300,
+    y: 400,
+    radius: 10,
   };
 
   let clicked;
   let selected;
+  let intersect;
 
   window.addEventListener("mousedown", function(e) {
-    const collision = [p0, p1, p2, p3].filter((p) =>
-      utils.collisionCirclePoint(e.clientX, e.clientY, p));
+    const collision = [p0, p1, p2, p3].filter((p) => {
+      const state = {state: {x: p.x, y: p.y, radius: p.radius}};
+      return utils.collisionCirclePoint(e.clientX, e.clientY, state);
+    });
 
     if (collision.length) {
       selected = collision[0];
@@ -57,33 +52,34 @@ window.onload = function() {
     }
 
     clicked = true;
+    intersect = segementIntersection(p0, p1, p2, p3);
   });
 
   window.addEventListener("mouseup", function() {
     clicked = false;
     selected = false;
+    intersect = segementIntersection(p0, p1, p2, p3);
   });
 
   window.addEventListener("mousemove", function(e) {
     if (clicked && selected) {
-      selected.state.x = e.clientX;
-      selected.state.y = e.clientY;
+      selected.x = e.clientX;
+      selected.y = e.clientY;
+      intersect = segementIntersection(p0, p1, p2, p3);
     }
-
-    render();
   });
 
-  function segementIntersection(p0, p1, p2, p3) {
-    const A1 = p0.state.y - p1.state.y;
-    const B1 = p1.state.x - p0.state.x;
+  const segementIntersection = (p0, p1, p2, p3) => {
+    const A1 = p0.y - p1.y;
+    const B1 = p1.x - p0.x;
     // Standard form of a line.
     // Ax + By = C;
-    const C1 = A1 * p0.state.x + B1 * p0.state.y;
+    const C1 = A1 * p0.x + B1 * p0.y;
 
-    const A2 = p2.state.y - p3.state.y;
-    const B2 = p3.state.x - p2.state.x;
+    const A2 = p2.y - p3.y;
+    const B2 = p3.x - p2.x;
 
-    const C2 = A2 * p2.state.x + B2 * p2.state.y;
+    const C2 = A2 * p2.x + B2 * p2.y;
 
     // THe thing on the bottom of the divide symbol.
     // If the left hand and right hand side equal each other
@@ -105,46 +101,52 @@ window.onload = function() {
     // and divding it by the range of the intersection point
     // if is greate than 1 than its outside of the range
     // if its less than 0 its outside of the range.
-    const x0Range = (p1.state.x - p0.state.x);
-    const y0Range = (p1.state.y - p0.state.y);
-    const x0Val = (xIntercept - p0.state.x);
-    const y0Val = (yIntercept - p0.state.y);
+    const x0Range = (p1.x - p0.x);
+    const y0Range = (p1.y - p0.y);
+    const x0Val = (xIntercept - p0.x);
+    const y0Val = (yIntercept - p0.y);
 
-    const x1Range = (p3.state.x - p2.state.x);
-    const y1Range = (p3.state.y - p2.state.y);
-    const x1Val = (xIntercept - p2.state.x);
-    const y1Val = (yIntercept - p2.state.y);
+    const x1Range = (p3.x - p2.x);
+    const y1Range = (p3.y - p2.y);
+    const x1Val = (xIntercept - p2.x);
+    const y1Val = (yIntercept - p2.y);
 
     const rx0 = x0Val / x0Range;
     const ry0 = y0Val / y0Range;
     const rx1 = x1Val / x1Range;
     const ry1 = y1Val / y1Range;
 
-    const insideLineSegement0 = (rx0 >= 0 && rx0 <= 1) || (ry0 >= 0 && ry0 <= 1);
-    const insideLineSegement1 = (rx1 > 0 && rx1 < 1) || (ry1 > 0 && ry1 < 1);
+    const insideLineSegement0 =
+      (rx0 >= 0 && rx0 <= 1) || (ry0 >= 0 && ry0 <= 1);
+
+    const insideLineSegement1 =
+      (rx1 > 0 && rx1 < 1) || (ry1 > 0 && ry1 < 1);
 
     if (insideLineSegement0 && insideLineSegement1) {
-      shapes.circle(xIntercept, yIntercept, 10, "red");
-      // return {x, y};
+      return {x: xIntercept, y: yIntercept};
     }
-  }
 
-  function render() {
+    return false;
+  };
+
+  const render = () => {
     ctx.clearRect(0, 0, w, h);
 
-    [p0, p1, p2, p3].forEach((p) => shapes.pCircle(p));
+    [p0, p1, p2, p3].forEach((p) => shapes.circle(p.x, p.y, 10));
 
     ctx.beginPath();
 
-    ctx.moveTo(p0.state.x, p0.state.y);
-    ctx.lineTo(p1.state.x, p1.state.y);
-    ctx.moveTo(p2.state.x, p2.state.y);
-    ctx.lineTo(p3.state.x, p3.state.y);
+    ctx.moveTo(p0.x, p0.y);
+    ctx.lineTo(p1.x, p1.y);
+    ctx.moveTo(p2.x, p2.y);
+    ctx.lineTo(p3.x, p3.y);
 
     ctx.stroke();
 
-    segementIntersection(p0, p1, p2, p3);
-  
+    if (intersect) {
+      shapes.circle(intersect.x, intersect.y, 10, "red");
+    }
+
     rAF(render);
   };
 
