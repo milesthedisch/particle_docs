@@ -6,17 +6,17 @@ window.onload = function() {
   const targetContext = targetCanvas.getContext("2d");
 
   // Libs
-  const utils = particleLib.Utils;
-  const vector = new particleLib.Vector();
-  const shapes = new particleLib.Shapes(context, document);
-  const targetShapes = new particleLib.Shapes(targetContext, document);
-  const particle = new particleLib.Particle();
+  const utils = Utils;
+  const vector = new Vector();
+  const shapes = new Shapes(context, document);
+  const targetShapes = new Shapes(targetContext, document);
+  const particle = new Particle();
 
   // Boundries
   let w = canvas.width = targetCanvas.width = window.innerWidth;
   let h = canvas.height = targetCanvas.height = window.innerHeight;
 
-  p = particle.create({x: 0, y: h/2, magnitude: 6, direction: 0, radius: 4, gravity: 0.005});
+  p = Particle.create({x: 0, y: h/2, magnitude: 6, direction: 0, radius: 4, gravity: 0.005});
   targetShapes.circle(w/2, h/2, 100);
 
   function reset(heading) {
