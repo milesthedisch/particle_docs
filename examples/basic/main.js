@@ -1,6 +1,7 @@
 "use strict";
 
 window.onload = function() {
+
   const Particle = particleLib.Particle;
   const particle = new Particle();
   const rAF = window.requestAnimationFrame;
@@ -34,12 +35,12 @@ window.onload = function() {
 
     ctx.clearRect(0, 0, w, h);
 
-    ctx.fillStyle = `rgba(0, 0, 0, ${absRad * -absRad + 0.2})`;
+    ctx.fillStyle = `rgba(0, 0, 255, ${absRad * -absRad + 0.2})`;
     ctx.fillRect(0, 0, w, h);
     
 
     p.state.radius = rad * (rad * 100) + 50;
-    p.state.color = `rgba(0, 0, 0, ${absRad * absRad + 0.8})`;
+    p.state.color = `rgba(0, 0, 255, ${absRad * absRad + 0.8})`;
 
     shape.pCircle(p);
 
