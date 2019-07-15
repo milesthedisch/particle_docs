@@ -13,7 +13,7 @@ window.onload = function() {
 
   const YAT = particleLib.YAT.init({
     clock: particleLib.Clock,
-    fps: 10,
+    fps: 60,
   });
 
   const t1 = YAT.create({

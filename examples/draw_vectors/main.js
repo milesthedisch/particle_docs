@@ -2,7 +2,7 @@ window.onload = function() {
   const rAF = window.requestAnimationFrame;
   const canvas = a;
   const ctx = a.getContext("2d");
-  
+
   // Libs
   const utils = particleLib.Utils;
   const vector = new particleLib.Vector();
@@ -13,14 +13,11 @@ window.onload = function() {
   let h = canvas.height = window.innerHeight;
 
   (function render() {
-    ctx.clearRect(0, 0, w, h);
-
     v1 = vector.randomBetween(0, w, 0, h);
     v2 = vector.randomBetween(0, w, 0, h);
 
     if (particleLib.Vector.vectorIntersect(v1, v2)) {
-      shapes.drawLineVec(v1);
-      shapes.drawLineVec(v2);
+      shapes.drawLineVec(v1, v2);
     }
 
     rAF(render);
