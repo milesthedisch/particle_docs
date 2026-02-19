@@ -1,14 +1,14 @@
 const express = require("express");
-const exphbs = require("express-handlebars");
+const { engine } = require("express-handlebars");
 const router = require("./router");
 const logger = require("./helpers/logger");
 const app = express();
 
 module.exports = function(config) {
   // Set the engine to handlebars and use layout main as the default.
-  app.engine("handlebars", exphbs({
+  app.engine("handlebars", engine({
     defaultLayout: config.views.default,
-    layoutDir: config.views.layouts,
+    layoutsDir: config.views.layouts,
     partialsDir: config.views.partials,
   }));
 

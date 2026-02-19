@@ -1,64 +1,57 @@
 const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const extractSass = new ExtractTextPlugin({
-  filename: "./build/css/[name].[contenthash].css",
-  disable: process.env.NODE_ENV === "development",
-  publicPath: "./public",
-});
+const alias = {};
+try {
+  alias.particle_library = require.resolve("particle_library");
+} catch (e) {
+  // particle_library is a local dependency that may not be present
+}
 
 module.exports = {
   bail: true,
+  entry: path.resolve("./src/app.js"),
   resolve: {
     modules: [
       "node_modules",
       path.resolve(__dirname, "src/module"),
     ],
-    alias: {
-      particle_library: require.resolve("particle_library"),
-    },
+    alias,
   },
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "./public/build/js"),
-    publicPath: "./public",
+    publicPath: "auto",
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
-        use: extractSass.extract({
-          use: [
-            {
-              loader: "css-loader",
-              options: {
-                sourceMaps: process.env.NODE_ENV === "development",
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sassOptions: {
+                silenceDeprecations: ["import"],
               },
             },
-            {
-              loader: "sass-loader",
-              options: {
-                sourceMaps: process.env.NODE_ENV === "development",
-              },
-            },
-          ],
-          // use style-loader in development
-          fallback: "style-loader",
-        }),
+          },
+        ],
       },
-      // We create the file-loader first to make sure the fonts are
-      // resolved when the sass loader is parsing the sass.
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
-        loader: "file-loader",
-        options: {
-          name: "files/[name].[ext]",
-          publicPath: "./public",
+        type: "asset/resource",
+        generator: {
+          filename: "../css/fonts/[name][ext]",
         },
       },
     ],
   },
   plugins: [
-    new ExtractTextPlugin("./public/css/[name].bundle.css"),
+    new MiniCssExtractPlugin({
+      filename: "../css/[name].css",
+    }),
   ],
 };

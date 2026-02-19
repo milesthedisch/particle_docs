@@ -7,16 +7,16 @@
     "example": "examples"
   },
   "scripts": {
-    "build": "export NODE_ENV=production && webpack --config=./webpack.production.js",
-    "build:dev": "export NODE_ENV=development && webpack --config=./webpack.dev.js",
+    "build": "webpack --config=./webpack.production.js",
+    "build:dev": "webpack --config=./webpack.dev.js",
     "dev": "npm run build:dev & npm run serve",
-    "serve": "nodemon -e \"node server.js\" js,handlebars,json, --watch ./controllers --watch ./views server.js --watch ./examples | bunyan",
+    "serve": "nodemon -e js,handlebars,json --watch ./controllers --watch ./views server.js --watch ./examples | bunyan",
     "start": "node server.js",
     "create": "./bin/cli create example"
   },
   "engines": {
-    "node": ">=6.9.0",
-    "npm": ">=3.0.0"
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
   },
   "repository": {
     "type": "git",
@@ -29,40 +29,26 @@
   },
   "homepage": "https://github.com/milesthedisch/particle_docs#readme",
   "dependencies": {
-    "babel-runtime": "^6.20.0",
     "bunyan": "^1.8.5",
-    "express": "^4.14.0",
-    "express-handlebars": "^3.0.0",
-    "extend": "^3.0.1",
-    "handlebars": "^4.0.6",
-    "particle_library": "../particle_library",
-    "whatwg-fetch": "^2.0.1"
+    "express": "^4.21.0",
+    "express-handlebars": "^7.1.0",
+    "handlebars": "^4.7.8",
+    "particle_library": "../particle_library"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.35",
-    "@babel/preset-env": "^7.0.0-beta.35",
-    "autoprefixer": "^6.6.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^8.0.0-beta.0",
-    "babel-preset-env": "^1.6.1",
-    "clean-css": "^3.4.21",
-    "css-loader": "^0.28.7",
+    "css-loader": "^7.1.0",
     "docopt": "^0.6.2",
-    "eslint": "^4.13.1",
-    "eslint-config-google": "^0.9.1",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.6",
-    "fs-extra": "^4.0.3",
-    "html-webpack-plugin": "^2.24.1",
-    "node-sass": "^4.7.2",
-    "nodemon": "^1.11.0",
-    "npm-run-all": "^3.1.2",
-    "postcss-cli": "^2.6.0",
-    "resolve-url-loader": "^2.2.1",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.1",
-    "uglifyjs-webpack-plugin": "^1.0.0",
-    "url-loader": "^0.6.2",
-    "webpack": "^3.10.0"
+    "eslint": "^8.57.0",
+    "eslint-config-google": "^0.14.0",
+    "fs-extra": "^11.2.0",
+    "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.9.0",
+    "nodemon": "^3.1.0",
+    "sass": "^1.77.0",
+    "sass-loader": "^14.2.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.0",
+    "webpack-merge": "^6.0.0"
   }
 }

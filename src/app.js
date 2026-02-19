@@ -1,3 +1,4 @@
+require("./styles/main.scss");
 window.particleLib = require("particle_library");
 const iframe = require("iframe_manager.js")(document);
 const shims = require("shims.js")(document);
